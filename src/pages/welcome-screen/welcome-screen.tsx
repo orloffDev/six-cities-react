@@ -1,4 +1,4 @@
-import PlaceCard from "../../components/place-card/place-card";
+import PlaceCard from '../../components/place-card/place-card';
 
 function WelcomeScreen(): JSX.Element {
   return (
@@ -48,11 +48,11 @@ function WelcomeScreen(): JSX.Element {
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlink:href="#icon-arrow-select"></use>
-                  </svg>
-                </span>
+                Popular
+                <svg className="places__sorting-arrow" width="7" height="4">
+                  <use xlinkHref="#icon-arrow-select"></use>
+                </svg>
+              </span>
               <ul className="places__options places__options--custom places__options--opened">
                 <li className="places__option places__option--active" tabIndex="0">Popular</li>
                 <li className="places__option" tabIndex="0">Price: low to high</li>
@@ -74,7 +74,7 @@ function WelcomeScreen(): JSX.Element {
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 export default WelcomeScreen;
