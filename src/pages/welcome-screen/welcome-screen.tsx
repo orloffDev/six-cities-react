@@ -1,6 +1,10 @@
 import PlaceCard from '../../components/place-card/place-card';
 
-function WelcomeScreen(): JSX.Element {
+type WelcomeScreenProps = {
+  placesFound: number;
+}
+
+function WelcomeScreen({placesFound}: WelcomeScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -44,7 +48,7 @@ function WelcomeScreen(): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{placesFound} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">

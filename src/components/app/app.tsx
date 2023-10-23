@@ -1,8 +1,12 @@
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 
-function App(): JSX.Element {
+type AppProps = {
+  placesFound: number;
+}
+
+function App({placesFound}: AppProps): JSX.Element {
   return (
-    <WelcomeScreen />
+    <WelcomeScreen placesFound={placesFound} />
   );
 }
 
