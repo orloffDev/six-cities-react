@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 
 type LogoProps = {
-  pageName: string;
+  pageName: string | undefined;
 }
 
 function Logo({pageName}: LogoProps): JSX.Element {
