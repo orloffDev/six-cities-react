@@ -136,8 +136,8 @@ function OfferScreen(): JSX.Element {
                     Angelina
                   </span>
                   <span className="offer__user-status">
-                  Pro
-                </span>
+                    Pro
+                  </span>
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
