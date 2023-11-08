@@ -5,7 +5,7 @@ type LogoProps = {
 }
 
 function Logo({pageName}: LogoProps): JSX.Element {
-  const cls: string = 'header__logo-link' + '123123';
+  const cls: string = 'header__logo-link' + (pageName == 'welcome' ? 'header__logo-link--active' : '');
 
   return (
     <Link className={cls} to="/">
