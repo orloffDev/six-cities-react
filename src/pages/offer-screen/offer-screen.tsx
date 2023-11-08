@@ -159,8 +159,8 @@ function OfferScreen(): JSX.Element {
                         <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
                       </div>
                       <span className="reviews__user-name">
-                      Max
-                    </span>
+                        Max
+                      </span>
                     </div>
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
