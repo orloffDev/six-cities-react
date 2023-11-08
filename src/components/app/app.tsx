@@ -18,35 +18,35 @@ function App({placesFound}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Root}
-          element={<WelcomeScreen placesFound={placesFound} />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={'AUTH'} //TODO
-            >
-              <FavoritesScreen />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginScreen />}
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferScreen />}
-        />
-        <Route
-          path="*"
-          element={<NotFoundScreen />}
-        />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Root}
+            element={<WelcomeScreen placesFound={placesFound} />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                authorizationStatus={'AUTH'} //TODO
+              >
+                <FavoritesScreen />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginScreen />}
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferScreen />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundScreen />}
+          />
+        </Routes>
+      </BrowserRouter>
     </HelmetProvider>
   );
 }
