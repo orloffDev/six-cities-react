@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import {Helmet} from 'react-helmet-async'
+import {Helmet} from 'react-helmet-async';
 
 function FavoritesScreen(): JSX.Element {
   return (
