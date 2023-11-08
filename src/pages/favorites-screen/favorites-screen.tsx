@@ -1,8 +1,13 @@
 import Logo from "../../components/logo/logo";
+import {Helmet} from 'react-helmet-async'
 
 function FavoritesScreen(): JSX.Element {
   return (
     <>
+      <Helmet>
+        <title>aasdads</title>
+      </Helmet>
+
       <div className="page">
         <header className="header">
           <div className="container">
