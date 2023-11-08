@@ -1,4 +1,4 @@
-import Logo from "../../components/logo/logo";
+import Logo from '../../components/logo/logo';
 
 function OfferScreen(): JSX.Element {
   return (
