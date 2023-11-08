@@ -1,7 +1,7 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
@@ -27,7 +27,7 @@ function App({placesFound}: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={'NO_AUTH'} //TODO
+                authorizationStatus={AuthorizationStatus.NoAuth} //TODO
               >
                 <FavoritesScreen />
               </PrivateRoute>
