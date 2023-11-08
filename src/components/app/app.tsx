@@ -20,7 +20,7 @@ function App({placesFound}: AppProps): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route
-            path={AppRoute.Root}
+            path={AppRoute.Main}
             element={<WelcomeScreen placesFound={placesFound} />}
           />
           <Route
