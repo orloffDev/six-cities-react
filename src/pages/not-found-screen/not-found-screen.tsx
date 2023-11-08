@@ -27,6 +27,3 @@ function NotFoundScreen(): JSX.Element {
 }
 
 export default NotFoundScreen;
-
-
-
