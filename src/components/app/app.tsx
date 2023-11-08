@@ -1,4 +1,6 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
+
 import {AppRoute} from '../../const';
 
 import PrivateRoute from '../private-route/private-route';
@@ -14,7 +16,8 @@ type AppProps = {
 
 function App({placesFound}: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -44,6 +47,7 @@ function App({placesFound}: AppProps): JSX.Element {
         />
       </Routes>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
