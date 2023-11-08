@@ -27,7 +27,7 @@ function App({placesFound}: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={'AUTH'} //TODO
+                authorizationStatus={'NO_AUTH'} //TODO
               >
                 <FavoritesScreen />
               </PrivateRoute>
