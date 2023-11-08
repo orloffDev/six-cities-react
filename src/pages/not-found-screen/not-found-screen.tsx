@@ -15,7 +15,7 @@ function NotFoundScreen(): JSX.Element {
         </div>
       </header>
       <main className="page__404">
-        <div class="container">
+        <div className="container">
           <div style={{display: 'flex', flexDirection:'column', alignItems:'center'}}>
             <span style={{display: 'block', fontSize:'12vw'}}>404</span>
             <Link to="/">На главную</Link>
