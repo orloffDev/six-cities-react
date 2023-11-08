@@ -133,8 +133,8 @@ function OfferScreen(): JSX.Element {
                     <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                  Angelina
-                </span>
+                    Angelina
+                  </span>
                   <span className="offer__user-status">
                   Pro
                 </span>
