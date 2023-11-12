@@ -12,7 +12,6 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({offer}: PlaceCardProps): JSX.Element {
-  const linkTo = `${AppRoute.Offer}/${offer.id}`;
   const {
     id,
     title,
@@ -23,6 +22,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
     price,
     previewImage
   } = offer;
+  const linkTo = `${AppRoute.Offer}/${id}`;
 
   return (
     <article className="cities__card place-card">
