@@ -18,8 +18,8 @@ export const offers:Offer[] = [
       "longitude": 4.673877537499948,
       "zoom": 8
     },
-    "isFavorite": false,
-    "isPremium": false,
+    "isFavorite": true,
+    "isPremium": true,
     "rating": 4,
     "previewImage": "img/apartment-01.jpg"
   },
