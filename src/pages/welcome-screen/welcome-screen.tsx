@@ -1,8 +1,9 @@
+//components
 import Logo from '../../components/logo/logo';
-import PlaceCard from '../../components/place-card/place-card';
-
+import PlaceList from '../../components/place-list/place-list';
+//types
 import {Offer} from '../../types/offer'
-
+//props
 type WelcomeScreenProps = {
   offers: Offer[];
 }
@@ -97,11 +98,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <PlaceList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
