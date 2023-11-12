@@ -1,13 +1,16 @@
 import Logo from '../../components/logo/logo';
 import PlaceCard from '../../components/place-card/place-card';
 
+import {Offer} from '../../types/offer'
+
 type WelcomeScreenProps = {
-  placesFound: number;
+  offers: Offer[];
 }
 
-function WelcomeScreen({placesFound}: WelcomeScreenProps): JSX.Element {
-  return (
+function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
+  const placesFound = offers.length;
 
+  return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
