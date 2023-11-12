@@ -9,7 +9,7 @@ function PlaceList({offers}: PlaceListProps): JSX.Element {
   return (
     <>
       {offers.map((offer) => (
-        <PlaceCard offer={offer} />
+        <PlaceCard key={offer.id} offer={offer} />
       ))}
     </>
   );
