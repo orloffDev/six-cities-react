@@ -25,7 +25,7 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
     price,
     previewImage
   } = offer;
-  const linkTo = `${AppRoute.Offer}/${id}`;
+  const linkTo = `/offer/${id}`;
 
   //
   return (

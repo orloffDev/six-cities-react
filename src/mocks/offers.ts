@@ -90,7 +90,7 @@ export const offers:Offer[] = [
     "previewImage": "img/room.jpg"
   },
   {
-    "id": "6af6f711-c28d-4121-82cd-e0b462a27f00-4",
+    "id": "6af6f711-c28d-4121-82cd-e0b462a27f00-5",
     "title": "Beautiful & luxurious studio at great location",
     "type": "apartment",
     "price": 333,
@@ -112,7 +112,7 @@ export const offers:Offer[] = [
     "previewImage": "img/room.jpg"
   },
   {
-    "id": "6af6f711-c28d-4121-82cd-e0b462a27f00-4",
+    "id": "6af6f711-c28d-4121-82cd-e0b462a27f00-6",
     "title": "Beautiful & luxurious studio at great location",
     "type": "apartment",
     "price": 444,
