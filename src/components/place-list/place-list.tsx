@@ -20,7 +20,7 @@ function PlaceList({offers}: PlaceListProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <PlaceCard key={offer.id} offer={offer} handleEnter={handleEnter} />
+        <PlaceCard key={offer.id} offer={offer} parent="cities" handleEnter={handleEnter} />
       ))}
     </div>
   );

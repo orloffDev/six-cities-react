@@ -10,10 +10,11 @@ import {AppRoute} from '../../const';
 
 type PlaceCardProps = {
   offer: Offer,
-  handleEnter: OfferHandleEnter
+  handleEnter: OfferHandleEnter,
+  parent: 'cities' | 'favorites'
 }
 
-function PlaceCard({offer, handleEnter}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -27,9 +28,9 @@ function PlaceCard({offer, handleEnter}: PlaceCardProps): JSX.Element {
   const linkTo = `${AppRoute.Offer}/${id}`;
 
   return (
-    <article className="cities__card place-card" onPointerEnter={handleEnter}>
+    <article className={`${parent}__image-wrapper place-card__image-wrapper`} onPointerEnter={handleEnter}>
       {isPremium && <div className="place-card__mark"> <span>Premium</span> </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${parent}__image-wrapper place-card__image-wrapper`}>
         <Link to={linkTo}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </Link>
