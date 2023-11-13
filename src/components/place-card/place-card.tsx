@@ -3,15 +3,17 @@ import {Link} from 'react-router-dom';
 
 //types
 import {Offer} from "../../types/offer";
+import {OfferHandleEnter} from "../../types/offer";
 
 import {AppRoute} from '../../const';
 
 
 type PlaceCardProps = {
-  offer: Offer
+  offer: Offer,
+  handleEnter: OfferHandleEnter
 }
 
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, handleEnter}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -25,7 +27,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
   const linkTo = `${AppRoute.Offer}/${id}`;
 
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onPointerEnter={handleEnter}>
       {isPremium && <div className="place-card__mark"> <span>Premium</span> </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={linkTo}>

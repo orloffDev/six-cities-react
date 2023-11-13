@@ -13,3 +13,7 @@ export type Offer = {
   rating: number
   previewImage: string
 }
+
+export type OfferHandleEnter= (id: Offer | null) => void
+
+
