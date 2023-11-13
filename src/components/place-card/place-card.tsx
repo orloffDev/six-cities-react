@@ -28,8 +28,8 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
   const linkTo = `${AppRoute.Offer}/${id}`;
 
   return (
-    <article className={`${parent}__image-wrapper place-card__image-wrapper`} onPointerEnter={handleEnter}>
-      {isPremium && <div className="place-card__mark"> <span>Premium</span> </div>}
+    <article className={`${parent}__card place-card`} onPointerEnter={handleEnter}>
+      {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${parent}__image-wrapper place-card__image-wrapper`}>
         <Link to={linkTo}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
