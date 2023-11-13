@@ -10,7 +10,7 @@ import {AppRoute} from '../../const';
 
 type PlaceCardProps = {
   offer: Offer,
-  handleEnter: OfferHandleEnter,
+  handleEnter?: OfferHandleEnter,
   parent: 'cities' | 'favorites'
 }
 
@@ -27,6 +27,7 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
   } = offer;
   const linkTo = `${AppRoute.Offer}/${id}`;
 
+  //
   return (
     <article className={`${parent}__card place-card`} onPointerEnter={handleEnter}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
