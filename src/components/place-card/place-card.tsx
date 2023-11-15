@@ -1,4 +1,4 @@
-//components
+//react
 import {Link} from 'react-router-dom';
 
 //types
