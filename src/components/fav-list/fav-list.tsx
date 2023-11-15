@@ -12,7 +12,7 @@ type FavListProps = {
 function FavList({offers}: FavListProps): JSX.Element {
   const favOffers = offers
     .filter((offer) => offer.isFavorite)
-    .reduce<Record<string, Offer[]>>((acc, offer) => {
+    .reduce<Record<string, Offer[]>>((acc, offer) => { //TODO ??
       acc[offer.city.name] = [...(acc[offer.city.name] ?? []), offer];
       return acc;
     }, {});
