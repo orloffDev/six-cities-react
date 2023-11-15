@@ -28,7 +28,7 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
   return (
     <article
       className={`${parent}__card place-card`}
-      onPointerEnter={(e)=>{
+      onPointerEnter={()=>{
         if (handleEnter) {
           handleEnter(offer)
         }}}
