@@ -1,6 +1,5 @@
 //react
 import {ChangeEvent} from 'react';
-import * as React from "react";
 
 type ReviewsRatingProps = {
   handleRatingChange: (event: ChangeEvent<HTMLInputElement>) => void

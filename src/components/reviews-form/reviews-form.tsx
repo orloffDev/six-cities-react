@@ -20,7 +20,7 @@ function ReviewsForm(): JSX.Element {
   const handleRatingChange = (event: ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
-      rating: parseInt(event.target.value)
+      rating: parseInt(event.target.value, 10)
     });
   };
 
