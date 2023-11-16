@@ -1,10 +1,9 @@
+//react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-
-const data = {
-  placesFound: 12233255
-};
+//mocks
+import {offers} from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placesFound={data.placesFound} />
+    <App offers={offers} />
   </React.StrictMode>
 );

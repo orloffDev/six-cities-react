@@ -1,13 +1,17 @@
+//components
 import Logo from '../../components/logo/logo';
-import PlaceCard from '../../components/place-card/place-card';
-
+import PlaceList from '../../components/place-list/place-list';
+//types
+import {Offer} from '../../types/offer';
+//props
 type WelcomeScreenProps = {
-  placesFound: number;
+  offers: Offer[];
 }
 
-function WelcomeScreen({placesFound}: WelcomeScreenProps): JSX.Element {
-  return (
+function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
+  const placesFound = offers.length;
 
+  return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
@@ -93,13 +97,9 @@ function WelcomeScreen({placesFound}: WelcomeScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-              </div>
+
+              <PlaceList offers={offers} />
+
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

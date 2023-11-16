@@ -1,0 +1,47 @@
+//react
+import {Link} from 'react-router-dom';
+//components
+import PlaceCard from '../../components/place-card/place-card';
+//types
+import {Offer} from '../../types/offer';
+
+type FavListProps = {
+  offers: Offer[];
+}
+
+function FavList({offers}: FavListProps): JSX.Element {
+  const favOffers = offers
+    .filter((offer) => offer.isFavorite)
+    .reduce<Record<string, Offer[]>>((acc, offer) => { //TODO ??
+      acc[offer.city.name] = [...(acc[offer.city.name] ?? []), offer];
+      return acc;
+    }, {});
+
+  //
+  return (
+    <ul className="favorites__list">
+      {Object.entries(favOffers).map(([cityName, cityOffers]) => (
+        <li key={cityName} className="favorites__locations-items">
+          <div className="favorites__locations locations locations--current">
+            <div className="locations__item">
+              <Link className="locations__item-link" to="#">
+                <span>{cityName}</span>
+              </Link>
+            </div>
+          </div>
+          <div className="favorites__places">
+            {cityOffers.map((cityOffer) => (
+              <PlaceCard
+                key={cityOffer.id}
+                offer={cityOffer}
+                parent="favorites"
+              />
+            ))}
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default FavList;
