@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom';
 //components
 import PlaceCard from '../../components/place-card/place-card';
 //types
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 
 type FavListProps = {
-  offers: Offer[]
+  offers: Offer[];
 }
 
 function FavList({offers}: FavListProps): JSX.Element {
