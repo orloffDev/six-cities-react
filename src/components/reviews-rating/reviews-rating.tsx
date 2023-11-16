@@ -3,7 +3,7 @@ import {ChangeEvent} from 'react';
 import * as React from 'react';
 
 type ReviewsRatingProps = {
-  handleRatingChange: (event: ChangeEvent<HTMLInputElement>) => void
+  handleRatingChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 function ReviewsRating({handleRatingChange}: ReviewsRatingProps): JSX.Element {
