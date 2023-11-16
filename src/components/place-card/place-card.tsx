@@ -2,13 +2,13 @@
 import {Link} from 'react-router-dom';
 
 //types
-import {Offer} from "../../types/offer";
-import {OfferHandleEnter} from "../../types/offer";
+import {Offer} from '../../types/offer';
+import {OfferHandleEnter} from '../../types/offer';
 
 type PlaceCardProps = {
-  offer: Offer,
-  handleEnter?: OfferHandleEnter,
-  parent: 'cities' | 'favorites'
+  offer: Offer;
+  handleEnter?: OfferHandleEnter;
+  parent: 'cities' | 'favorites';
 }
 
 function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
@@ -30,8 +30,9 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
       className={`${parent}__card place-card`}
       onPointerEnter={()=>{
         if (handleEnter) {
-          handleEnter(offer)
-        }}}
+          handleEnter(offer);
+        }
+      }}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${parent}__image-wrapper place-card__image-wrapper`}>
