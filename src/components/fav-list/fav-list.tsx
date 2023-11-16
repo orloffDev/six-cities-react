@@ -20,20 +20,20 @@ function FavList({offers}: FavListProps): JSX.Element {
   //
   return (
     <ul className="favorites__list">
-      {Object.entries(favOffers).map(([name, offers]) => (
-        <li key={name} className="favorites__locations-items">
+      {Object.entries(favOffers).map(([cityName, cityOffers]) => (
+        <li key={cityName} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
               <Link className="locations__item-link" to="#">
-                <span>{name}</span>
+                <span>{cityName}</span>
               </Link>
             </div>
           </div>
           <div className="favorites__places">
-            {offers.map((offer) => (
+            {cityOffers.map((cityOffer) => (
               <PlaceCard
-                key={offer.id}
-                offer={offer}
+                key={cityOffer.id}
+                offer={cityOffer}
                 parent="favorites"
               />
             ))}
