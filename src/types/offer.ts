@@ -14,6 +14,6 @@ export type Offer = {
   previewImage: string
 }
 
-export type OfferHandleEnter= (offer: Offer | null) => void
+export type OfferHandleEnter= (offer: Offer) => void
 
 
