@@ -12,7 +12,7 @@ type PlaceListProps = {
 function PlaceList({offers}: PlaceListProps): JSX.Element {
   const [activePlace, setActivePlace] = useState<Offer|null>(null);
 
-  function handleEnter(offer: Offer) {
+  function handleEnter(offer) {
     //console.log('reactEvent', reactEvent);
     if(!activePlace) console.log(12123);
     setActivePlace(offer);
