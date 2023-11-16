@@ -3,10 +3,10 @@ import {useState} from 'react';
 //components
 import PlaceCard from '../../components/place-card/place-card';
 //types
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 
 type PlaceListProps = {
-  offers: Offer[]
+  offers: Offer[];
 }
 
 function PlaceList({offers}: PlaceListProps): JSX.Element {
@@ -14,7 +14,9 @@ function PlaceList({offers}: PlaceListProps): JSX.Element {
 
   function handleEnter(offer: Offer) {
     //console.log('reactEvent', reactEvent);
-    if(!activePlace) console.log(12123);
+    if(!activePlace) {
+      window.console.log(12123);
+    }
     setActivePlace(offer);
   }
 
