@@ -1,6 +1,6 @@
 //components
 import Logo from '../../components/logo/logo';
-import ReviewsForm from "../../components/reviews-form/reviews-form";
+import ReviewsForm from '../../components/reviews-form/reviews-form';
 
 function OfferScreen(): JSX.Element {
   return (

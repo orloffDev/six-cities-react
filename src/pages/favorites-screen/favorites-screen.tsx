@@ -2,9 +2,9 @@
 import {Helmet} from 'react-helmet-async';
 //components
 import Logo from '../../components/logo/logo';
-import FavList from "../../components/fav-list/fav-list";
+import FavList from '../../components/fav-list/fav-list';
 //types
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 //props
 type FavoritesScreenProps = {
   offers: Offer[];

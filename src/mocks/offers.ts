@@ -132,4 +132,4 @@ export const offers:Offer[] = [
     'isPremium': false,
     'rating': 4,
     'previewImage': 'img/room.jpg'
-  }]
+  }];

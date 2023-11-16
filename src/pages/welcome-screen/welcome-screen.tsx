@@ -2,7 +2,7 @@
 import Logo from '../../components/logo/logo';
 import PlaceList from '../../components/place-list/place-list';
 //types
-import {Offer} from '../../types/offer'
+import {Offer} from '../../types/offer';
 //props
 type WelcomeScreenProps = {
   offers: Offer[];
