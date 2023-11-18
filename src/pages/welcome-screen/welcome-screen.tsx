@@ -1,15 +1,21 @@
 //components
 import Logo from '../../components/logo/logo';
 import PlaceList from '../../components/place-list/place-list';
+import PlaceMap from '../../components/place-map/place-map';
+//const
+import {CITY_DEFAULT_NAME} from '../../const';
 //types
 import {Offer} from '../../types/offer';
+//helpers
+import {getMapData} from "../../utils/getMapData";
 //props
 type WelcomeScreenProps = {
   offers: Offer[];
 }
 
 function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
-  const placesFound = offers.length;
+  const placesFound: number = offers.length;
+  const mapData = getMapData(offers, CITY_DEFAULT_NAME);
 
   return (
     <div className="page page--gray page--main">
@@ -102,7 +108,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+                <PlaceMap mapData={mapData} />
             </div>
           </div>
         </div>

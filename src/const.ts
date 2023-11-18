@@ -12,3 +12,5 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const CITY_DEFAULT_NAME = 'Amsterdam';
+
