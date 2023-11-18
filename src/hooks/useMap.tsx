@@ -7,7 +7,7 @@ import {RefObject} from 'react';
 import {Location} from "../types/location";
 
 function useMap(mapRef: RefObject<HTMLDivElement>, center:Location) {
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState<Object | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function useMap(mapRef: RefObject<HTMLDivElement>, center:Location) {
         )
         .addTo(instance);
 
-      setMap(prevState => (instance || prevState));
+      setMap(instance);
       isRenderedRef.current = true;
     }
   }, [mapRef, center]);
