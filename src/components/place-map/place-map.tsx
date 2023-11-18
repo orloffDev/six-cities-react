@@ -1,14 +1,10 @@
 //vendors
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
 //react
-import {useRef, useEffect, useState} from 'react';
-
+import {useRef, useEffect} from 'react';
 //hooks
 import useMap from '../../hooks/useMap';
-//const
-import {CITY_DEFAULT_NAME} from '../../const';
 //types
 import {MapData} from "../../types/map-data";
 
