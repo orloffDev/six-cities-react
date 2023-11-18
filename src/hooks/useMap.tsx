@@ -5,7 +5,7 @@ import {useEffect, useState, useRef} from 'react';
 //types
 import {Location} from "../types/location";
 
-function useMap(mapRef: RefObject, center:Location) {
+function useMap(mapRef: RefObject<HTMLInputElement>, center:Location) {
   const [map, setMap] = useState(null);
   const isRenderedRef = useRef(false);
 
