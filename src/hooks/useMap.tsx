@@ -29,7 +29,7 @@ function useMap(mapRef: RefObject<HTMLDivElement>, center:Location) {
         )
         .addTo(instance);
 
-      setMap(instance);
+      setMap(prevState => (instance || prevState));
       isRenderedRef.current = true;
     }
   }, [mapRef, center]);
