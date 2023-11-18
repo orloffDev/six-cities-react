@@ -2,10 +2,11 @@
 import leaflet from 'leaflet';
 //react
 import {useEffect, useState, useRef} from 'react';
+import {RefObject} from 'react';
 //types
 import {Location} from "../types/location";
 
-function useMap(mapRef: RefObject<HTMLInputElement>, center:Location) {
+function useMap(mapRef: RefObject<HTMLDivElement>, center:Location) {
   const [map, setMap] = useState(null);
   const isRenderedRef = useRef(false);
 
