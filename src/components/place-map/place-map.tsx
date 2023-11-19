@@ -7,10 +7,25 @@ import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/useMap';
 //types
 import {MapData} from "../../types/map-data";
+//const
+import {URL_MARKER_CURRENT} from "../../const";
+import {URL_MARKER_DEFAULT} from "../../const";
 
 type PlaceMapProps = {
   mapData: MapData
 }
+
+const defaultCustomIcon = leaflet.icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+const currentCustomIcon = leaflet.icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
 
 function PlaceMap({mapData}: PlaceMapProps) {
   const mapRef = useRef(null);
@@ -20,10 +35,16 @@ function PlaceMap({mapData}: PlaceMapProps) {
     if (map) {
       //const markerLayer = layerGroup().addTo(map);
       mapData['points'].forEach((point) => {
+        console.log('point.id',point.id);
+        console.log('mapData?.selectedPoint?.id',mapData?.selectedPoint?.id);
         leaflet
           .marker({
             lat: point.latitude,
             lng: point.longitude,
+          }, {
+            icon: (point.id === mapData?.selectedPoint?.id)
+              ? currentCustomIcon
+              : defaultCustomIcon,
           })
           .addTo(map, mapData);
       });

@@ -22,7 +22,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
 
   const onChangeHoverPlaceList = function(offer){
     const selectedPoint = {
-      title: offer.title,
+      id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
     }

@@ -1,5 +1,5 @@
 export type MapPoint = {
-  title: string;
+  id: string;
   latitude: number;
   longitude: number;
 }

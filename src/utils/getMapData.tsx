@@ -9,7 +9,7 @@ const getMapData = function(offers: Offer[], city:string): MapData{
   const points = offers.reduce((acc, offer) => {
     if(offer['city']['name'] === city){
       acc.push({
-        title: offer['city']['name'],
+        id: offer['id'],
         latitude: offer['location']['latitude'],
         longitude: offer['location']['longitude']
       });
