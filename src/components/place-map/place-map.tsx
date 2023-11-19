@@ -2,7 +2,7 @@
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 //react
-import {useRef, useEffect} from "react";
+import {useRef, useEffect} from 'react';
 //hooks
 import useMap from '../../hooks/useMap';
 //types
