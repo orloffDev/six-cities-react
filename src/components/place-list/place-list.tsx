@@ -1,5 +1,5 @@
 //react
-import {useState} from 'react';
+//import {ChangeEvent, useState} from 'react';
 //components
 import PlaceCard from '../../components/place-card/place-card';
 //types
@@ -7,17 +7,21 @@ import {Offer} from '../../types/offer';
 
 type PlaceListProps = {
   offers: Offer[];
+  onChangeHoverPlace: (offer: Offer) => void;
 }
 
-function PlaceList({offers}: PlaceListProps): JSX.Element {
-  const [activePlace, setActivePlace] = useState<Offer|null>(null);
+function PlaceList({offers, onChangeHoverPlace}: PlaceListProps): JSX.Element {
+  //const [activePlace, setActivePlace] = useState<Offer|null>(null);
 
   function handleEnter(offer: Offer) {
     //console.log('reactEvent', reactEvent);
-    if(!activePlace) {
+    /*if(!activePlace) {
       window.console.log(12123);
+
+
     }
-    setActivePlace(offer);
+    setActivePlace(offer);*/
+    onChangeHoverPlace(offer);
   }
 
   //
