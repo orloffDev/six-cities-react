@@ -18,7 +18,7 @@ function PlaceMap({mapData}: PlaceMapProps) {
 
   useEffect(() => {
     if (map) {
-      //const markerLayer = layerGroup().addTo(map);
+      const markerLayer = layerGroup().addTo(map);
       mapData['points'].forEach((point) => {
         leaflet
           .marker({
