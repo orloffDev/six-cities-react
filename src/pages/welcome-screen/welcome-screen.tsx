@@ -19,6 +19,7 @@ type WelcomeScreenProps = {
 function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
   const placesFound: number = offers.length;
   const [mapData, setMapData] = useState<MapData>(getMapData(offers, CITY_DEFAULT_NAME));
+  const offersFromCity = offers.filter((offer) => offer.city.name === CITY_DEFAULT_NAME);
 
   const onChangeHoverPlaceList = function(offer){
     const selectedPoint = {
@@ -120,7 +121,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
 
-              <PlaceList offers={offers} onChangeHoverPlace={onChangeHoverPlaceList} />
+              <PlaceList offers={offersFromCity} onChangeHoverPlace={onChangeHoverPlaceList} />
 
             </section>
             <div className="cities__right-section">
