@@ -1,3 +1,5 @@
+//react
+import {useState} from 'react';
 //components
 import Logo from '../../components/logo/logo';
 import PlaceList from '../../components/place-list/place-list';
@@ -6,6 +8,7 @@ import PlaceMap from '../../components/place-map/place-map';
 import {CITY_DEFAULT_NAME} from '../../const';
 //types
 import {Offer} from '../../types/offer';
+import {MapData} from '../../types/map-data';
 //helpers
 import {getMapData} from "../../utils/getMapData";
 //props
@@ -15,7 +18,20 @@ type WelcomeScreenProps = {
 
 function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
   const placesFound: number = offers.length;
-  const mapData = getMapData(offers, CITY_DEFAULT_NAME);
+  const [mapData, setMapData] = useState<MapData>(getMapData(offers, CITY_DEFAULT_NAME));
+
+  const onChangeHoverPlaceList = function(offer){
+    const selectedPoint = {
+      title: offer.title,
+      latitude: offer.location.latitude,
+      longitude: offer.location.longitude
+    }
+
+    setMapData({
+      ...mapData,
+      selectedPoint: selectedPoint
+    })
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -104,7 +120,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
 
-              <PlaceList offers={offers} />
+              <PlaceList offers={offers} onChangeHoverPlace={onChangeHoverPlaceList} />
 
             </section>
             <div className="cities__right-section">

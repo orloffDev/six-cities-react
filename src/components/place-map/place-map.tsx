@@ -25,10 +25,10 @@ function PlaceMap({mapData}: PlaceMapProps) {
             lat: point.latitude,
             lng: point.longitude,
           })
-          .addTo(map);
+          .addTo(map, mapData);
       });
     }
-  }, [map]);
+  }, [map, mapData]);
 
 
   return (
