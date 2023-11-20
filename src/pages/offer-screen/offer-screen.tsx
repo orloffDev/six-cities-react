@@ -178,7 +178,7 @@ function OfferScreen({offers}: OfferScreenProps): JSX.Element {
               </section>
             </div>
           </div>
-          <PlaceMap mapData={mapData} parent="offer" />
+          {mapData.center !== undefined ? <PlaceMap mapData={mapData} parent="offer" /> : null}
         </section>
         <div className="container">
           <section className="near-places places">
