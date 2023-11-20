@@ -12,7 +12,8 @@ import {URL_MARKER_CURRENT} from "../../const";
 import {URL_MARKER_DEFAULT} from "../../const";
 
 type PlaceMapProps = {
-  mapData: MapData
+  mapData: MapData;
+  parent: 'cities' | 'offer';
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -27,7 +28,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function PlaceMap({mapData}: PlaceMapProps) {
+function PlaceMap({mapData, parent}: PlaceMapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapData.center);
 
@@ -53,7 +54,7 @@ function PlaceMap({mapData}: PlaceMapProps) {
 
 
   return (
-    <section className="cities__map map" ref={mapRef}></section>
+    <section className={`${parent}__map map`} ref={mapRef}></section>
   );
 }
 

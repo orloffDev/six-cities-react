@@ -121,11 +121,16 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
 
-              <PlaceList offers={offersFromCity} onChangeHoverPlace={onChangeHoverPlaceList} />
+              <PlaceList
+                offers={offersFromCity}
+                onChangeHoverPlace={onChangeHoverPlaceList}
+                parentClass="cities__places-list tabs__content"
+                parent="cities"
+              />
 
             </section>
             <div className="cities__right-section">
-                <PlaceMap mapData={mapData} />
+                <PlaceMap mapData={mapData} parent="cities" />
             </div>
           </div>
         </div>

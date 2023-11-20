@@ -5,10 +5,12 @@ import {Offer} from '../../types/offer';
 
 type PlaceListProps = {
   offers: Offer[];
-  onChangeHoverPlace: (offer: Offer) => void;
+  onChangeHoverPlace?: (offer: Offer) => void;
+  parentClass: string;
+  parent: string;
 }
 
-function PlaceList({offers, onChangeHoverPlace}: PlaceListProps): JSX.Element {
+function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListProps): JSX.Element {
   //const [activePlace, setActivePlace] = useState<Offer|null>(null);
 
   function handleEnter(offer: Offer) {
@@ -19,17 +21,17 @@ function PlaceList({offers, onChangeHoverPlace}: PlaceListProps): JSX.Element {
 
     }
     setActivePlace(offer);*/
-    onChangeHoverPlace(offer);
+    onChangeHoverPlace && onChangeHoverPlace(offer);
   }
 
   //
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`${parentClass} places__list`}>
       {offers.map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}
-          parent="cities"
+          parent={parent}
           handleEnter={handleEnter}
         />
       ))}
