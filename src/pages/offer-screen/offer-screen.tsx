@@ -2,8 +2,17 @@
 import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from "../../components/reviews-list/reviews-list";
+//mocks
+import {reviewsData} from '../../mocks/reviews-data';
+import {Offer} from "../../types/offer";
+//props
+type OfferScreenProps = {
+  offers: Offer[];
+}
 
-function OfferScreen(): JSX.Element {
+function OfferScreen({offers}: OfferScreenProps): JSX.Element {
+  const reviewsCount = reviewsData.length;
+
   return (
     <div className="page">
       <header className="header">
@@ -154,8 +163,8 @@ function OfferScreen(): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ReviewsList />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
+                <ReviewsList reviewsData={reviewsData} />
                 <ReviewsForm />
               </section>
             </div>
