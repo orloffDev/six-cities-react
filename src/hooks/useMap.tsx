@@ -3,7 +3,6 @@ import leaflet from 'leaflet';
 import { Map } from 'leaflet';
 //react
 import {useEffect, useState, useRef} from 'react';
-import {RefObject} from 'react';
 //types
 import {Location} from "../types/location";
 
