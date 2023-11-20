@@ -33,7 +33,7 @@ function PlaceMap({mapData, parent}: PlaceMapProps) {
   const map = useMap(mapRef, mapData.center);
 
   useEffect(() => {
-    if (map) {
+    if (map && mapData['points']) {
       //const markerLayer = layerGroup().addTo(map);
       mapData['points'].forEach((point) => {
         console.log('point.id',point.id);
