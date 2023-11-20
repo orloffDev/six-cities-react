@@ -21,7 +21,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
   const [mapData, setMapData] = useState<MapData>(getMapData(offers, CITY_DEFAULT_NAME));
   const offersFromCity = offers.filter((offer) => offer.city.name === CITY_DEFAULT_NAME);
 
-  const onChangeHoverPlaceList = function(offer){
+  const onChangeHoverPlaceList = function(offer: Offer){
     const selectedPoint = {
       id: offer.id,
       latitude: offer.location.latitude,
