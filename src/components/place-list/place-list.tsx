@@ -1,5 +1,3 @@
-//react
-//import {ChangeEvent, useState} from 'react';
 //components
 import PlaceCard from '../../components/place-card/place-card';
 //types
