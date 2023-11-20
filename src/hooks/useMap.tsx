@@ -1,5 +1,6 @@
 //vendors
 import leaflet from 'leaflet';
+import { Map } from 'leaflet';
 //react
 import {useEffect, useState, useRef} from 'react';
 import {RefObject} from 'react';
@@ -7,8 +8,8 @@ import {RefObject} from 'react';
 import {Location} from "../types/location";
 
 function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location | undefined) {
-  const [map, setMap] = useState<Object | null>(null);
-  const isRenderedRef = useRef(false);
+  const [map, setMap] = useState<Map | null>(null);
+  const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {

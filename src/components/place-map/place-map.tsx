@@ -1,5 +1,6 @@
 //vendors
 import leaflet from 'leaflet';
+import { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 //react
 import {useRef, useEffect} from 'react';
@@ -34,10 +35,8 @@ function PlaceMap({mapData, parent}: PlaceMapProps) {
 
   useEffect(() => {
     if (map && mapData['points']) {
-      //const markerLayer = layerGroup().addTo(map);
+      const markerLayer = layerGroup().addTo(map);
       mapData['points'].forEach((point) => {
-        console.log('point.id',point.id);
-        console.log('mapData?.selectedPoint?.id',mapData?.selectedPoint?.id);
         leaflet
           .marker({
             lat: point.latitude,
@@ -47,7 +46,7 @@ function PlaceMap({mapData, parent}: PlaceMapProps) {
               ? currentCustomIcon
               : defaultCustomIcon,
           })
-          .addTo(map);
+          .addTo(markerLayer);
       });
     }
   }, [map, mapData]);
