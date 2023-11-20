@@ -2,7 +2,6 @@
 import ReviewsItem from "../reviews-item/reviews-item";
 //types
 import {Review} from "../../types/review";
-import PlaceCard from "../place-card/place-card";
 //props
 type ReviewsListProps = {
   reviewsData: Review[];

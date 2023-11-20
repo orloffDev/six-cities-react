@@ -1,5 +1,4 @@
 //react
-import {useState} from "react";
 //components
 import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
@@ -9,7 +8,6 @@ import PlaceMap from "../../components/place-map/place-map";
 import {reviewsData} from '../../mocks/reviews-data';
 //types
 import {Offer} from "../../types/offer";
-import {MapData} from "../../types/map-data";
 //utils
 import {getMapData} from "../../utils/getMapData";
 //const
