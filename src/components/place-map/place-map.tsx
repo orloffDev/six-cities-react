@@ -1,5 +1,5 @@
 //vendors
-import leaflet from 'leaflet';
+import {leaflet, Map} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 //react
 import {useRef, useEffect} from 'react';
@@ -30,7 +30,7 @@ const currentCustomIcon = leaflet.icon({
 
 function PlaceMap({mapData, parent}: PlaceMapProps) {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, mapData.center);
+  const map: Map = useMap(mapRef, mapData.center);
 
   useEffect(() => {
     if (map) {
