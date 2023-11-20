@@ -130,7 +130,7 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-                <PlaceMap mapData={mapData} parent="cities" />
+              {mapData.center !== undefined ? <PlaceMap mapData={mapData} parent="cities" /> : null}
             </div>
           </div>
         </div>
