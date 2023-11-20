@@ -6,7 +6,7 @@ const getMapData = function(offers: Offer[], city:string): MapData{
     return offer['city']['name'] === city;
   });
 
-  const points = offers.reduce((acc, offer) => {
+  const points = offers ? offers.reduce((acc, offer) => {
     if(offer['city']['name'] === city){
       acc.push({
         id: offer['id'],
@@ -15,7 +15,7 @@ const getMapData = function(offers: Offer[], city:string): MapData{
       });
     }
     return acc;
-  }, []);
+  }, []) : undefined;
 
   return {
     center: offer ? offer['city']['location'] : undefined,

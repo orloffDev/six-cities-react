@@ -3,7 +3,7 @@ import {MapPoint} from './map-point';
 
 export type MapData = {
   center: Location | undefined;
-  points: MapPoint[];
+  points: MapPoint[] | undefined;
   selectedPoint?: MapPoint;
 }
 
