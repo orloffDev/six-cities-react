@@ -2,7 +2,7 @@
 import {Review} from '../../types/review';
 
 type ReviewsItemProps = {
-  reviewData: Review[];
+  reviewData: Review;
 }
 function ReviewsItem({reviewData}: ReviewsItemProps): JSX.Element {
 

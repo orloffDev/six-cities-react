@@ -47,7 +47,7 @@ function PlaceMap({mapData, parent}: PlaceMapProps) {
               ? currentCustomIcon
               : defaultCustomIcon,
           })
-          .addTo(map, mapData);
+          .addTo(map);
       });
     }
   }, [map, mapData]);

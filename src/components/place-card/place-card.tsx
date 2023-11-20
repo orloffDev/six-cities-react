@@ -8,7 +8,7 @@ import {OfferHandleEnter} from '../../types/offer';
 type PlaceCardProps = {
   offer: Offer;
   handleEnter?: OfferHandleEnter;
-  parent: 'cities' | 'favorites' | 'near-places';
+  parent: string;
 }
 
 function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
