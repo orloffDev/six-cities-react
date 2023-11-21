@@ -1,7 +1,7 @@
 //components
-import ReviewsItem from "../reviews-item/reviews-item";
+import ReviewsItem from '../reviews-item/reviews-item';
 //types
-import {Review} from "../../types/review";
+import {Review} from '../../types/review';
 //props
 type ReviewsListProps = {
   reviewsData: Review[];
