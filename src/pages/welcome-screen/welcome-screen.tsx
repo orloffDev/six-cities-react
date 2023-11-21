@@ -10,7 +10,7 @@ import {CITY_DEFAULT_NAME} from '../../const';
 import {Offer} from '../../types/offer';
 import {MapData} from '../../types/map-data';
 //helpers
-import {getMapData} from "../../utils/getMapData";
+import {getMapData} from '../../utils/getMapData';
 //props
 type WelcomeScreenProps = {
   offers: Offer[];
@@ -26,12 +26,12 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
-    }
+    };
 
     setMapData({
       ...mapData,
       selectedPoint: selectedPoint
-    })
+    });
   };
 
   return (
