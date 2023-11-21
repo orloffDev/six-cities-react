@@ -1,8 +1,8 @@
 import {Offer} from '../types/offer';
 import {MapData} from '../types/map-data';
 
-const getMapData = function(offers: Offer[], city:string): MapData{
-  const offer: Offer = offers.find((offer)=>{
+const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapData{
+  const offer: Offer = offers.find((offer:  Offer)=>{
     return offer['city']['name'] === city;
   });
 
