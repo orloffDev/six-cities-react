@@ -6,7 +6,9 @@ import {MapPoint} from '../types/map-point';
 const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapData{
   const centerOffer = offers.find((offer) => offer['city']['name'] === city);
 
-  if(!centerOffer) throw new Error(); //TODO ??
+  if(!centerOffer) {
+    throw new Error();
+  } //TODO ??
 
   const points = offers.reduce((acc: MapPoint[], offer) => {
     if(offer['city']['name'] === city){
