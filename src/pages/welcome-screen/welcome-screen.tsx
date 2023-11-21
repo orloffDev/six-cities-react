@@ -10,7 +10,7 @@ import {CITY_DEFAULT_NAME} from '../../const';
 import {Offer} from '../../types/offer';
 import {MapData} from '../../types/map-data';
 //helpers
-import {getMapData} from "../../utils/getMapData";
+import {getMapData} from '../../utils/getMapData';
 //props
 type WelcomeScreenProps = {
   offers: Offer[];
@@ -21,17 +21,17 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
   const [mapData, setMapData] = useState<MapData>(getMapData(offers, CITY_DEFAULT_NAME));
   const offersFromCity = offers.filter((offer) => offer.city.name === CITY_DEFAULT_NAME);
 
-  const onChangeHoverPlaceList = function(offer){
+  const onChangeHoverPlaceList = function(offer: Offer){
     const selectedPoint = {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
-    }
+    };
 
     setMapData({
       ...mapData,
       selectedPoint: selectedPoint
-    })
+    });
   };
 
   return (
@@ -121,11 +121,16 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
                 </ul>
               </form>
 
-              <PlaceList offers={offersFromCity} onChangeHoverPlace={onChangeHoverPlaceList} />
+              <PlaceList
+                offers={offersFromCity}
+                onChangeHoverPlace={onChangeHoverPlaceList}
+                parentClass="cities__places-list tabs__content"
+                parent="cities"
+              />
 
             </section>
             <div className="cities__right-section">
-                <PlaceMap mapData={mapData} />
+              {mapData.center !== undefined ? <PlaceMap mapData={mapData} parent="cities" /> : null}
             </div>
           </div>
         </div>

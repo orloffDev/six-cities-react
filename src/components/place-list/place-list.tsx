@@ -1,37 +1,34 @@
-//react
-//import {ChangeEvent, useState} from 'react';
 //components
 import PlaceCard from '../../components/place-card/place-card';
 //types
 import {Offer} from '../../types/offer';
+//const
+import {MAX_NEAR_PLACES_COUNT} from '../../const';
 
 type PlaceListProps = {
   offers: Offer[];
-  onChangeHoverPlace: (offer: Offer) => void;
+  onChangeHoverPlace?: (offer: Offer) => void;
+  parentClass: string;
+  parent: string;
 }
 
-function PlaceList({offers, onChangeHoverPlace}: PlaceListProps): JSX.Element {
+function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListProps): JSX.Element {
   //const [activePlace, setActivePlace] = useState<Offer|null>(null);
 
   function handleEnter(offer: Offer) {
-    //console.log('reactEvent', reactEvent);
-    /*if(!activePlace) {
-      window.console.log(12123);
-
-
+    if (onChangeHoverPlace) {
+      onChangeHoverPlace(offer);
     }
-    setActivePlace(offer);*/
-    onChangeHoverPlace(offer);
   }
 
   //
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (
+    <div className={`${parentClass} places__list`}>
+      {offers.slice(0, MAX_NEAR_PLACES_COUNT).map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}
-          parent="cities"
+          parent={parent}
           handleEnter={handleEnter}
         />
       ))}

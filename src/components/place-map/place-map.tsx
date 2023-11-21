@@ -1,18 +1,20 @@
 //vendors
 import leaflet from 'leaflet';
+import { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 //react
 import {useRef, useEffect} from 'react';
 //hooks
 import useMap from '../../hooks/useMap';
 //types
-import {MapData} from "../../types/map-data";
+import {MapData} from '../../types/map-data';
 //const
-import {URL_MARKER_CURRENT} from "../../const";
-import {URL_MARKER_DEFAULT} from "../../const";
+import {URL_MARKER_CURRENT} from '../../const';
+import {URL_MARKER_DEFAULT} from '../../const';
 
 type PlaceMapProps = {
-  mapData: MapData
+  mapData: MapData;
+  parent: 'cities' | 'offer';
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -27,16 +29,14 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function PlaceMap({mapData}: PlaceMapProps) {
+function PlaceMap({mapData, parent}: PlaceMapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapData.center);
 
   useEffect(() => {
-    if (map) {
-      //const markerLayer = layerGroup().addTo(map);
+    if (map && mapData['points']) {
+      const markerLayer = layerGroup().addTo(map);
       mapData['points'].forEach((point) => {
-        console.log('point.id',point.id);
-        console.log('mapData?.selectedPoint?.id',mapData?.selectedPoint?.id);
         leaflet
           .marker({
             lat: point.latitude,
@@ -46,14 +46,14 @@ function PlaceMap({mapData}: PlaceMapProps) {
               ? currentCustomIcon
               : defaultCustomIcon,
           })
-          .addTo(map, mapData);
+          .addTo(markerLayer);
       });
     }
   }, [map, mapData]);
 
 
   return (
-    <section className="cities__map map" ref={mapRef}></section>
+    <section className={`${parent}__map map`} ref={mapRef}></section>
   );
 }
 
