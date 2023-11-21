@@ -3,7 +3,7 @@ import PlaceCard from '../../components/place-card/place-card';
 //types
 import {Offer} from '../../types/offer';
 //const
-import {MAX_NEAR_PLACES_COUNT} from "../../const";
+import {MAX_NEAR_PLACES_COUNT} from '../../const';
 
 type PlaceListProps = {
   offers: Offer[];

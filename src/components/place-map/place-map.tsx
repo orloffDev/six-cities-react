@@ -7,10 +7,10 @@ import {useRef, useEffect} from 'react';
 //hooks
 import useMap from '../../hooks/useMap';
 //types
-import {MapData} from "../../types/map-data";
+import {MapData} from '../../types/map-data';
 //const
-import {URL_MARKER_CURRENT} from "../../const";
-import {URL_MARKER_DEFAULT} from "../../const";
+import {URL_MARKER_CURRENT} from '../../const';
+import {URL_MARKER_DEFAULT} from '../../const';
 
 type PlaceMapProps = {
   mapData: MapData;
