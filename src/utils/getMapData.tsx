@@ -4,9 +4,7 @@ import {MapData} from '../types/map-data';
 import {MapPoint} from '../types/map-point';
 
 const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapData{
-  const centerOffer = offers.find((offer)=>{
-    return offer['city']['name'] === city;
-  });
+  const centerOffer = offers.find(offer => offer['city']['name'] === city);
 
   if(!centerOffer) throw new Error(); //TODO ??
 
