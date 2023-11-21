@@ -24,7 +24,7 @@ const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapDat
   return {
     center: centerOffer['city']['location'],
     points: points
-  }
-}
+  };
+};
 
-export {getMapData}
+export {getMapData};
