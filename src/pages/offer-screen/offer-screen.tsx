@@ -3,7 +3,7 @@
 import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import PlaceMap from "../../components/place-map/place-map";
+import PlaceMap from '../../components/place-map/place-map';
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
 //types

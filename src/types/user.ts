@@ -3,6 +3,3 @@ export type User = {
   avatarUrl: string;
   isPro: boolean;
 }
-
-
-
