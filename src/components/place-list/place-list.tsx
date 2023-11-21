@@ -16,14 +16,9 @@ function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListP
   //const [activePlace, setActivePlace] = useState<Offer|null>(null);
 
   function handleEnter(offer: Offer) {
-    //console.log('reactEvent', reactEvent);
-    /*if(!activePlace) {
-      window.console.log(12123);
-
-
+    if (onChangeHoverPlace) {
+      onChangeHoverPlace(offer);
     }
-    setActivePlace(offer);*/
-    onChangeHoverPlace && onChangeHoverPlace(offer);
   }
 
   //
