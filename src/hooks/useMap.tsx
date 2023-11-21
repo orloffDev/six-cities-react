@@ -6,7 +6,7 @@ import {useEffect, useState, useRef} from 'react';
 //types
 import {Location} from "../types/location";
 
-function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location | undefined) {
+function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location) {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
