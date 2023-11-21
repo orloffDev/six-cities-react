@@ -2,6 +2,8 @@
 import PlaceCard from '../../components/place-card/place-card';
 //types
 import {Offer} from '../../types/offer';
+//const
+import {MAX_NEAR_PLACES_COUNT} from "../../const";
 
 type PlaceListProps = {
   offers: Offer[];
@@ -27,7 +29,7 @@ function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListP
   //
   return (
     <div className={`${parentClass} places__list`}>
-      {offers.map((offer) => (
+      {offers.slice(0, MAX_NEAR_PLACES_COUNT).map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}
