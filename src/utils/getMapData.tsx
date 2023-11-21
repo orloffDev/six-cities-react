@@ -1,5 +1,7 @@
+//types
 import {Offer} from '../types/offer';
 import {MapData} from '../types/map-data';
+import {MapPoint} from "../types/map-point";
 
 const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapData{
   const offer = offers.find((offer)=>{
@@ -8,7 +10,7 @@ const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapDat
 
   if(!offer) throw new Error();
 
-  const points = offers.reduce((acc, offer) => {
+  const points = offers.reduce((acc: MapPoint[], offer) => {
     if(offer['city']['name'] === city){
       acc.push({
         id: offer['id'],
