@@ -6,6 +6,3 @@ export type MapData = {
   points: MapPoint[];
   selectedPoint?: MapPoint;
 }
-
-
-
