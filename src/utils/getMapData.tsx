@@ -2,11 +2,11 @@ import {Offer} from '../types/offer';
 import {MapData} from '../types/map-data';
 
 const getMapData = function(offers: Offer[], city:string): MapData{
-  const offer = offers.find((offer)=>{
+  const offer: Offer = offers.find((offer)=>{
     return offer['city']['name'] === city;
   });
 
-  const points = offers ? offers.reduce((acc, offer) => {
+  const points = offers.reduce((acc, offer) => {
     if(offer['city']['name'] === city){
       acc.push({
         id: offer['id'],
@@ -15,10 +15,10 @@ const getMapData = function(offers: Offer[], city:string): MapData{
       });
     }
     return acc;
-  }, []) : undefined;
+  }, []);
 
   return {
-    center: offer ? offer['city']['location'] : undefined,
+    center: offer['city']['location'],
     points: points
   }
 }
