@@ -2,8 +2,8 @@ import {Location} from './location';
 import {MapPoint} from './map-point';
 
 export type MapData = {
-  center: Location | undefined;
-  points: MapPoint[] | undefined;
+  center: Location;
+  points: MapPoint[];
   selectedPoint?: MapPoint;
 }
 
