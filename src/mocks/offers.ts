@@ -2761,4 +2761,4 @@ export const offers:Offer[] = [
     'isPremium': true,
     'rating': 2.6
   }
-  ];
+];

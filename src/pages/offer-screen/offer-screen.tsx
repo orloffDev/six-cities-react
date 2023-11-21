@@ -7,12 +7,12 @@ import PlaceMap from "../../components/place-map/place-map";
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
 //types
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 //utils
-import {getMapData} from "../../utils/getMapData";
+import {getMapData} from '../../utils/getMapData';
 //const
-import {CITY_DEFAULT_NAME} from "../../const";
-import PlaceList from "../../components/place-list/place-list";
+import {CITY_DEFAULT_NAME} from '../../const';
+import PlaceList from '../../components/place-list/place-list';
 //props
 type OfferScreenProps = {
   offers: Offer[];
