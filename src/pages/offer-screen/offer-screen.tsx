@@ -2,7 +2,7 @@
 //components
 import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import ReviewsList from "../../components/reviews-list/reviews-list";
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from "../../components/place-map/place-map";
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
@@ -186,7 +186,8 @@ function OfferScreen({offers}: OfferScreenProps): JSX.Element {
             <PlaceList
               offers={offers}
               parentClass="near-places__list"
-              parent="near-places" />
+              parent="near-places"
+            />
           </section>
         </div>
       </main>
