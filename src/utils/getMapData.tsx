@@ -8,6 +8,8 @@ const getMapData = function(offers: Offer[], city:Offer['city']['name']): MapDat
     return offer['city']['name'] === city;
   });
 
+  if(!offer) throw new Error(); //TODO ??
+
   const points = offers.reduce((acc: MapPoint[], offer) => {
     if(offer['city']['name'] === city){
       acc.push({
