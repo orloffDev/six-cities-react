@@ -4,21 +4,20 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
+//hooks
+import {useAppSelector} from "../../hooks/use-app-selector";
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
-//types
-import {Offer} from '../../types/offer';
 //utils
 import {getMapData} from '../../utils/getMapData';
 //const
 import {CITY_DEFAULT_NAME} from '../../const';
 import {MAX_NEAR_PLACES_COUNT} from '../../const';
-//props
-type OfferScreenProps = {
-  offers: Offer[];
-}
 
-function OfferScreen({offers}: OfferScreenProps): JSX.Element {
+
+
+function OfferScreen(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const reviewsCount = reviewsData.length;
   const mapData = getMapData(offers, CITY_DEFAULT_NAME);
 

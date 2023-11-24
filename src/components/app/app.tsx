@@ -11,19 +11,14 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
-
-type AppProps = {
-  offers: Offer[];
-}
-
-function App({offers}: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<WelcomeScreen offers={offers} />}
+            element={<WelcomeScreen />}
           />
           <Route
             path={AppRoute.Favorites}
@@ -31,7 +26,7 @@ function App({offers}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth} //TODO
               >
-                <FavoritesScreen offers={offers} />
+                <FavoritesScreen />
               </PrivateRoute>
             }
           />
@@ -41,7 +36,7 @@ function App({offers}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen offers={offers}/>}
+            element={<OfferScreen />}
           />
           <Route
             path="*"
