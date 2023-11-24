@@ -8,7 +8,7 @@ type PlaceListProps = {
   onChangeHoverPlace?: (offer: Offer) => void;
   parentClass: string;
   parent: string;
-  maxLength: number | undefined;
+  maxLength?: number;
 }
 
 function PlaceList({offers, onChangeHoverPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
