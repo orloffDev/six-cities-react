@@ -1,4 +1,5 @@
 //react
+import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 //hooks
 import {useAppSelector} from "../../hooks/use-app-selector";
@@ -20,7 +21,7 @@ function Item({name}: ItemProps): JSX.Element {
   const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
   const dispatch = useAppDispatch();
 
-  const handleItemClick = function(e){
+  const handleItemClick = function(e: MouseEvent<HTMLElement>){
     e.preventDefault();
     if(name === activeCityName) return;
 
