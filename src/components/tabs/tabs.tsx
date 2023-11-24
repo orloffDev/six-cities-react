@@ -1,24 +1,30 @@
 //react
 import {Link} from 'react-router-dom';
+//hooks
+import {useAppSelector} from "../../hooks/use-app-selector";
 //types
 import {CityName} from '../../types/city-name';
 //const
 import {CitiesList} from '../../const';
-//store
-import {store} from '../../store/index';
 
 type ItemProps = {
   name: CityName;
 }
 
-const activeCityName: CityName = store.getState()['activeCityName'];
+const handleItemClick = function(e){
+  e.preventDefault();
+
+}
 
 function Item({name}: ItemProps): JSX.Element {
+  const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
+
   return (
     <li className="locations__item" >
       <Link
         to="#"
         className={`locations__item-link tabs__item  ${ activeCityName === name && 'tabs__item--active' }`}
+        onClick={handleItemClick}
       >
         <span>{name}</span>
       </Link>
