@@ -1,5 +1,5 @@
 //react
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 //types
 import {CityName} from '../../types/city-name';
 //const
