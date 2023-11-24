@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 //types
 import {CityName} from '../../types/city-name';
 //const
-import {CitiesList} from "../../const";
+import {CitiesList} from '../../const';
 //store
-import {store} from "../../store/index";
+import {store} from '../../store/index';
 
 type ItemProps = {
   name: CityName;
@@ -23,7 +23,7 @@ function Item({name}: ItemProps): JSX.Element {
         <span>{name}</span>
       </Link>
     </li>
-  )
+  );
 }
 
 function Tabs(): JSX.Element {

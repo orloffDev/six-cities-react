@@ -12,7 +12,7 @@ type PlaceListProps = {
 }
 
 function PlaceList({offers, onChangeHoverPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
-  const sliceOffers:Offer[] = maxLength ?  offers.slice(0, maxLength) : offers;
+  const sliceOffers:Offer[] = maxLength ? offers.slice(0, maxLength) : offers;
 
   function handleEnter(offer: Offer) {
     if (onChangeHoverPlace) {
