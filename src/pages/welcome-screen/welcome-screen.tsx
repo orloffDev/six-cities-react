@@ -6,7 +6,7 @@ import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
 import Tabs from "../../components/tabs/tabs";
 //hooks
-import {useAppDispatch} from "../../hooks/use-app-dispatch";
+//import {useAppDispatch} from "../../hooks/use-app-dispatch";
 import {useAppSelector} from "../../hooks/use-app-selector";
 //types
 import {Offer} from '../../types/offer';
