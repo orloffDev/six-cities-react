@@ -8,8 +8,7 @@ import {getMapData} from "../utils/getMapData";
 
 const initialState = {
   activeCityName: CITY_DEFAULT_NAME,
-  offers: offers,
-  offersFromCity: getMapData
+  offers: offers
 };
 
 export const reducer = createReducer(initialState, (builder) => {

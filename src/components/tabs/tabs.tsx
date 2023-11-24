@@ -2,6 +2,9 @@
 import {Link} from 'react-router-dom';
 //hooks
 import {useAppSelector} from "../../hooks/use-app-selector";
+import {useAppDispatch} from "../../hooks/use-app-dispatch";
+//action
+import {setActiveCityName} from '../../store/action';
 //types
 import {CityName} from '../../types/city-name';
 //const
@@ -11,13 +14,18 @@ type ItemProps = {
   name: CityName;
 }
 
-const handleItemClick = function(e){
-  e.preventDefault();
 
-}
 
 function Item({name}: ItemProps): JSX.Element {
   const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
+  const dispatch = useAppDispatch();
+
+  const handleItemClick = function(e){
+    e.preventDefault();
+    if(name === activeCityName) return;
+
+    dispatch(setActiveCityName(name));
+  }
 
   return (
     <li className="locations__item" >
