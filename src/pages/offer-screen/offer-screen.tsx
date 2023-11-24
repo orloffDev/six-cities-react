@@ -1,9 +1,9 @@
-//react
 //components
 import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
+import PlaceList from '../../components/place-list/place-list';
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
 //types
@@ -12,7 +12,7 @@ import {Offer} from '../../types/offer';
 import {getMapData} from '../../utils/getMapData';
 //const
 import {CITY_DEFAULT_NAME} from '../../const';
-import PlaceList from '../../components/place-list/place-list';
+import {MAX_NEAR_PLACES_COUNT} from '../../const';
 //props
 type OfferScreenProps = {
   offers: Offer[];
@@ -187,6 +187,7 @@ function OfferScreen({offers}: OfferScreenProps): JSX.Element {
               offers={offers}
               parentClass="near-places__list"
               parent="near-places"
+              maxLength={MAX_NEAR_PLACES_COUNT}
             />
           </section>
         </div>

@@ -2,18 +2,17 @@
 import PlaceCard from '../../components/place-card/place-card';
 //types
 import {Offer} from '../../types/offer';
-//const
-import {MAX_NEAR_PLACES_COUNT} from '../../const';
 
 type PlaceListProps = {
   offers: Offer[];
   onChangeHoverPlace?: (offer: Offer) => void;
   parentClass: string;
   parent: string;
+  maxLength: number | undefined;
 }
 
-function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListProps): JSX.Element {
-  //const [activePlace, setActivePlace] = useState<Offer|null>(null);
+function PlaceList({offers, onChangeHoverPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
+  const sliceOffers:Offer[] = maxLength ?  offers.slice(0, maxLength) : offers;
 
   function handleEnter(offer: Offer) {
     if (onChangeHoverPlace) {
@@ -24,7 +23,7 @@ function PlaceList({offers, onChangeHoverPlace, parentClass, parent}: PlaceListP
   //
   return (
     <div className={`${parentClass} places__list`}>
-      {offers.slice(0, MAX_NEAR_PLACES_COUNT).map((offer) => (
+      {sliceOffers.map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}

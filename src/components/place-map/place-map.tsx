@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 //react
 import {useRef, useEffect} from 'react';
 //hooks
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 //types
 import {MapData} from '../../types/map-data';
 //const
