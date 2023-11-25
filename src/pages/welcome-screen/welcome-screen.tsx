@@ -24,7 +24,7 @@ function WelcomeScreen(): JSX.Element {
   const placesFound: number = offersFromCity.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
-    const newSelectedPoint: SelectedPoint  = {
+    const newSelectedPoint: SelectedPoint = {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
