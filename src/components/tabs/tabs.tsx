@@ -16,14 +16,15 @@ type ItemProps = {
 }
 
 function Item({name}: ItemProps): JSX.Element {
-  const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
+  const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const dispatch = useAppDispatch();
   const handleItemClick = function(e: MouseEvent){
     e.preventDefault();
-    if(name === activeCityName) return;
-
+    if(name === activeCityName){
+      return;
+    }
     dispatch(setActiveCityName(name));
-  }
+  };
 
   return (
     <li className="locations__item">
