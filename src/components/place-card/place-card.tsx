@@ -29,12 +29,12 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
     if (onEnter) {
       onEnter(offer);
     }
-  }
+  };
   const handleOut = ()=>{
     if (onOut) {
       onOut(offer);
     }
-  }
+  };
 
   //
   return (

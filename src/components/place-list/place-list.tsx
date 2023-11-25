@@ -19,13 +19,13 @@ function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, p
     if (onChangeHoverPlace) {
       onChangeHoverPlace(offer);
     }
-  }
+  };
 
   const handleOut = (offer: Offer) =>{
     if (onChangeOutPlace) {
       onChangeOutPlace(offer);
     }
-  }
+  };
 
   //
   return (

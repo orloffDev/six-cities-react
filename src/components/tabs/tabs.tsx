@@ -2,8 +2,8 @@
 import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 //hooks
-import {useAppSelector} from "../../hooks/use-app-selector";
-import {useAppDispatch} from "../../hooks/use-app-dispatch";
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 //action
 import {setActiveCityName} from '../../store/action';
 //types
@@ -29,7 +29,7 @@ function Item({name}: ItemProps): JSX.Element {
   }
 
   return (
-    <li className="locations__item" >
+    <li className="locations__item">
       <Link
         to="#"
         className={`locations__item-link tabs__item  ${ activeCityName === name && 'tabs__item--active' }`}
