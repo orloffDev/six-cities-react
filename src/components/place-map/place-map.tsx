@@ -8,7 +8,7 @@ import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map';
 //types
 import {MapData} from '../../types/map-data';
-import {MapPoint} from '../../types/map-point';
+import {SelectedPoint} from '../../types/selected-point';
 //const
 import {URL_MARKER_CURRENT} from '../../const';
 import {URL_MARKER_DEFAULT} from '../../const';
@@ -16,7 +16,7 @@ import {URL_MARKER_DEFAULT} from '../../const';
 type PlaceMapProps = {
   mapData: MapData;
   parent: 'cities' | 'offer';
-  selectedPoint?: MapPoint;
+  selectedPoint: SelectedPoint;
 }
 
 const defaultCustomIcon = leaflet.icon({
