@@ -8,6 +8,7 @@ import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map';
 //types
 import {MapData} from '../../types/map-data';
+import {MapPoint} from '../../types/map-point';
 //const
 import {URL_MARKER_CURRENT} from '../../const';
 import {URL_MARKER_DEFAULT} from '../../const';
@@ -15,6 +16,7 @@ import {URL_MARKER_DEFAULT} from '../../const';
 type PlaceMapProps = {
   mapData: MapData;
   parent: 'cities' | 'offer';
+  selectedPoint?: MapPoint;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -29,7 +31,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-function PlaceMap({mapData, parent}: PlaceMapProps) {
+function PlaceMap({mapData, parent, selectedPoint}: PlaceMapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapData.center);
 
@@ -42,14 +44,18 @@ function PlaceMap({mapData, parent}: PlaceMapProps) {
             lat: point.latitude,
             lng: point.longitude,
           }, {
-            icon: (point.id === mapData?.selectedPoint?.id)
+            icon: (point.id === selectedPoint?.id)
               ? currentCustomIcon
               : defaultCustomIcon,
           })
           .addTo(markerLayer);
       });
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
     }
-  }, [map, mapData]);
+  }, [map, mapData, selectedPoint]);
 
 
   return (

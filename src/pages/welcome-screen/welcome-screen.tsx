@@ -6,11 +6,10 @@ import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
 import Tabs from "../../components/tabs/tabs";
 //hooks
-//import {useAppDispatch} from "../../hooks/use-app-dispatch";
 import {useAppSelector} from "../../hooks/use-app-selector";
 //types
 import {Offer} from '../../types/offer';
-import {MapData} from '../../types/map-data';
+import {SelectedPoint} from '../../types/selected-point';
 import {CityName} from "../../types/city-name";
 //utils
 import {getMapData} from '../../utils/getMapData';
@@ -20,21 +19,17 @@ function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
   const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
-  const [mapData, setMapData] = useState<MapData>(getMapData(offers, activeCityName));
+  const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
+  const mapData = getMapData(offers, activeCityName)
   const placesFound: number = offersFromCity.length;
 
-
   const onChangeHoverPlaceList = function(offer: Offer){
-    const selectedPoint = {
+    const selectedPoint: SelectedPoint  = {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
     };
-
-    setMapData({
-      ...mapData,
-      selectedPoint: selectedPoint
-    });
+    setSelectedPoint(selectedPoint);
   };
 
   return (
@@ -100,7 +95,7 @@ function WelcomeScreen(): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              {mapData.center !== undefined ? <PlaceMap mapData={mapData} parent="cities" /> : null}
+              {mapData && <PlaceMap mapData={mapData} selectedPoint={selectedPoint} parent="cities" />}
             </div>
           </div>
         </div>
