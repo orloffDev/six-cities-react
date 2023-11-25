@@ -1,4 +1,4 @@
 import {CitiesList} from "../const";
 
-export type CityName = Object.keys(CitiesList);
+export type CityName = keyof typeof CitiesList;
 
