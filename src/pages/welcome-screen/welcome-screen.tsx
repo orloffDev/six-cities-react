@@ -32,7 +32,7 @@ function WelcomeScreen(): JSX.Element {
     setSelectedPoint(selectedPoint);
   };
 
-  const onChangeOutPlaceList = function(offer: Offer){
+  const onChangeOutPlaceList = function(){
     setSelectedPoint(null);
   };
 
