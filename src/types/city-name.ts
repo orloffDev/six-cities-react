@@ -1,4 +1,2 @@
-import {CitiesList} from "../const";
-
-export type CityName = Record<CitiesList, string>;
+export type CityName = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 
