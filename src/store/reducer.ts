@@ -5,7 +5,7 @@ import {CITY_DEFAULT_NAME } from '../const';
 import {offers} from "../mocks/offers";
 
 const initialState = {
-  activeCityName: 'Paris',
+  activeCityName: CITY_DEFAULT_NAME,
   offers: offers
 };
 
