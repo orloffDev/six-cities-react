@@ -1,4 +1,4 @@
 import {CitiesList} from "../const";
 
-export type CityName = `${CitiesList}`;
+export type CityName = keyof typeof CitiesList;
 
