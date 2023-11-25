@@ -16,7 +16,7 @@ import {URL_MARKER_DEFAULT} from '../../const';
 type PlaceMapProps = {
   mapData: MapData;
   parent: 'cities' | 'offer';
-  selectedPoint: SelectedPoint;
+  selectedPoint?: SelectedPoint;
 }
 
 const defaultCustomIcon = leaflet.icon({
