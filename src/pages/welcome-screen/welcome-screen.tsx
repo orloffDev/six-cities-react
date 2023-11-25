@@ -4,32 +4,32 @@ import {useState} from 'react';
 import Logo from '../../components/logo/logo';
 import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
-import Tabs from "../../components/tabs/tabs";
+import Tabs from '../../components/tabs/tabs';
 //hooks
-import {useAppSelector} from "../../hooks/use-app-selector";
+import {useAppSelector} from '../../hooks/use-app-selector';
 //types
 import {Offer} from '../../types/offer';
 import {SelectedPoint} from '../../types/selected-point';
-import {CityName} from "../../types/city-name";
+import {CityName} from '../../types/city-name';
 //utils
 import {getMapData} from '../../utils/getMapData';
 
 
 function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
-  const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
+  const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
-  const mapData = getMapData(offers, activeCityName)
+  const mapData = getMapData(offers, activeCityName);
   const placesFound: number = offersFromCity.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
-    const selectedPoint: SelectedPoint  = {
+    const newSelectedPoint: SelectedPoint  = {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
     };
-    setSelectedPoint(selectedPoint);
+    setSelectedPoint(newSelectedPoint);
   };
 
   const onChangeOutPlaceList = function(){
