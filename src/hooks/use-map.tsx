@@ -34,7 +34,7 @@ function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location) {
         renderedRef.current = instance;
       } else { //карта уже была создана, просто обновляем центр
         const instance = renderedRef.current;
-        instance.setView(new L.LatLng(center.latitude, center.longitude), center.zoom);
+        instance.flyTo([center.latitude, center.longitude], center.zoom);
       }
     }
   }, [mapRef, center]);
