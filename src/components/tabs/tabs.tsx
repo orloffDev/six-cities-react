@@ -44,7 +44,7 @@ function Tabs(): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {(Object.keys(CitiesList) as Array<keyof typeof CityName>).map((name) => (
+          {(Object.keys(CitiesList) as Array<keyof typeof CitiesList>).map((name: CityName) => (
             <Item key={name} name={name} />
           ))}
         </ul>
