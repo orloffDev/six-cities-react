@@ -5,7 +5,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
 //hooks
-import {useAppSelector} from "../../hooks/use-app-selector";
+import {useAppSelector} from '../../hooks/use-app-selector';
 //mocks
 import {reviewsData} from '../../mocks/reviews-data';
 //utils
@@ -13,8 +13,6 @@ import {getMapData} from '../../utils/getMapData';
 //const
 import {CITY_DEFAULT_NAME} from '../../const';
 import {MAX_NEAR_PLACES_COUNT} from '../../const';
-
-
 
 function OfferScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
