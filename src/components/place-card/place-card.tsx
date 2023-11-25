@@ -40,8 +40,8 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
   return (
     <article
       className={`${parent}__card place-card`}
-      onMouseEnter={handleEnter}
-      onMouseOut={handleOut}
+      onPointerEnter={handleEnter}
+      onPointerLeave={handleOut}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${parent}__image-wrapper place-card__image-wrapper`}>

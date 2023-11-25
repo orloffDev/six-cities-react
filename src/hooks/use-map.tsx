@@ -8,11 +8,11 @@ import {Location} from '../types/location';
 
 function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location) {
   const [map, setMap] = useState<Map | null>(null);
-  const isRenderedRef = useRef<boolean>(false);
+  const renderedRef = useRef<Map | null>(null);
 
   useEffect(() => {
     if (mapRef.current !== null) {
-      if(!isRenderedRef.current) {
+      if(!renderedRef.current) {
         const instance = leaflet.map(mapRef.current, {
           center: {
             lat: center.latitude,
@@ -31,9 +31,9 @@ function useMap(mapRef: React.RefObject<HTMLDivElement>, center: Location) {
           .addTo(instance);
 
         setMap(instance);
-        isRenderedRef.current = instance;
+        renderedRef.current = instance;
       } else { //карта уже была создана, просто обновляем центр
-        const instance = isRenderedRef.current;
+        const instance = renderedRef.current;
         instance.setView(new L.LatLng(center.latitude, center.longitude), center.zoom);
       }
     }

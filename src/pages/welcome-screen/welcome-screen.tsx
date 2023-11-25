@@ -16,7 +16,6 @@ import {getMapData} from '../../utils/getMapData';
 
 
 function WelcomeScreen(): JSX.Element {
-  console.log(11111111111);
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
   const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
