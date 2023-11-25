@@ -10,17 +10,14 @@ import {setActiveCityName} from '../../store/action';
 import {CityName} from '../../types/city-name';
 //const
 import {CitiesList} from '../../const';
-
+//props
 type ItemProps = {
   name: CityName;
 }
 
-
-
 function Item({name}: ItemProps): JSX.Element {
   const activeCityName: CityName =  useAppSelector((state) => state.activeCityName);
   const dispatch = useAppDispatch();
-
   const handleItemClick = function(e: MouseEvent){
     e.preventDefault();
     if(name === activeCityName) return;
