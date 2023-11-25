@@ -4,7 +4,7 @@ import {Helmet} from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import FavList from '../../components/fav-list/fav-list';
 //hooks
-import {useAppSelector} from "../../hooks/use-app-selector";
+import {useAppSelector} from '../../hooks/use-app-selector';
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
