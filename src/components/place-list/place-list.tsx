@@ -6,17 +6,24 @@ import {Offer} from '../../types/offer';
 type PlaceListProps = {
   offers: Offer[];
   onChangeHoverPlace?: (offer: Offer) => void;
+  onChangeOutPlace?: (offer: Offer) => void;
   parentClass: string;
   parent: string;
   maxLength?: number;
 }
 
-function PlaceList({offers, onChangeHoverPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
+function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
   const sliceOffers:Offer[] = maxLength ? offers.slice(0, maxLength) : offers;
 
-  function handleEnter(offer: Offer) {
+  const handleEnter = (offer: Offer) =>{
     if (onChangeHoverPlace) {
       onChangeHoverPlace(offer);
+    }
+  }
+
+  const handleOut = (offer: Offer) =>{
+    if (onChangeOutPlace) {
+      onChangeOutPlace(offer);
     }
   }
 
@@ -28,7 +35,8 @@ function PlaceList({offers, onChangeHoverPlace, parentClass, parent, maxLength}:
           key={offer.id}
           offer={offer}
           parent={parent}
-          handleEnter={handleEnter}
+          onEnter={handleEnter}
+          onOut={handleOut}
         />
       ))}
     </div>

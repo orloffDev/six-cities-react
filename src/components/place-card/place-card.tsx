@@ -4,14 +4,16 @@ import {Link} from 'react-router-dom';
 //types
 import {Offer} from '../../types/offer';
 import {OfferHandleEnter} from '../../types/offer';
+import {OfferHandleOut} from '../../types/offer';
 
 type PlaceCardProps = {
   offer: Offer;
-  handleEnter?: OfferHandleEnter;
+  onEnter?: OfferHandleEnter;
+  onOut?: OfferHandleOut;
   parent: string;
 }
 
-function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -23,16 +25,23 @@ function PlaceCard({offer, handleEnter, parent}: PlaceCardProps): JSX.Element {
     previewImage
   } = offer;
   const linkTo = `/offer/${id}`;
+  const handleEnter = ()=>{
+    if (onEnter) {
+      onEnter(offer);
+    }
+  }
+  const handleOut = ()=>{
+    if (onOut) {
+      onOut(offer);
+    }
+  }
 
   //
   return (
     <article
       className={`${parent}__card place-card`}
-      onPointerEnter={()=>{
-        if (handleEnter) {
-          handleEnter(offer);
-        }
-      }}
+      onMouseOver={handleEnter}
+      onMouseOut={handleOut}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${parent}__image-wrapper place-card__image-wrapper`}>

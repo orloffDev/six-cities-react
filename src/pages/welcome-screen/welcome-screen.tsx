@@ -32,6 +32,10 @@ function WelcomeScreen(): JSX.Element {
     setSelectedPoint(selectedPoint);
   };
 
+  const onChangeOutPlaceList = function(offer: Offer){
+    setSelectedPoint(null);
+  };
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -89,6 +93,7 @@ function WelcomeScreen(): JSX.Element {
               <PlaceList
                 offers={offersFromCity}
                 onChangeHoverPlace={onChangeHoverPlaceList}
+                onChangeOutPlace={onChangeOutPlaceList}
                 parentClass="cities__places-list tabs__content"
                 parent="cities"
               />
