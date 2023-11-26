@@ -1,3 +1,3 @@
-import {MapPoint} from "./map-point";
+import {MapPoint} from './map-point';
 
 export type SelectedPoint = MapPoint | null;

@@ -2,7 +2,7 @@
 import {Offer} from '../types/offer';
 import {MapData} from '../types/map-data';
 import {MapPoint} from '../types/map-point';
-import {CityName} from "../types/city-name";
+import {CityName} from '../types/city-name';
 
 const getMapData = function(offers: Offer[], city: CityName): MapData{
   const centerOffer = offers.find((offer) => offer['city']['name'] === city);
