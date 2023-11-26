@@ -1,3 +1,2 @@
-import {CitiesList} from "../const";
-type ValueOf<T> = T[keyof T];
-export type CityName = ValueOf<CitiesList>;
+export type CityName = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+
