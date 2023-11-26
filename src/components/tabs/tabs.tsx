@@ -16,7 +16,6 @@ type ItemProps = {
 }
 
 function Item({name}: ItemProps): JSX.Element {
-  console.log(name);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const dispatch = useAppDispatch();
   const handleItemClick = function(e: MouseEvent){

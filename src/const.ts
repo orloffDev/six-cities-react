@@ -1,3 +1,5 @@
+import {CityName} from "./types/city-name";
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -21,7 +23,7 @@ export enum CitiesList {
   Dusseldorf = 'Dusseldorf'
 }
 
-export const CITY_DEFAULT_NAME = 'Paris';
+export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
