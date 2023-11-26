@@ -1,2 +1,3 @@
-export type CityName = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+import {CitiesList} from "../const";
 
+export type CityName = ValueOf<CitiesList>;

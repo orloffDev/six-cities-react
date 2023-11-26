@@ -46,8 +46,8 @@ function Tabs(): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {list.map((key) => (
-            <Item key={key} name={key} />
+          {list.map((val) => (
+            <Item key={val} name={val} />
           ))}
         </ul>
       </section>
