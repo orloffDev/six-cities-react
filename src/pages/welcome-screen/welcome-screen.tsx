@@ -4,34 +4,36 @@ import {useState} from 'react';
 import Logo from '../../components/logo/logo';
 import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
-//const
-import {CITY_DEFAULT_NAME} from '../../const';
+import Tabs from '../../components/tabs/tabs';
+//hooks
+import {useAppSelector} from '../../hooks/use-app-selector';
 //types
 import {Offer} from '../../types/offer';
-import {MapData} from '../../types/map-data';
-//helpers
+import {SelectedPoint} from '../../types/selected-point';
+import {CityName} from '../../types/city-name';
+//utils
 import {getMapData} from '../../utils/getMapData';
-//props
-type WelcomeScreenProps = {
-  offers: Offer[];
-}
 
-function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
-  const placesFound: number = offers.length;
-  const [mapData, setMapData] = useState<MapData>(getMapData(offers, CITY_DEFAULT_NAME));
-  const offersFromCity = offers.filter((offer) => offer.city.name === CITY_DEFAULT_NAME);
+
+function WelcomeScreen(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
+  const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
+  const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
+  const mapData = getMapData(offers, activeCityName);
+  const placesFound: number = offersFromCity.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
-    const selectedPoint = {
+    const newSelectedPoint: SelectedPoint = {
       id: offer.id,
       latitude: offer.location.latitude,
       longitude: offer.location.longitude
     };
+    setSelectedPoint(newSelectedPoint);
+  };
 
-    setMapData({
-      ...mapData,
-      selectedPoint: selectedPoint
-    });
+  const onChangeOutPlaceList = function(){
+    setSelectedPoint(null);
   };
 
   return (
@@ -64,47 +66,14 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <Tabs />
+
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesFound} places to stay in Amsterdam</b>
+              <b className="places__found">{placesFound} places to stay in {activeCityName}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -124,13 +93,14 @@ function WelcomeScreen({offers}: WelcomeScreenProps): JSX.Element {
               <PlaceList
                 offers={offersFromCity}
                 onChangeHoverPlace={onChangeHoverPlaceList}
+                onChangeOutPlace={onChangeOutPlaceList}
                 parentClass="cities__places-list tabs__content"
                 parent="cities"
               />
 
             </section>
             <div className="cities__right-section">
-              {mapData.center !== undefined ? <PlaceMap mapData={mapData} parent="cities" /> : null}
+              {mapData && <PlaceMap mapData={mapData} selectedPoint={selectedPoint} parent="cities" />}
             </div>
           </div>
         </div>

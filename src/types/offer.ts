@@ -16,4 +16,6 @@ export type Offer = {
 
 export type OfferHandleEnter= (offer: Offer) => void
 
+export type OfferHandleOut= (offer: Offer) => void
+
 

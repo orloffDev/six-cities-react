@@ -1,3 +1,5 @@
+import {CityName} from './types/city-name';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -12,7 +14,16 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const CITY_DEFAULT_NAME = 'Amsterdam';
+export enum CitiesList {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
+export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
