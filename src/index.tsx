@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 //store
 import {store} from './store/index';
+//actions
+import {fetchOffersAction} from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

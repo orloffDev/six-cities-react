@@ -6,7 +6,7 @@ import {offers} from '../mocks/offers';
 
 const initialState = {
   activeCityName: CITY_DEFAULT_NAME,
-  offers: offers
+  offers: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
