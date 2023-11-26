@@ -16,6 +16,7 @@ type ItemProps = {
 }
 
 function Item({name}: ItemProps): JSX.Element {
+  console.log(name);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const dispatch = useAppDispatch();
   const handleItemClick = function(e: MouseEvent){
@@ -40,12 +41,14 @@ function Item({name}: ItemProps): JSX.Element {
 }
 
 function Tabs(): JSX.Element {
+  const list = Object.values(CitiesList) as Array<keyof typeof CitiesList>;
+
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {(Object.keys(CitiesList) as Array<keyof typeof CitiesList>).map((name: CityName) => (
-            <Item key={name} name={name} />
+          {list.map((key) => (
+            <Item key={key} name={key} />
           ))}
         </ul>
       </section>
