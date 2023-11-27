@@ -12,7 +12,7 @@ function FavoritesScreen(): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>aasdads</title>
+        <title>Favorites</title>
       </Helmet>
 
       <div className="page">
