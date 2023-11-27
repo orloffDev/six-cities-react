@@ -200,20 +200,3 @@ function OfferScreen(): JSX.Element {
 }
 
 export default OfferScreen;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 import {CityName} from './city-name';
 import {Offer} from './offer';
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus} from '../const';
 
 export type InitialState = {
   activeCityName: CityName;
