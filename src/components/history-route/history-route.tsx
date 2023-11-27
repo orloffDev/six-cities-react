@@ -9,9 +9,9 @@ export interface HistoryRouterProps {
 }
 
 function HistoryRouter({
- basename,
- children,
- history,
+  basename,
+  children,
+  history,
 }: HistoryRouterProps) {
   const [state, setState] = useState({
     action: history.action,
