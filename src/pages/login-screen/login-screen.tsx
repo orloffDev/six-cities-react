@@ -1,9 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {useRef, FormEvent} from 'react';
-import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {loginAction} from '../../store/api-actions';
-import {AppRoute} from '../../const';
 
 import Logo from '../../components/logo/logo';
 
@@ -12,7 +10,6 @@ function LoginScreen(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
