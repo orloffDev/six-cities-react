@@ -13,7 +13,7 @@ import {getMapData} from '../../utils/getMapData';
 //const
 import {CITY_DEFAULT_NAME} from '../../const';
 import {MAX_NEAR_PLACES_COUNT} from '../../const';
-import {Helmet} from "react-helmet-async";
+import {Helmet} from 'react-helmet-async';
 
 function OfferScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -26,7 +26,7 @@ function OfferScreen(): JSX.Element {
         <title>Offer</title>
       </Helmet>
       <div className="page">
-      <header className="header">
+        <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
@@ -52,7 +52,7 @@ function OfferScreen(): JSX.Element {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--offer">
+        <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
@@ -194,7 +194,7 @@ function OfferScreen(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+      </div>
     </>
   );
 }

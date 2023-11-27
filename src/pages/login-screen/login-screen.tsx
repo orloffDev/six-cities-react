@@ -43,9 +43,9 @@ function LoginScreen(): JSX.Element {
             <section className="login">
               <h1 className="login__title">Sign in</h1>
               <form
-                  className="login__form form"
-                  action="#" method="post"
-                  onSubmit={handleSubmit}
+                className="login__form form"
+                action="#" method="post"
+                onSubmit={handleSubmit}
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
