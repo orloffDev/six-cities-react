@@ -15,7 +15,7 @@ const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.NOT_FOUND]: true
 };
 
-const shouldDisplayError = (response: AxiosResponse, AxiosResponse, AxiosError) => !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
