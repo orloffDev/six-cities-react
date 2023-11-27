@@ -9,3 +9,5 @@ export const setActiveCityName = createAction('city/change', (activeCityName: Ci
 export const setOffers = createAction('offers/change', (offers: Offer[]) => ({
   payload: offers
 }));
+
+export const setError = createAction<string | null>('offers/setError');

@@ -4,5 +4,6 @@ import {Offer} from './offer';
 export type InitialState = {
   activeCityName: CityName;
   offers: Offer[] | [];
+  error: string | null;
 }
 
