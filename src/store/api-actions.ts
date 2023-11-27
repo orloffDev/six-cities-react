@@ -3,6 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
 import {Offer} from '../types/offer';
+import {AuthData} from "../types/auth-data";
 import {setOffers, requireAuthorization, setOffersDataLoadingStatus, setError} from './action';
 import {APIRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus} from '../const';
 
