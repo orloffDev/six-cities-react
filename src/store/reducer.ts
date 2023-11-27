@@ -20,6 +20,6 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(setError, (state, action) => {
-    state.error = action.payload;
-  });
+      state.error = action.payload;
+    });
 });
