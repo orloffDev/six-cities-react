@@ -15,8 +15,6 @@ import {CityName} from '../../types/city-name';
 import {getMapData} from '../../utils/getMapData';
 import {Helmet} from 'react-helmet-async';
 
-
-
 function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);

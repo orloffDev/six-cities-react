@@ -217,9 +217,3 @@ export default OfferScreen;
 
 
 
-
-
-
-
-
-
