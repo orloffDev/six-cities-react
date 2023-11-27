@@ -8,7 +8,9 @@ const getMapData = function(offers: Offer[], city: CityName): MapData | undefine
 
   const centerOffer = offers.find((offer) => offer['city']['name'] === city);
 
-  if(!centerOffer) return undefined;
+  if(!centerOffer) {
+    return undefined;
+  }
 
   const points = offers.reduce((acc: MapPoint[], offer) => {
     if(offer['city']['name'] === city){
