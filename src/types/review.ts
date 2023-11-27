@@ -1,9 +1,9 @@
-import {User} from './user';
+import {UserData} from './user-data';
 
 export type Review = {
   id: string;
   date: string;
-  user: User;
+  user: UserData;
   comment: string;
   rating: number;
 }
