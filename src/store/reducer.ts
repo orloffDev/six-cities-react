@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setActiveCityName, setOffers} from './action';
 //types
-import {InitialState} from "../types/InitialState";
+import {InitialState} from '../types/InitialState';
 //const
 import {CITY_DEFAULT_NAME } from '../const';
 
