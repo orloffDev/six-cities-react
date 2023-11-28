@@ -3,7 +3,7 @@ import Logo from "../logo/logo";
 import {useAppDispatch} from "../../hooks/use-app-dispatch";
 import {logoutAction, loginAction} from "../../store/api-actions";
 import {useAppSelector} from "../../hooks/use-app-selector";
-import {AuthorizationStatus} from "../../const";
+import {AppRoute, AuthorizationStatus} from "../../const";
 
 
 function SignOut(): JSX.Element {
@@ -23,11 +23,10 @@ function SignOut(): JSX.Element {
 };
 
 function SignIn(): JSX.Element {
-  const dispatch = useAppDispatch();
   return (
     <Link
       className="header__nav-link"
-      to='/'
+      to={AppRoute.Login}
     >
       <span className="header__signout">Sign in</span>
     </Link>
@@ -62,13 +61,7 @@ function Header(): JSX.Element {
                 </a>
               </li>
               <li className="header__nav-item">
-                <Link
-                  className="header__nav-link"
-                  onClick={signHandler}
-                  to='/'
-                >
-                  <span className="header__signout">{signText}</span>
-                </Link>
+                {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
               </li>
             </ul>
           </nav>
