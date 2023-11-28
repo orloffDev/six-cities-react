@@ -2,13 +2,46 @@ import {Link} from "react-router-dom";
 import Logo from "../logo/logo";
 import {useAppDispatch} from "../../hooks/use-app-dispatch";
 import {logoutAction, loginAction} from "../../store/api-actions";
+import {useAppSelector} from "../../hooks/use-app-selector";
+import {AuthorizationStatus} from "../../const";
 
+
+function SignOut(): JSX.Element {
+  const dispatch = useAppDispatch();
+  return (
+    <Link
+      className="header__nav-link"
+      onClick={(e)=>{
+        e.preventDefault();
+        dispatch(loginAction());
+      }}
+      to='/'
+    >
+      <span className="header__signout">Sign out</span>
+    </Link>
+  );
+};
+
+function SignIn(): JSX.Element {
+  const dispatch = useAppDispatch();
+  return (
+    <Link
+      className="header__nav-link"
+      to='/'
+    >
+      <span className="header__signout">Sign in</span>
+    </Link>
+  );
+};
 
 function Header(): JSX.Element {
-  const dispatch = useAppDispatch();
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const signText = authorizationStatus === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in';
   const signHandler = (e)=>{
     evt.preventDefault();
-    dispatch(logoutAction());
+
+    dispatch(loginAction());
   };
 
   return (
@@ -31,13 +64,10 @@ function Header(): JSX.Element {
               <li className="header__nav-item">
                 <Link
                   className="header__nav-link"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    dispatch(logoutAction());
-                  }}
+                  onClick={signHandler}
                   to='/'
                 >
-                  <span className="header__signout">Sign out</span>
+                  <span className="header__signout">{signText}</span>
                 </Link>
               </li>
             </ul>
