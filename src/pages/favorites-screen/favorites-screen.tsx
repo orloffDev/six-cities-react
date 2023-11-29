@@ -1,9 +1,5 @@
-//react
 import {Helmet} from 'react-helmet-async';
-//components
-import Logo from '../../components/logo/logo';
 import FavList from '../../components/fav-list/fav-list';
-//hooks
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from "../../components/header/header";
 
