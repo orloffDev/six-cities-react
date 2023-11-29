@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import {CityName} from '../types/city-name';
 import {Offer} from '../types/offer';
 import {AppRoute, AuthorizationStatus} from '../const';
-import {UserData} from "../types/user-data";
+import {UserData} from '../types/user-data';
 
 export const setActiveCityName = createAction('city/change', (activeCityName: CityName) => ({
   payload: activeCityName
