@@ -34,8 +34,8 @@ function SignOut(): JSX.Element {
       </li>
     </ul>
 
-  );
-};
+  )
+}
 
 function SignIn(): JSX.Element {
   return (
@@ -49,8 +49,8 @@ function SignIn(): JSX.Element {
         </Link>
       </li>
     </ul>
-  );
-};
+  )
+}
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
