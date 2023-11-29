@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import Logo from "../logo/logo";
+import Logo from '../logo/logo';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -34,7 +34,7 @@ function SignOut(): JSX.Element {
       </li>
     </ul>
 
-  )
+  );
 }
 
 function SignIn(): JSX.Element {
@@ -49,7 +49,7 @@ function SignIn(): JSX.Element {
         </Link>
       </li>
     </ul>
-  )
+  );
 }
 
 function Header(): JSX.Element {
