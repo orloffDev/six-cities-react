@@ -19,7 +19,6 @@ function App(): JSX.Element {
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingScreen />
-      alert
     );
   }
 
