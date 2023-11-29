@@ -1,9 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import Logo from "../logo/logo";
-import {useAppDispatch} from "../../hooks/use-app-dispatch";
-import {logoutAction} from "../../store/api-actions";
-import {useAppSelector} from "../../hooks/use-app-selector";
-import {AppRoute, AuthorizationStatus} from "../../const";
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {logoutAction} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 
 function SignOut(): JSX.Element {
