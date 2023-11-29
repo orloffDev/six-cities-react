@@ -1,21 +1,17 @@
-//components
-import Logo from '../../components/logo/logo';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
-//hooks
 import {useAppSelector} from '../../hooks/use-app-selector';
-//mocks
 import {reviewsData} from '../../mocks/reviews-data';
-//utils
 import {getMapData} from '../../utils/getMapData';
-//const
-import {CITY_DEFAULT_NAME} from '../../const';
+import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
 import {MAX_NEAR_PLACES_COUNT} from '../../const';
 import {Helmet} from 'react-helmet-async';
+import Header from "../../components/header/header";
 
 function OfferScreen(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
   const reviewsCount = reviewsData.length;
   const mapData = getMapData(offers, CITY_DEFAULT_NAME);
@@ -26,32 +22,7 @@ function OfferScreen(): JSX.Element {
         <title>Offer</title>
       </Helmet>
       <div className="page">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                {<Logo />}
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">3</span>
-                    </a>
-                  </li>
-                  <li className="header__nav-item">
-                    <a className="header__nav-link" href="#">
-                      <span className="header__signout">Sign out</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header nav={true} />
         <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
@@ -176,7 +147,7 @@ function OfferScreen(): JSX.Element {
                 <section className="offer__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
                   <ReviewsList reviewsData={reviewsData} />
-                  <ReviewsForm />
+                  {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm /> : null}
                 </section>
               </div>
             </div>
