@@ -60,8 +60,10 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
     cancelFetch();
     controllerRef.current = new AbortController();
-    const config: AxiosRequestConfig<AbortSignal> = {data: undefined, string: undefined};
-    config.signal = controllerRef.current.signal as AbortSignal;
+    const signal:AbortSignal = controllerRef.current.signal;
+    const config = {
+      signal: signal
+    } as AxiosRequestConfig ;
 
     api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
