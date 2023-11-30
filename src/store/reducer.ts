@@ -18,7 +18,8 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   error: null,
-  userData: null
+  userData: null,
+  userFavCount: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
