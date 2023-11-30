@@ -1,19 +1,11 @@
-import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
+import Header from "../../components/header/header";
 
 
 function NotFoundScreen(): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              {<Logo pageName="notFound"></Logo>}
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="page__404">
         <div className="container">
           <div style={{display: 'flex', flexDirection:'column', alignItems:'center'}}>

@@ -52,9 +52,20 @@ function SignIn(): JSX.Element {
   );
 }
 
-function Header(): JSX.Element {
+function Nav(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  return (
+    <nav className="header__nav">
+      {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
+    </nav>
+  );
+}
 
+type HeaderProps = {
+  nav?: boolean
+}
+
+function Header({nav}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -62,9 +73,7 @@ function Header(): JSX.Element {
           <div className="header__left">
             {<Logo pageName="welcome"></Logo>}
           </div>
-          <nav className="header__nav">
-            {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
-          </nav>
+          {nav && <Nav />}
         </div>
       </div>
     </header>
