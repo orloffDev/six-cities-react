@@ -6,6 +6,7 @@ import {FormData} from "../../types/form-data";
 import {Review} from "../../types/review";
 import {createAPI} from "../../services/api";
 import {APIRoute} from "../../const";
+import {MutableRefObject} from "../../types/index";
 import './reviews-form.css';
 
 type ReviewsFormProps = {
@@ -14,7 +15,7 @@ type ReviewsFormProps = {
 }
 
 function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
-  const controllerRef = useRef(null);
+  const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
 
   const [formData, setFormData] = useState({
