@@ -31,8 +31,7 @@ function OfferScreen(): JSX.Element {
   const mapData = getMapData(offersNear);
 
   const onFormSuccess = function(data){
-    const reviewData = data.data;
-    const newData = [...reviewsData, reviewData];
+    const newData = [...reviewsData, data];
     setReviewsData(newData);
   };
 

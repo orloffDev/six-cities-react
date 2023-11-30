@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import {AxiosError} from "axios";
+import {AxiosError, AxiosResponse, AxiosRequestConfig} from "axios";
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
 import {FormData} from "../../types/form-data";
@@ -60,11 +60,11 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
     cancelFetch();
     controllerRef.current = new AbortController();
+    const config: AxiosRequestConfig = {data: undefined, string: undefined};
+    config.signal = controllerRef.current.signal as AbortSignal;
 
-    api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, {
-      signal: controllerRef.current.signal
-    })
-      .then((data)=>{
+    api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, config)
+      .then(({data})=>{
         onSuccess(data);
       })
       .catch((error: unknown)=>{
