@@ -28,9 +28,11 @@ function OfferScreen(): JSX.Element {
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[] | null>(null);
   const reviewsCount = reviewsData ? reviewsData.length : null;
-
-
   const mapData = getMapData(offersNear);
+
+  const onFormSuccess = function(data){
+    alert(data);
+  };
 
   const toggleFavorite = async (favoriteOffer: Offer) => {
     if (authorizationStatus !== authorizationStatus.Auth) {
@@ -171,7 +173,7 @@ function OfferScreen(): JSX.Element {
                 {reviewsCount && <section className="offer__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
                   <ReviewsList reviewsData={reviewsData} />
-                  {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm /> : null}
+                  {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm onSuccess={onFormSuccess} id={id} /> : null}
                 </section>}
 
               </div>
