@@ -20,13 +20,14 @@ function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
   const reviewsCount = reviewsData.length;
-  const mapData = getMapData(offers, CITY_DEFAULT_NAME);
 
 
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams()?.id;
   const [offer, setOffer] = useState<Offer | null>(null);
+  const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
+  const mapData = getMapData(offersNear);
 
   const toggleFavorite = async (favoriteOffer: Offer) => {
     if (authorizationStatus !== authorizationStatus.Auth) {
@@ -36,9 +37,9 @@ function OfferScreen(): JSX.Element {
 
     const { isFavorite } = favoriteOffer;
     if (isFavorite) {
-      console.log('remove')
+      console.log('remove') //TODO
     } else {
-      console.log('add');
+      console.log('add'); //TODO
     }
     fetchOffer();
   };
@@ -46,7 +47,6 @@ function OfferScreen(): JSX.Element {
   const fetchOffer = async() => {
     try {
       const res = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-      console.log(res.data)
       setOffer(res.data);
     } catch (error: unknown) {
       if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
@@ -55,8 +55,18 @@ function OfferScreen(): JSX.Element {
     }
   };
 
-  useEffect(() => {
+  const fetchOffersNear = async() => {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    setOffersNear(data.slice(0, 3));
+  };
+
+  const fetchAll = function(){
     fetchOffer();
+    fetchOffersNear();
+  }
+
+  useEffect(() => {
+    fetchAll();
     window.scrollTo(0, 0);
   }, [id]);
 
@@ -190,7 +200,7 @@ function OfferScreen(): JSX.Element {
             </div>
             {mapData && <PlaceMap mapData={mapData} parent="offer" />}
           </section>
-          <div className="container">
+          {offersNear && <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceList
@@ -200,7 +210,7 @@ function OfferScreen(): JSX.Element {
                 maxLength={MAX_NEAR_PLACES_COUNT}
               />
             </section>
-          </div>
+          </div>}
         </main>
         }
       </div>
