@@ -1,11 +1,12 @@
 import { toast } from 'react-toastify';
 import {AxiosError} from "axios";
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
 import {FormData} from "../../types/form-data";
 import {Review} from "../../types/review";
 import {createAPI} from "../../services/api";
 import {APIRoute} from "../../const";
+import './reviews-form.css';
 
 type ReviewsFormProps = {
   onSuccess: (formData: FormData) => Promise<void>;
@@ -13,6 +14,13 @@ type ReviewsFormProps = {
 }
 
 function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
+  const controllerRef = useRef(null);
+  const api = createAPI();
+  const cancelFetch = ()=>{
+    const controller = controllerRef.current;
+    controller && controller.abort();
+  }
+
   const [formData, setFormData] = useState({
     rating: 0,
     comment: ''
@@ -32,18 +40,24 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     });
   };
 
-  let controller;
-  const api = createAPI();
+
+
+  useEffect(() => {
+    return()=>{
+      cancelFetch();
+    }
+  }, []);
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    evt.target.disabled = 'disabled';
+    const formTag = evt.currentTarget;
+    formTag.classList.add('form--disabled');
 
-    controller && controller.abort();
-    controller = new AbortController();
+    cancelFetch();
+    controllerRef.current = new AbortController();
 
     api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, {
-      signal: controller.signal
+      signal: controllerRef.current.signal
     })
       .then((data)=>{
         onSuccess(data);
@@ -52,10 +66,13 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
           const errorText: string | undefined = error?.message;
           if (errorText) {
-            alert(errorText);
+            console.log(errorText);
             toast.error(errorText);
           }
         }
+      })
+      .finally(()=>{
+        formTag.classList.remove('form--disabled');
       })
 
 
