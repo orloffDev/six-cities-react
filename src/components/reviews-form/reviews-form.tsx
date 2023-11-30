@@ -16,10 +16,6 @@ type ReviewsFormProps = {
 function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
   const controllerRef = useRef(null);
   const api = createAPI();
-  const cancelFetch = ()=>{
-    const controller = controllerRef.current;
-    controller && controller.abort();
-  }
 
   const [formData, setFormData] = useState({
     rating: 0,
@@ -40,7 +36,15 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     });
   };
 
+  const cancelFetch = ()=>{
+    const controller = controllerRef.current;
+    controller && controller.abort();
+  }
 
+  const resetForm = (formTag)=>{
+    formTag.reset();
+    formTag.classList.remove('form--disabled');
+  }
 
   useEffect(() => {
     return()=>{
@@ -72,12 +76,8 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         }
       })
       .finally(()=>{
-        formTag.classList.remove('form--disabled');
+        resetForm(formTag);
       })
-
-
-
-    //onFormSend(form);
   };
 
   //
