@@ -8,7 +8,7 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import {reviewsData} from '../../mocks/reviews-data';
 import {getMapData} from '../../utils/getMapData';
 import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
-import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
+import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";
@@ -27,6 +27,21 @@ function OfferScreen(): JSX.Element {
   const api = createAPI();
   const id = useParams()?.id;
   const [offer, setOffer] = useState<Offer | null>(null);
+
+  const toggleFavorite = async (favoriteOffer: Offer) => {
+    if (authorizationStatus !== authorizationStatus.Auth) {
+      navigate(AppRoute.Login);
+      return;
+    }
+
+    const { isFavorite } = favoriteOffer;
+    if (isFavorite) {
+      console.log('remove')
+    } else {
+      console.log('add');
+    }
+    fetchOffer();
+  };
 
   const fetchOffer = async() => {
     try {
@@ -57,36 +72,28 @@ function OfferScreen(): JSX.Element {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
+                {offer.images.slice(0,6).map((picUrl) => (
+                  <div key={picUrl} className="offer__image-wrapper">
+                    <img className="offer__image" src={picUrl} alt="Photo studio" />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
+                {offer.isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
-                </div>
+                </div>}
                 <div className="offer__name-wrapper">
-                  <h1 className="offer__name">
-                    Beautiful &amp; luxurious studio at great location
-                  </h1>
-                  <button className="offer__bookmark-button button" type="button">
+                  <h1 className="offer__name">{offer.title}</h1>
+                  <button
+                    className={`offer__bookmark-button button ${offer.isFavorite && authorizationStatus === authorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
+                    type="button"
+                    onClick={ () => {
+                      toggleFavorite(offer);
+                    }}
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
