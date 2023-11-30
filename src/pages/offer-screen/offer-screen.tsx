@@ -5,13 +5,13 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {reviewsData} from '../../mocks/reviews-data';
 import {getMapData} from '../../utils/getMapData';
 import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
 import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";
+import {Review} from "../../types/review";
 import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from "../../services/api";
 
@@ -19,7 +19,6 @@ import {createAPI} from "../../services/api";
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
-  const reviewsCount = reviewsData.length;
 
 
   const navigate = useNavigate();
@@ -27,6 +26,10 @@ function OfferScreen(): JSX.Element {
   const id = useParams()?.id;
   const [offer, setOffer] = useState<Offer | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
+  const [reviewsData, setReviewsData] = useState<Review[] | null>(null);
+  const reviewsCount = reviewsData ? reviewsData.length : null;
+
+
   const mapData = getMapData(offersNear);
 
   const toggleFavorite = async (favoriteOffer: Offer) => {
@@ -60,9 +63,15 @@ function OfferScreen(): JSX.Element {
     setOffersNear(data.slice(0, 3));
   };
 
+  const fetchReviews = async() => {
+    const { data } = await api.get<Comment[]>(`${APIRoute.Reviews}/${id}`);
+    setReviewsData(data);
+  };
+
   const fetchAll = function(){
     fetchOffer();
     fetchOffersNear();
+    fetchReviews();
   }
 
   useEffect(() => {
@@ -77,8 +86,7 @@ function OfferScreen(): JSX.Element {
       </Helmet>
       <div className="page">
         <Header nav={true} />
-        {offer &&
-        <main className="page__main page__main--offer">
+        {offer && <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
@@ -159,11 +167,13 @@ function OfferScreen(): JSX.Element {
                     <p className="offer__text">{offer.description}</p>
                   </div>
                 </div>
-                <section className="offer__reviews reviews">
+
+                {reviewsCount && <section className="offer__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
                   <ReviewsList reviewsData={reviewsData} />
                   {authorizationStatus === AuthorizationStatus.Auth ? <ReviewsForm /> : null}
-                </section>
+                </section>}
+
               </div>
             </div>
             {mapData && <PlaceMap mapData={mapData} parent="offer" />}
@@ -179,8 +189,7 @@ function OfferScreen(): JSX.Element {
               />
             </section>
           </div>}
-        </main>
-        }
+        </main>}
       </div>
     </>
   );
