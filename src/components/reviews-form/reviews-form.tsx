@@ -63,7 +63,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     const signal:AbortSignal = controllerRef.current.signal;
     const config = {
       signal: signal
-    } as AxiosRequestConfig ;
+    } as AxiosRequestConfig;
 
     api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
@@ -97,7 +97,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData['review']}
+        value={formData['comment']}
         onChange={handleReviewChange}
       />
       <div className="reviews__button-wrapper">
