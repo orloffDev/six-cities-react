@@ -43,3 +43,6 @@ export const REQUEST_TIMEOUT = 5000;
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
+export const ERROR_STATUS_CODE = 404;
+export const ERROR_ROUTE = '404';
+

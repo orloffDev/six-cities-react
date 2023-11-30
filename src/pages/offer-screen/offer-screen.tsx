@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+import {useEffect, useState} from 'react';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceMap from '../../components/place-map/place-map';
@@ -6,15 +8,42 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import {reviewsData} from '../../mocks/reviews-data';
 import {getMapData} from '../../utils/getMapData';
 import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
-import {MAX_NEAR_PLACES_COUNT} from '../../const';
+import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
+import {Offer} from "../../types/offer";
+import { useParams, useNavigate } from 'react-router-dom';
+import {createAPI} from "../../services/api";
+
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
   const reviewsCount = reviewsData.length;
   const mapData = getMapData(offers, CITY_DEFAULT_NAME);
+
+
+  const navigate = useNavigate();
+  const api = createAPI();
+  const id = useParams()?.id;
+  const [offer, setOffer] = useState<Offer | null>(null);
+
+  const fetchOffer = async() => {
+    try {
+      const res = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+      console.log(res.data)
+      setOffer(res.data);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
+        navigate(ERROR_ROUTE);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchOffer();
+    window.scrollTo(0, 0);
+  }, [id]);
 
   return (
     <>
@@ -23,6 +52,7 @@ function OfferScreen(): JSX.Element {
       </Helmet>
       <div className="page">
         <Header nav={true} />
+        {offer &&
         <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
@@ -165,6 +195,7 @@ function OfferScreen(): JSX.Element {
             </section>
           </div>
         </main>
+        }
       </div>
     </>
   );
