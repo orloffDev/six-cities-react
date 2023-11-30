@@ -26,12 +26,14 @@ function OfferScreen(): JSX.Element {
   const id = useParams()?.id;
   const [offer, setOffer] = useState<Offer | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
-  const [reviewsData, setReviewsData] = useState<Review[] | null>(null);
+  const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const reviewsCount = reviewsData ? reviewsData.length : null;
   const mapData = getMapData(offersNear);
 
   const onFormSuccess = function(data){
-    alert(data);
+    const reviewData = data.data;
+    const newData = [...reviewsData, reviewData];
+    setReviewsData(newData);
   };
 
   const toggleFavorite = async (favoriteOffer: Offer) => {
