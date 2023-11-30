@@ -42,7 +42,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     controller && controller.abort();
   }
 
-  const resetForm = (formTag)=>{
+  const resetForm = (formTag: HTMLFormElement)=>{
     formTag.reset();
     formTag.classList.remove('form--disabled');
   }
