@@ -21,15 +21,6 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
-  const cancelFetch = ()=>{
-    const controller = controllerRef.current;
-    controller && controller.abort();
-  };
-  useEffect(() => {
-    return()=>{
-      cancelFetch();
-    }
-  }, []);
 
   const onSuccess = function(data:Offer){
     setIsFavorite(data.isFavorite);
@@ -40,21 +31,17 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
       navigate(AppRoute.Login);
       return;
     }
+    if(controllerRef.current){ console.log(88888); return; }
 
-    //controllerRef.current && return;
-
-    const button = evt.currentTarget;
     const newStatus = isFavorite ? 0 : 1;
-    const id = offer.id;
 
     controllerRef.current = new AbortController();
     const signal:AbortSignal = controllerRef.current.signal;
-
     const config = {
       signal: signal
     } as AxiosRequestConfig;
 
-    api.post<Review>(`${APIRoute.Favorite}/${id}/${newStatus}`, null, config)
+    api.post<Review>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
         onSuccess(data);
       })
@@ -66,9 +53,16 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
           }
         }
       })
+      .finally(()=>{
+        controllerRef.current = null;
+      })
   }
 
-  //
+  useEffect(() => {
+    return()=>{
+      controllerRef.current?.abort();
+    }
+  }, []);
 
   return (
     <button

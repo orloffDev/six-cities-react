@@ -44,7 +44,10 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
   const resetForm = (formTag: HTMLFormElement)=>{
     formTag.reset();
-    formTag.classList.remove('form--disabled');
+    setFormData({
+      rating: 0,
+      comment: ''
+    });
   }
 
   useEffect(() => {
@@ -67,18 +70,19 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
     api.post<Review>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
+        resetForm(formTag);
         onSuccess(data);
       })
       .catch((error: unknown)=>{
         if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
-          const errorText: string | undefined = error?.message;
+          const errorText: string | undefined = error?.response?.data?.message;
           if (errorText) {
             toast.error(errorText);
           }
         }
       })
       .finally(()=>{
-        resetForm(formTag);
+        formTag.classList.remove('form--disabled');
       })
   };
 
