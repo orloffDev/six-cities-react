@@ -10,7 +10,7 @@ import {MutableRefObject} from "../../types/index";
 import './reviews-form.css';
 
 type ReviewsFormProps = {
-  onSuccess: (formData: FormData) => Promise<void>;
+  onSuccess: (reviewData: Review) => Promise<void>;
   id: Review['id'];
 }
 
@@ -65,7 +65,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       signal: signal
     } as AxiosRequestConfig;
 
-    api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, config)
+    api.post<Review>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
         onSuccess(data);
       })

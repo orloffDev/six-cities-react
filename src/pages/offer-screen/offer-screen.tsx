@@ -6,7 +6,7 @@ import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getMapData} from '../../utils/getMapData';
-import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
@@ -31,7 +31,7 @@ function OfferScreen(): JSX.Element {
   const reviewsCount = reviewsData ? reviewsData.length : null;
   const mapData = getMapData(offersNear);
 
-  const onFormSuccess = function(data){
+  const onFormSuccess = function(data: Review){
     const newData = [...reviewsData, data];
     setReviewsData(newData);
   };
