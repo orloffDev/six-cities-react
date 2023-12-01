@@ -21,7 +21,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
   const [formData, setFormData] = useState({
     rating: 0,
     comment: ''
-  });
+  } as FormData);
 
   const handleReviewChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
