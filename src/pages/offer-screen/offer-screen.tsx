@@ -110,7 +110,7 @@ function OfferScreen(): JSX.Element {
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offerItem.title}</h1>
                   <button
-                    className={`offer__bookmark-button button ${offerItem.isFavorite && authorizationStatus === authorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
+                    className={`offer__bookmark-button button ${offerItem.isFavorite && authorizationStatus === AuthorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
                     type="button"
                     onClick={ () => {
                       toggleFavorite(offer);
