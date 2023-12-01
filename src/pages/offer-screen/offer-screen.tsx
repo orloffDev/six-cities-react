@@ -69,7 +69,7 @@ function OfferScreen(): JSX.Element {
 
   const fetchReviews = async() => {
     const { data } = await api.get<Comment[]>(`${APIRoute.Reviews}/${id}`);
-    setReviewsData(data);
+    setReviewsData(data as Review[]);
   };
 
   const fetchAll = function(){
