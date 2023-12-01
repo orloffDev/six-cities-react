@@ -73,7 +73,6 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
           const errorText: string | undefined = error?.message;
           if (errorText) {
-            console.log(errorText);
             toast.error(errorText);
           }
         }

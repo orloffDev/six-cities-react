@@ -10,6 +10,9 @@ import {store} from './store/index';
 //actions
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
@@ -21,6 +24,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
+      <ToastContainer />
       <App />
     </Provider>
   </React.StrictMode>

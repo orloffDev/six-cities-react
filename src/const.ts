@@ -28,6 +28,7 @@ export enum APIRoute {
   Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite',
 }
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
