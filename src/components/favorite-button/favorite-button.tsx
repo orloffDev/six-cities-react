@@ -16,7 +16,7 @@ type FavButtonProps = {
 }
 
 function FavoriteButton({offer}: FavButtonProps): JSX.Element {
-  const [isFav, setIsFav] = useState(offer.isFavorite);
+  const [isFavorite, setIsFavorite] = useState(offer.isFavorite);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
@@ -32,7 +32,7 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
   }, []);
 
   const onSuccess = function(data:Offer){
-    setIsFav(data.isFavorite);
+    setIsFavorite(data.isFavorite);
   }
 
   const pointerHandler = function(evt: React.PointerEvent<HTMLButtonElement>){
@@ -44,7 +44,7 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
     //controllerRef.current && return;
 
     const button = evt.currentTarget;
-    const newStatus = isFav ? 0 : 1;
+    const newStatus = isFavorite ? 0 : 1;
     const id = offer.id;
 
     controllerRef.current = new AbortController();
@@ -72,7 +72,7 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
 
   return (
     <button
-      className={`place-card__bookmark-button button ${isFav && 'place-card__bookmark-button--active'}`}
+      className={`place-card__bookmark-button button ${isFavorite && 'place-card__bookmark-button--active'}`}
       type="button"
       onPointerDown={pointerHandler}
     >
