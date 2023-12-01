@@ -10,18 +10,22 @@ import {AuthorizationStatus} from "../../const";
 import {createAPI} from "../../services/api";
 import {useAppSelector} from "../../hooks/use-app-selector";
 import {useNavigate} from "react-router-dom";
+import classNames from "classnames";
 
 type FavButtonProps = {
-  offer: Offer
+  offer: Offer,
+  parent: string,
+  width: number
+  height: number
 }
 
-function FavoriteButton({offer}: FavButtonProps): JSX.Element {
+function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(offer.isFavorite);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
-
+  const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onSuccess = function(data:Offer){
     setIsFavorite(data.isFavorite);
   }
@@ -31,7 +35,7 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
       navigate(AppRoute.Login);
       return;
     }
-    if(controllerRef.current){ console.log(88888); return; }
+    if(controllerRef.current){ return; }
 
     const newStatus = isFavorite ? 0 : 1;
 
@@ -66,11 +70,11 @@ function FavoriteButton({offer}: FavButtonProps): JSX.Element {
 
   return (
     <button
-      className={`place-card__bookmark-button button ${isFavorite && 'place-card__bookmark-button--active'}`}
+      className={buttonClasses}
       type="button"
       onPointerDown={pointerHandler}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={`${parent}__bookmark-icon`} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>

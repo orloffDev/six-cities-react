@@ -15,6 +15,7 @@ import {OfferItem} from "../../types/offer-item";
 import {Review} from "../../types/review";
 import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from "../../services/api";
+import FavoriteButton from "../../components/favorite-button/favorite-button";
 
 
 function OfferScreen(): JSX.Element {
@@ -34,21 +35,6 @@ function OfferScreen(): JSX.Element {
   const onFormSuccess = function(data: Review){
     const newData = [...reviewsData, data];
     setReviewsData(newData);
-  };
-
-  const toggleFavorite = async (favoriteOffer: OfferItem) => {
-    if (authorizationStatus !== AuthorizationStatus.Auth) {
-      navigate(AppRoute.Login);
-      return;
-    }
-
-    const { isFavorite } = favoriteOffer;
-    if (isFavorite) {
-      console.log('remove') //TODO
-    } else {
-      console.log('add'); //TODO
-    }
-    fetchOffer();
   };
 
   const fetchOffer = async() => {
@@ -109,18 +95,7 @@ function OfferScreen(): JSX.Element {
                 </div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offerItem.title}</h1>
-                  <button
-                    className={`offer__bookmark-button button ${offerItem.isFavorite && authorizationStatus === AuthorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
-                    type="button"
-                    onClick={ () => {
-                      toggleFavorite(offer);
-                    }}
-                  >
-                    <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoriteButton offer={offerItem} parent="offer" width={31} height={33} />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
