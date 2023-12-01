@@ -37,7 +37,7 @@ function OfferScreen(): JSX.Element {
   };
 
   const toggleFavorite = async (favoriteOffer: OfferItem) => {
-    if (authorizationStatus !== authorizationStatus.Auth) {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
       return;
     }
