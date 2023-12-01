@@ -11,6 +11,7 @@ import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUT
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";
+import {OfferItem} from "../../types/offer-item";
 import {Review} from "../../types/review";
 import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from "../../services/api";
@@ -24,7 +25,7 @@ function OfferScreen(): JSX.Element {
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams()?.id;
-  const [offer, setOffer] = useState<Offer | null>(null);
+  const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const reviewsCount = reviewsData ? reviewsData.length : null;
@@ -35,7 +36,7 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
-  const toggleFavorite = async (favoriteOffer: Offer) => {
+  const toggleFavorite = async (favoriteOffer: OfferItem) => {
     if (authorizationStatus !== authorizationStatus.Auth) {
       navigate(AppRoute.Login);
       return;
@@ -52,8 +53,8 @@ function OfferScreen(): JSX.Element {
 
   const fetchOffer = async() => {
     try {
-      const res = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-      setOffer(res.data);
+      const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+      setOfferItem(res.data);
     } catch (error: unknown) {
       if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
         navigate(ERROR_ROUTE);
@@ -89,11 +90,11 @@ function OfferScreen(): JSX.Element {
       </Helmet>
       <div className="page">
         <Header nav={true} />
-        {offer && <main className="page__main page__main--offer">
+        {offerItem && <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.slice(0,6).map((picUrl) => (
+                {offerItem.images.slice(0,6).map((picUrl) => (
                   <div key={picUrl} className="offer__image-wrapper">
                     <img className="offer__image" src={picUrl} alt="Photo studio" />
                   </div>
@@ -102,14 +103,14 @@ function OfferScreen(): JSX.Element {
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
-                {offer.isPremium &&
+                {offerItem.isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>}
                 <div className="offer__name-wrapper">
-                  <h1 className="offer__name">{offer.title}</h1>
+                  <h1 className="offer__name">{offerItem.title}</h1>
                   <button
-                    className={`offer__bookmark-button button ${offer.isFavorite && authorizationStatus === authorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
+                    className={`offer__bookmark-button button ${offerItem.isFavorite && authorizationStatus === authorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
                     type="button"
                     onClick={ () => {
                       toggleFavorite(offer);
@@ -123,30 +124,30 @@ function OfferScreen(): JSX.Element {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${offer.rating * 100 / 5}%`}}></span>
+                    <span style={{width: `${offerItem.rating * 100 / 5}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{offer.rating}</span>
+                  <span className="offer__rating-value rating__value">{offerItem.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offer.type}
+                    {offerItem.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} {offer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                    {offerItem.bedrooms} {offerItem.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} {offer.maxAdults > 1 ? 'adults' : 'adult'}
+                    Max {offerItem.maxAdults} {offerItem.maxAdults > 1 ? 'adults' : 'adult'}
                   </li>
                 </ul>
                 <div className="offer__price">
-                  <b className="offer__price-value">&euro;{offer.price}</b>
+                  <b className="offer__price-value">&euro;{offerItem.price}</b>
                   <span className="offer__price-text">&nbsp;night</span>
                 </div>
                 <div className="offer__inside">
                   <h2 className="offer__inside-title">What&apos;s inside</h2>
                   <ul className="offer__inside-list">
-                    {offer.goods.map((feature) => (
+                    {offerItem.goods.map((feature) => (
                       <li key={feature} className="offer__inside-item">
                         {feature}
                       </li>
@@ -156,18 +157,18 @@ function OfferScreen(): JSX.Element {
                 <div className="offer__host">
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
-                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${offer.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
-                      <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${offerItem.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
+                      <img className="offer__avatar user__avatar" src={offerItem.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="offer__user-name">
-                      {offer.host.name}
+                      {offerItem.host.name}
                     </span>
-                    {offer.host.isPro && <span className="offer__user-status">
+                    {offerItem.host.isPro && <span className="offer__user-status">
                       Pro
                     </span>}
                   </div>
                   <div className="offer__description">
-                    <p className="offer__text">{offer.description}</p>
+                    <p className="offer__text">{offerItem.description}</p>
                   </div>
                 </div>
                 <section className="offer__reviews reviews">
