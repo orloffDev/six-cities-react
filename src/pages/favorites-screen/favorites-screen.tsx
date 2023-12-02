@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import FavList from '../../components/fav-list/fav-list';
+import FavoriteList from '../../components/fav-list/fav-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";
@@ -21,7 +21,7 @@ function FavoritesScreen(): JSX.Element {
 
             {favoriteOffers.length !== 0 && ( <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <FavList offers={favoriteOffers} />
+              <FavoriteList offers={favoriteOffers} />
             </section>)}
 
             {favoriteOffers.length === 0 && ( <section className="favorites favorites--empty">

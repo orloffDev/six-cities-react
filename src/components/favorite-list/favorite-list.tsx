@@ -5,16 +5,16 @@ import PlaceCard from '../../components/place-card/place-card';
 //types
 import {Offer} from '../../types/offer';
 
-type FavListProps = {
+type FavoriteListProps = {
   offers: Offer[];
 }
 
-function FavList({offers}: FavListProps): JSX.Element {
+function FavoriteList({offers}: FavoriteListProps): JSX.Element {
   const list = offers.reduce<Record<string, Offer[]>>((acc, offer) => {
     acc[offer.city.name] = [...(acc[offer.city.name] ?? []), offer];
     return acc;
   }, {});
-  
+
   //
   return (
     <ul className="favorites__list">
@@ -42,4 +42,4 @@ function FavList({offers}: FavListProps): JSX.Element {
   );
 }
 
-export default FavList;
+export default FavoriteList;
