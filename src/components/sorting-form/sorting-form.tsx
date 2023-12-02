@@ -31,7 +31,7 @@ function SortingForm({ onChangeSort }: SortingProps): JSX.Element {
         </svg>
       </span>
       <ul className={sortListClass}>
-        {Object.keys(SortingOption).map((key) =>
+        {Object.keys(SortingOption).map((key: keyof typeof SortingOption) =>
           (
             <li
               tabIndex={0}
