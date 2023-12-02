@@ -79,8 +79,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.Main));
     dispatch(FavoriteCountAction());
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
@@ -93,7 +93,10 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(setUserData(null));
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(setFavoriteCount(null));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
