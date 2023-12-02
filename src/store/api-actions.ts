@@ -99,6 +99,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(setFavoriteCount(null));
     dispatch(fetchOffersAction());
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
