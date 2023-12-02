@@ -31,7 +31,8 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onToggle= function(data:Offer){
-    const newCount = (favoriteCount || 0) + (data.isFavorite ? 1 : -1);
+    const sign = data.isFavorite ? 1 : -1;
+    const newCount = favoriteCount ? favoriteCount + sign : sign;
     store.dispatch(setFavoriteCount(newCount));
     setIsFavorite(data.isFavorite);
   }
