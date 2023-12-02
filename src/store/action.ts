@@ -12,6 +12,10 @@ export const setOffers = createAction('offers/change', (offers: Offer[]) => ({
   payload: offers
 }));
 
+export const setFavoriteCount = createAction('favoriteCount/change', (count: number | null) => ({
+  payload: count
+}));
+
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

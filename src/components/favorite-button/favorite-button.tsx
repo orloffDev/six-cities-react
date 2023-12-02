@@ -11,6 +11,9 @@ import {createAPI} from "../../services/api";
 import {useAppSelector} from "../../hooks/use-app-selector";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
+import {store} from "../../store/index";
+import {checkAuthAction} from "../../store/api-actions";
+import {setFavoriteCount} from "../../store/action";
 
 type FavButtonProps = {
   offer: Offer,
@@ -22,15 +25,19 @@ type FavButtonProps = {
 function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
   const [isFavorite, setIsFavorite] = useState(offer.isFavorite);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const favoriteCount = useAppSelector((state) => state.favoriteCount);
+
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
-  const onSuccess = function(data:Offer){
+  const onToggle= function(data:Offer){
+    const newCount = favoriteCount + (data.isFavorite ? 1 : -1);
+    store.dispatch(setFavoriteCount(newCount));
     setIsFavorite(data.isFavorite);
   }
 
-  const pointerHandler = function(evt: React.PointerEvent<HTMLButtonElement>){
+  const handleButtonDown = function(evt: React.PointerEvent<HTMLButtonElement>){
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
       return;
@@ -47,7 +54,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
 
     api.post<Review>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
-        onSuccess(data);
+        onToggle(data);
       })
       .catch((error: unknown)=>{
         if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
@@ -72,7 +79,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
     <button
       className={buttonClasses}
       type="button"
-      onPointerDown={pointerHandler}
+      onPointerDown={handleButtonDown}
     >
       <svg className={`${parent}__bookmark-icon`} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>

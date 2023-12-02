@@ -1,7 +1,14 @@
+import {useAppSelector} from "../../hooks/use-app-selector";
 
 function FavCount(): JSX.Element {
+  const favoriteCount = useAppSelector((state) => state.favoriteCount);
+
   return (
-    <span className="header__favorite-count">3</span>
+    <>
+      <span className="header__favorite-count">
+        {favoriteCount}
+      </span>
+    </>
   );
 }
 

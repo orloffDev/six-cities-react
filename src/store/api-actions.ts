@@ -7,6 +7,7 @@ import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
   setOffers,
+  setFavoriteCount,
   requireAuthorization,
   setOffersDataLoadingStatus,
   setError,
@@ -30,6 +31,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const FavoriteCountAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavorite',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+      dispatch(setFavoriteCount(data.length));
+    } catch(e){
+      dispatch(setFavoriteCount(null));
+    }
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -41,6 +58,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get(APIRoute.Login);
       dispatch(setUserData(data));
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(FavoriteCountAction());
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
@@ -62,6 +80,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
+    dispatch(FavoriteCountAction());
   },
 );
 

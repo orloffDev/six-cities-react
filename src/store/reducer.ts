@@ -5,7 +5,7 @@ import {
   setOffersDataLoadingStatus,
   requireAuthorization,
   setError,
-  setUserData
+  setUserData, setFavoriteCount
 } from './action';
 //types
 import {InitialState} from '../types/InitialState';
@@ -19,7 +19,7 @@ const initialState: InitialState = {
   isOffersDataLoading: false,
   error: null,
   userData: null,
-  userFavCount: null
+  favoriteCount: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -29,6 +29,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setFavoriteCount, (state, action) => {
+      state.favoriteCount = action.payload;
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
