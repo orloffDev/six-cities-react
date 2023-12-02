@@ -12,7 +12,6 @@ import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
 import {setOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {MapPoint} from "../../types/map-point";
 
 type FavButtonProps = {
   offer: Offer,
