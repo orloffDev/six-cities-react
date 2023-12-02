@@ -5,6 +5,7 @@ import {SortingOption} from "../const";
 export const useFilteredOffers = function (offers: Offer[], cityName: CityName, optionName?: string) {
   const byCity = offers.filter((offer) => offer.city.name === cityName);
   const byField = (byCity: Offer[]) => {
+    if(!optionName) return;
     switch (SortingOption[optionName]) {
       case SortingOption.Popular:
         return byCity;
