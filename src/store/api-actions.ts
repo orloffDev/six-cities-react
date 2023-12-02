@@ -16,6 +16,7 @@ import {
 } from './action';
 import {APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {saveToken, dropToken} from '../services/token';
+import {store} from "./index";
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -80,6 +81,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(FavoriteCountAction());
+    dispatch(fetchOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -96,7 +98,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(setUserData(null));
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(setFavoriteCount(null));
-    dispatch(redirectToRoute(AppRoute.Main));
+    dispatch(fetchOffersAction());
   },
 );
 
