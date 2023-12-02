@@ -1,17 +1,17 @@
-import {Offer} from "../../types/offer";
-import {useEffect, useRef, useState} from "react";
-import {AxiosError, AxiosRequestConfig} from "axios";
-import {APIRoute} from "../../const";
-import {AppRoute} from "../../const";
-import {toast} from "react-toastify";
+import {Offer} from '../../types/offer';
+import {useEffect, useRef, useState} from 'react';
+import {AxiosError, AxiosRequestConfig} from 'axios';
+import {APIRoute} from '../../const';
+import {AppRoute} from '../../const';
+import {toast} from 'react-toastify';
 import {MutableRefObject} from "../../types/index";
-import {AuthorizationStatus} from "../../const";
-import {createAPI} from "../../services/api";
-import {useAppSelector} from "../../hooks/use-app-selector";
-import {useNavigate} from "react-router-dom";
-import classNames from "classnames";
-import {setOffers} from "../../store/action";
-import {useAppDispatch} from "../../hooks/use-app-dispatch";
+import {AuthorizationStatus} from '../../const';
+import {createAPI} from '../../services/api';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {useNavigate} from 'react-router-dom';
+import classNames from 'classnames';
+import {setOffers} from '../../store/action';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 type FavButtonProps = {
   offer: Offer,
