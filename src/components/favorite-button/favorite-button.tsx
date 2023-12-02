@@ -1,7 +1,6 @@
 import {Offer} from "../../types/offer";
 import {useEffect, useRef, useState} from "react";
 import {AxiosError, AxiosRequestConfig} from "axios";
-import {Review} from "../../types/review";
 import {APIRoute} from "../../const";
 import {AppRoute} from "../../const";
 import {toast} from "react-toastify";
@@ -52,7 +51,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
       signal: signal
     } as AxiosRequestConfig;
 
-    api.post<Offer[]>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
+    api.post<Offer>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
         onToggle(data);
       })
