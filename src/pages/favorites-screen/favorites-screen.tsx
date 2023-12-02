@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import FavoriteList from '../../components/fav-list/fav-list';
+import FavoriteList from '../../components/favorite-list/favorite-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";

@@ -10,6 +10,5 @@ export type InitialState = {
   isOffersDataLoading: boolean;
   error: string | null;
   userData: UserData | null;
-  favoriteCount: number | null;
 }
 

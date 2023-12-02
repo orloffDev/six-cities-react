@@ -18,7 +18,6 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
   const {
     id,
     title,
-    isFavorite,
     isPremium,
     rating,
     type,
