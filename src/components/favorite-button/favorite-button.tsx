@@ -37,7 +37,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
     setIsFavorite(data.isFavorite);
   }
 
-  const handleButtonDown = function(evt: React.PointerEvent<HTMLButtonElement>){
+  const handleButtonDown = function(){
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
       return;
@@ -52,7 +52,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
       signal: signal
     } as AxiosRequestConfig;
 
-    api.post<Review>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
+    api.post<Offer[]>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
         onToggle(data);
       })
