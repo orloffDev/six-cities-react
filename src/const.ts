@@ -31,6 +31,15 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
+export enum SortingOption {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+export const SORTING_DEFAULT_OPTION = 'Popular';
+
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';

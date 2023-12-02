@@ -1,27 +1,26 @@
-//react
 import {useState} from 'react';
-//components
 import Header from '../../components/header/header';
 import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
 import Tabs from '../../components/tabs/tabs';
-//hooks
 import {useAppSelector} from '../../hooks/use-app-selector';
-//types
 import {Offer} from '../../types/offer';
 import {SelectedPoint} from '../../types/selected-point';
 import {CityName} from '../../types/city-name';
-//utils
 import {getMapData} from '../../utils/getMapData';
 import {Helmet} from 'react-helmet-async';
+import SortingForm from "../../components/sorting-form/sorting-form";
+import {SortingOption} from "../../const";
+import {useFilteredOffers} from "../../hooks/use-filtered-offers";
 
 function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
-  const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
   const mapData = getMapData(offers, activeCityName);
-  const placesFound: number = offersFromCity.length;
+  const [activeOption, setActiveOption] = useState<string>(SortingOption.Popular);
+  const filteredOffersData = useFilteredOffers(offers, activeCityName, activeOption);
+  const placesFound: number = filteredOffersData.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
     const newSelectedPoint: SelectedPoint = {
@@ -34,6 +33,10 @@ function WelcomeScreen(): JSX.Element {
 
   const onChangeOutPlaceList = function(){
     setSelectedPoint(null);
+  };
+
+  const updateSorting = (option: string) => {
+    setActiveOption(option);
   };
 
   return (
@@ -54,24 +57,9 @@ function WelcomeScreen(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{placesFound} places to stay in {activeCityName}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex={0}>
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                    <li className="places__option" tabIndex={0}>Price: low to high</li>
-                    <li className="places__option" tabIndex={0}>Price: high to low</li>
-                    <li className="places__option" tabIndex={0}>Top rated first</li>
-                  </ul>
-                </form>
-
+                <SortingForm onChangeSort={updateSorting} />
                 <PlaceList
-                  offers={offersFromCity}
+                  offers={filteredOffersData}
                   onChangeHoverPlace={onChangeHoverPlaceList}
                   onChangeOutPlace={onChangeOutPlaceList}
                   parentClass="cities__places-list tabs__content"
