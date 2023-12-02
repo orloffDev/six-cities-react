@@ -1,5 +1,5 @@
 import {Offer} from '../../types/offer';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {AxiosError, AxiosRequestConfig} from 'axios';
 import {APIRoute} from '../../const';
 import {AppRoute} from '../../const';
@@ -12,6 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
 import {setOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {MapPoint} from "../../types/map-point";
 
 type FavButtonProps = {
   offer: Offer,
@@ -30,7 +31,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onToggle= function(toggleOffer:Offer){
-    const newOffers = offers.reduce((acc, offer) => {
+    const newOffers = offers.reduce((acc:Offer[], offer) => {
       acc.push(offer.id === toggleOffer.id ? toggleOffer : offer);
       return acc;
     }, []);
