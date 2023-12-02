@@ -31,7 +31,7 @@ function SortingForm({ onChangeSort }: SortingProps): JSX.Element {
         </svg>
       </span>
       <ul className={sortListClass}>
-        {Object.keys(SortingOption).map((key: keyof SortingOption) =>
+        {Object.entries(SortingOption).map(([key, value]) =>
           (
             <li
               tabIndex={0}
@@ -39,7 +39,7 @@ function SortingForm({ onChangeSort }: SortingProps): JSX.Element {
               className={`places__option ${key === activeOption && 'places__option--active'}`}
               onClick={() => handleItemClick(key)}
             >
-              {SortingOption[key]}
+              {value}
             </li>
           )
         )}
