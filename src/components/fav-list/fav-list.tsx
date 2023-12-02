@@ -10,17 +10,15 @@ type FavListProps = {
 }
 
 function FavList({offers}: FavListProps): JSX.Element {
-  const favOffers = offers
-    .filter((offer) => offer.isFavorite)
-    .reduce<Record<string, Offer[]>>((acc, offer) => { //TODO ??
-      acc[offer.city.name] = [...(acc[offer.city.name] ?? []), offer];
-      return acc;
-    }, {});
-
+  const list = offers.reduce<Record<string, Offer[]>>((acc, offer) => {
+    acc[offer.city.name] = [...(acc[offer.city.name] ?? []), offer];
+    return acc;
+  }, {});
+  
   //
   return (
     <ul className="favorites__list">
-      {Object.entries(favOffers).map(([cityName, cityOffers]) => (
+      {Object.entries(list).map(([cityName, cityOffers]) => (
         <li key={cityName} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">

@@ -2,9 +2,11 @@ import {Helmet} from 'react-helmet-async';
 import FavList from '../../components/fav-list/fav-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from "../../components/header/header";
+import {Offer} from "../../types/offer";
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <>
@@ -16,10 +18,20 @@ function FavoritesScreen(): JSX.Element {
         <Header nav={true} />
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            <section className="favorites">
+
+            {favoriteOffers.length !== 0 && ( <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <FavList offers={offers} />
-            </section>
+              <FavList offers={favoriteOffers} />
+            </section>)}
+
+            {favoriteOffers.length === 0 && ( <section className="favorites favorites--empty">
+              <h1 className="visually-hidden">Favorites (empty)</h1>
+              <div className="favorites__status-wrapper">
+                <b className="favorites__status">Nothing yet saved.</b>
+                <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+              </div>
+            </section>)}
+
           </div>
         </main>
         <footer className="footer container">
