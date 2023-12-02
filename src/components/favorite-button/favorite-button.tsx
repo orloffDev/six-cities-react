@@ -12,7 +12,6 @@ import {useAppSelector} from "../../hooks/use-app-selector";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {store} from "../../store/index";
-import {checkAuthAction} from "../../store/api-actions";
 import {setFavoriteCount} from "../../store/action";
 
 type FavButtonProps = {
@@ -32,7 +31,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onToggle= function(data:Offer){
-    const newCount = favoriteCount + (data.isFavorite ? 1 : -1);
+    const newCount = (favoriteCount || 0) + (data.isFavorite ? 1 : -1);
     store.dispatch(setFavoriteCount(newCount));
     setIsFavorite(data.isFavorite);
   }
