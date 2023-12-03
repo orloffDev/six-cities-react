@@ -29,7 +29,7 @@ function OfferScreen(): JSX.Element {
   const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
-  const reviewsCount = reviewsData ? reviewsData.length : null;
+  const reviewsCount = reviewsData ? reviewsData.length : 0;
   const mapData = getMapData(offersNear);
 
   const onFormSuccess = function(data: Review){
