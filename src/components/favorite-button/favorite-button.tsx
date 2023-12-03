@@ -1,6 +1,6 @@
 import {Offer} from '../../types/offer';
 import {useEffect, useRef} from 'react';
-import axios, {AxiosError, AxiosRequestConfig} from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {APIRoute} from '../../const';
 import {AppRoute} from '../../const';
 import {toast} from 'react-toastify';
