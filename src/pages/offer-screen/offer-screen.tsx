@@ -25,7 +25,7 @@ function OfferScreen(): JSX.Element {
 
   const navigate = useNavigate();
   const api = createAPI();
-  const id = useParams()?.id;
+  const id = useParams().id;
   const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
