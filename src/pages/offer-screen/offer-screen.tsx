@@ -7,7 +7,7 @@ import PlaceList from '../../components/place-list/place-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getMapData} from '../../utils/getMapData';
 import {AuthorizationStatus} from '../../const';
-import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
+import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from "../../components/header/header";
 import {Offer} from "../../types/offer";
