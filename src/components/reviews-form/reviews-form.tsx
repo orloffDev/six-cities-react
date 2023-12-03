@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import axios, {AxiosError, AxiosRequestConfig} from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
 import {FormData} from '../../types/form-data';
