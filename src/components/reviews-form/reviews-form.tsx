@@ -39,7 +39,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
   const cancelFetch = ()=>{
     const controller = controllerRef.current;
-    controller && controller.abort();
+    if(controller) controller.abort();
   }
 
   const resetForm = (formTag: HTMLFormElement)=>{
