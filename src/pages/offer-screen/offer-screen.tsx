@@ -67,7 +67,7 @@ function OfferScreen(): JSX.Element {
   useEffect(() => {
     fetchAll();
     window.scrollTo(0, 0);
-  }, []);
+  });
 
   return (
     <>
