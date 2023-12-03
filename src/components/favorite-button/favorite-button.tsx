@@ -4,7 +4,7 @@ import {AxiosError, AxiosRequestConfig} from 'axios';
 import {APIRoute} from '../../const';
 import {AppRoute} from '../../const';
 import {toast} from 'react-toastify';
-import {MutableRefObject} from "../../types/index";
+import {MutableRefObject} from '../../types/index';
 import {AuthorizationStatus} from '../../const';
 import {createAPI} from '../../services/api';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -14,10 +14,10 @@ import {setOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 type FavButtonProps = {
-  offer: Offer,
-  parent: string,
-  width: number
-  height: number
+  offer: Offer;
+  parent: string;
+  width: number;
+  height: number;
 }
 
 function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
@@ -29,7 +29,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
-  const onToggle= function(toggleOffer:Offer){
+  const onToggle = function(toggleOffer:Offer){
     const newOffers = offers.reduce((acc:Offer[], offer) => {
       acc.push(offer.id === toggleOffer.id ? toggleOffer : offer);
       return acc;
