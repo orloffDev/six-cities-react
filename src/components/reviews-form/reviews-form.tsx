@@ -42,7 +42,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     if(controller) {
       controller.abort();
     }
-  }
+  };
 
   const resetForm = (formTag: HTMLFormElement)=>{
     formTag.reset();
@@ -50,13 +50,9 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       rating: 0,
       comment: ''
     });
-  }
+  };
 
-  useEffect(() => {
-    return()=>{
-      cancelFetch();
-    }
-  }, []);
+  useEffect(() => cancelFetch(), []);
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
