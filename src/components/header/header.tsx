@@ -4,7 +4,7 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useFavoriteCount} from "../../hooks/use-favorite-count";
+import {useFavoriteCount} from '../../hooks/use-favorite-count';
 
 
 function SignOut(): JSX.Element {
@@ -69,7 +69,7 @@ function Nav(): JSX.Element {
 }
 
 type HeaderProps = {
-  nav?: boolean
+  nav?: boolean;
 }
 
 function Header({nav}: HeaderProps): JSX.Element {

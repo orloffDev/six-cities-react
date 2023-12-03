@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {OfferHandleEnter} from '../../types/offer';
 import {OfferHandleOut} from '../../types/offer';
-import FavoriteButton from "../favorite-button/favorite-button";
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type PlaceCardProps = {
   offer: Offer;

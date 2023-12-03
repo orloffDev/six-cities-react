@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify';
-import {AxiosError, AxiosRequestConfig} from "axios";
+import {AxiosError, AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
-import {FormData} from "../../types/form-data";
-import {Review} from "../../types/review";
-import {createAPI} from "../../services/api";
-import {APIRoute} from "../../const";
-import {MutableRefObject} from "../../types/index";
+import {FormData} from '../../types/form-data';
+import {Review} from '../../types/review';
+import {createAPI} from '../../services/api';
+import {APIRoute} from '../../const';
+import {MutableRefObject} from '../../types/index';
 import './reviews-form.css';
 
 type ReviewsFormProps = {
