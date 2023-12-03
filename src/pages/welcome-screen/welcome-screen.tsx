@@ -19,7 +19,7 @@ function WelcomeScreen(): JSX.Element {
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
   const mapData = getMapData(offers, activeCityName);
   const [activeOptionValue, setActiveOptionValue] = useState<string>(SORTING_DEFAULT_OPTION);
-  const filteredOffersData = useFilteredOffers(offers, activeCityName, activeOptionValue);
+  const filteredOffersData: Offer[] = useFilteredOffers(offers, activeCityName, activeOptionValue);
   const placesFound: number = filteredOffersData.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
