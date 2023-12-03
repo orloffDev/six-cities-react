@@ -22,7 +22,8 @@ function FavoritesScreen(): JSX.Element {
             {favoriteOffers.length !== 0 && (<section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <FavoriteList offers={favoriteOffers} />
-            </section>)}
+            </section>)
+            }
 
             {favoriteOffers.length === 0 && (<section className="favorites favorites--empty">
               <h1 className="visually-hidden">Favorites (empty)</h1>
