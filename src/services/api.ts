@@ -41,7 +41,7 @@ export const createAPI = (): AxiosInstance => {
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
-        toast.error(detailMessage);
+        //toast.error(detailMessage.message);
         //alert(detailMessage.message);
         //processErrorHandle(detailMessage.message); TODO
       }
