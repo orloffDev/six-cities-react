@@ -20,6 +20,11 @@ type FavButtonProps = {
   height: number;
 }
 
+type ValidationError = {
+  message: string;
+  errors: Record<string, string[]>
+}
+
 function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isFavorite = offer.isFavorite;
