@@ -75,7 +75,7 @@ function OfferScreen(): JSX.Element {
         <title>Offer</title>
       </Helmet>
       <div className="page">
-        <Header nav={true} />
+        <Header nav />
         {offerItem && <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">

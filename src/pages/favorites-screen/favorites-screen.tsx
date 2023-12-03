@@ -1,8 +1,8 @@
 import {Helmet} from 'react-helmet-async';
 import FavoriteList from '../../components/favorite-list/favorite-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import Header from "../../components/header/header";
-import {Offer} from "../../types/offer";
+import Header from '../../components/header/header';
+import {Offer} from '../../types/offer';
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -15,7 +15,7 @@ function FavoritesScreen(): JSX.Element {
       </Helmet>
 
       <div className="page">
-        <Header nav={true} />
+        <Header nav />
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
 
