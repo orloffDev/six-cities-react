@@ -79,9 +79,9 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   };
 
   useEffect(() => {
-    return()=>{
+    return () => {
       controllerRef.current?.abort();
-    }
+    };
   }, []);
 
   return (
