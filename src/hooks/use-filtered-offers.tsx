@@ -1,11 +1,13 @@
-import {Offer} from "../types/offer";
-import {CityName} from "../types/city-name";
-import {SortingOption} from "../const";
+import {Offer} from '../types/offer';
+import {CityName} from '../types/city-name';
+import {SortingOption} from '../const';
 
 export const useFilteredOffers = function (offers: Offer[], cityName: CityName, optionValue?: string): Offer[] {
   const byCity: Offer[] = offers.filter((offer) => offer.city.name === cityName);
-  const byField = (byCity: Offer[]): Offer[] => {
-    if(!optionValue) return byCity;
+  const byField = (byCity): Offer[] => {
+    if(!optionValue){
+      return byCity;
+    }
     switch (optionValue) {
       case SortingOption.Popular:
         return byCity;
