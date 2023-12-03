@@ -75,8 +75,8 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
       })
       .finally(()=>{
         controllerRef.current = null;
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     return()=>{
