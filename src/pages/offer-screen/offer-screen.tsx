@@ -161,7 +161,8 @@ function OfferScreen(): JSX.Element {
             </div>
             {mapData && <PlaceMap mapData={mapData} parent="offer" />}
           </section>
-          {offersNear && <div className="container">
+          {offersNear &&
+          <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceList
