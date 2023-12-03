@@ -36,14 +36,17 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
     }, []);
 
     dispatch(setOffers(newOffers));
-  }
+  };
 
   const handleButtonDown = function(){
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
       return;
     }
-    if(controllerRef.current){ return; }
+
+    if(controllerRef.current){
+      return;
+    }
 
     const newStatus = isFavorite ? 0 : 1;
 
