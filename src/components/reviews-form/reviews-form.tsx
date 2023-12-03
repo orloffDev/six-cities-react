@@ -10,7 +10,7 @@ import {MutableRefObject} from "../../types/index";
 import './reviews-form.css';
 
 type ReviewsFormProps = {
-  onSuccess: (reviewData: Review) => Promise<void>;
+  onSuccess: (data: Review) => void;
   id: Review['id'];
 }
 
