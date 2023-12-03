@@ -37,28 +37,28 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
-  const fetchOffer = async() => {
-    try {
-      const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
-      setOfferItem(res.data);
-    } catch (error: unknown) {
-      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
-        navigate(ERROR_ROUTE);
-      }
-    }
-  };
-
-  const fetchOffersNear = async() => {
-    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
-    setOffersNear(data.slice(0, 3));
-  };
-
-  const fetchReviews = async() => {
-    const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
-    setReviewsData(data);
-  };
-
   useEffect(() => {
+    const fetchOffer = async() => {
+      try {
+        const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+        setOfferItem(res.data);
+      } catch (error: unknown) {
+        if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
+          navigate(ERROR_ROUTE);
+        }
+      }
+    };
+
+    const fetchOffersNear = async() => {
+      const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+      setOffersNear(data.slice(0, 3));
+    };
+
+    const fetchReviews = async() => {
+      const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
+      setReviewsData(data);
+    };
+
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
