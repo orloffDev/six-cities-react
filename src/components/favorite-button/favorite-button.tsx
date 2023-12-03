@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
 import {setOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {ValidationError} from "../../types/index";
+import {ValidationError} from '../../types/index';
 
 type FavButtonProps = {
   offer: Offer;

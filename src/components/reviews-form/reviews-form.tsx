@@ -82,7 +82,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       })
       .finally(()=>{
         formTag.classList.remove('form--disabled');
-      })
+      });
   };
 
   //
@@ -91,7 +91,8 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <ReviewsRating handleRatingChange={handleRatingChange} />
       <textarea
