@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SortingOption, SORTING_DEFAULT_OPTION} from '../../const';
-import classNames from "classnames";
+import classNames from 'classnames';
 
 type SortingProps = {
   onChangeSort: (value: string) => void;
