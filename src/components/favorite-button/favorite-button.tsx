@@ -62,7 +62,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
       })
       .catch((error: unknown)=>{
         if (error instanceof AxiosError && error.code !== 'ERR_CANCELED') {
-          const errorText: string | undefined = error?.response?.data?.message || undefined;
+          const errorText: string | undefined = error?.response?.data?.message as string;
           if (errorText) {
             toast.error(errorText);
           }
