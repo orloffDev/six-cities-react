@@ -62,7 +62,7 @@ function OfferScreen(): JSX.Element {
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
-  }
+  };
 
   useEffect(() => {
     fetchAll();
@@ -138,9 +138,10 @@ function OfferScreen(): JSX.Element {
                     <span className="offer__user-name">
                       {offerItem.host.name}
                     </span>
-                    {offerItem.host.isPro && <span className="offer__user-status">
-                      Pro
-                    </span>}
+                    {offerItem.host.isPro &&
+                      <span className="offer__user-status">
+                        Pro
+                      </span>}
                   </div>
                   <div className="offer__description">
                     <p className="offer__text">{offerItem.description}</p>
