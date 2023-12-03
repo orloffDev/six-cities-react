@@ -19,5 +19,5 @@ export const useFilteredOffers = function (offers: Offer[], cityName: CityName, 
   }
 
   return newFilteredOffer;
-}
+};
 
