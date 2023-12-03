@@ -30,8 +30,8 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onToggle = function(toggleOffer:Offer){
-    const newOffers = offers.reduce((acc:Offer[], offer) => {
-      acc.push(offer.id === toggleOffer.id ? toggleOffer : offer);
+    const newOffers = offers.reduce((acc:Offer[], item) => {
+      acc.push(item.id === toggleOffer.id ? toggleOffer : item);
       return acc;
     }, []);
 
