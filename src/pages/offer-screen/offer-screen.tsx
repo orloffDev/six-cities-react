@@ -148,9 +148,13 @@ function OfferScreen(): JSX.Element {
                   </div>
                 </div>
                 <section className="offer__reviews reviews">
-                  {reviewsCount !== 0 && <><h2 className="reviews__title">Reviews &middot;
-                  <span className="reviews__amount">{reviewsCount}</span></h2>
-                  <ReviewsList reviewsData={reviewsData} /></>}
+                  {reviewsCount !== 0 &&
+                    <>
+                      <h2 className="reviews__title">Reviews &middot;
+                        <span className="reviews__amount">{reviewsCount}</span>
+                      </h2>
+                      <ReviewsList reviewsData={reviewsData} />
+                    </>}
                   {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm onSuccess={onFormSuccess} id={id} />}
                 </section>
               </div>
