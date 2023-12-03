@@ -58,14 +58,11 @@ function OfferScreen(): JSX.Element {
     setReviewsData(data);
   };
 
-  const fetchAll = function(){
+  useEffect(() => {
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
-  };
 
-  useEffect(() => {
-    fetchAll();
     window.scrollTo(0, 0);
   }, [id]);
 
