@@ -23,7 +23,8 @@ function OfferScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const navigate = useNavigate();
   const api = createAPI();
-  const id = useParams().id as string;
+  const pageId = useParams().id as string;
+  const [offerid, setOfferId] = useState<string | null>(null);
   const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
@@ -35,7 +36,7 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
-  const fetchOffer = async() => {
+  const fetchOffer = async(id) => {
     try {
       const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
       setOfferItem(res.data);
@@ -46,26 +47,29 @@ function OfferScreen(): JSX.Element {
     }
   };
 
-  const fetchOffersNear = async() => {
+  const fetchOffersNear = async(id) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
     setOffersNear(data.slice(0, 3));
   };
 
-  const fetchReviews = async() => {
+  const fetchReviews = async(id) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
     setReviewsData(data);
   };
 
   const fetchAll = function(id){
-    fetchOffer();
-    fetchOffersNear();
-    fetchReviews();
+    fetchOffer(id);
+    fetchOffersNear(id);
+    fetchReviews(id);
   };
 
   useEffect(() => {
-    fetchAll(id);
-    window.scrollTo(0, 0);
-  }, [id]);
+    if(pageId !== offerid){
+      fetchAll(pageId);
+      setOfferId(pageId);
+      window.scrollTo(0, 0);
+    }
+  }, [pageId]);
 
   return (
     <>
