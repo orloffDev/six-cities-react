@@ -2,8 +2,6 @@ import {Offer} from '../types/offer';
 import {CityName} from '../types/city-name';
 import {SortingOption} from '../const';
 
-
-
 export const useFilteredOffers = function (offers: Offer[], cityName: CityName, optionValue?: string): Offer[] {
   const newFilteredOffer: Offer[] = offers.filter((offer) => offer.city.name === cityName);
   if(optionValue){
