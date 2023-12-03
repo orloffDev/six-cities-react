@@ -37,34 +37,37 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
-  useEffect(() => {
-    const fetchOffer = async() => {
-      try {
-        const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
-        setOfferItem(res.data);
-      } catch (error: unknown) {
-        if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
-          navigate(ERROR_ROUTE);
-        }
+  const fetchOffer = async() => {
+    try {
+      const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+      setOfferItem(res.data);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
+        navigate(ERROR_ROUTE);
       }
-    };
+    }
+  };
 
-    const fetchOffersNear = async() => {
-      const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
-      setOffersNear(data.slice(0, 3));
-    };
+  const fetchOffersNear = async() => {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    setOffersNear(data.slice(0, 3));
+  };
 
-    const fetchReviews = async() => {
-      const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
-      setReviewsData(data);
-    };
+  const fetchReviews = async() => {
+    const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
+    setReviewsData(data);
+  };
 
+  const fetchAll = function(){
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
+  };
 
+  useEffect(() => {
+    fetchAll();
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
   return (
     <>
