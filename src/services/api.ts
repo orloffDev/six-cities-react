@@ -3,7 +3,7 @@ import {StatusCodes} from 'http-status-codes';
 import {BACKEND_URL, REQUEST_TIMEOUT} from '../const';
 import {getToken} from './token';
 import { toast } from 'react-toastify';
-import {processErrorHandle} from './process-error-handle';
+//import {processErrorHandle} from './process-error-handle';
 
 type DetailMessageType = {
   type: string;
