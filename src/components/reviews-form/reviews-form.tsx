@@ -1,13 +1,14 @@
 import { toast } from 'react-toastify';
-import {AxiosError, AxiosRequestConfig} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
 import {FormData} from '../../types/form-data';
 import {Review} from '../../types/review';
 import {createAPI} from '../../services/api';
 import {APIRoute} from '../../const';
-import {MutableRefObject} from '../../types/index';
+import {MutableRefObject, ValidationError} from '../../types/index';
 import './reviews-form.css';
+
 
 type ReviewsFormProps = {
   onSuccess: (data: Review) => void;
@@ -72,8 +73,8 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         onSuccess(data);
       })
       .catch((error: unknown)=>{
-        if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
-          const errorText: string | undefined = error?.response?.data?.message;
+        if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
+          const errorText: string | undefined = error.response?.data?.message;
           if (errorText) {
             toast.error(errorText);
           }

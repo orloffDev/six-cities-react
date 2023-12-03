@@ -1,6 +1,6 @@
 import {Offer} from '../../types/offer';
 import {useEffect, useRef} from 'react';
-import axios, {AxiosRequestConfig} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {APIRoute} from '../../const';
 import {AppRoute} from '../../const';
 import {toast} from 'react-toastify';
@@ -12,17 +12,13 @@ import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
 import {setOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {ValidationError} from "../../types/index";
 
 type FavButtonProps = {
   offer: Offer;
   parent: string;
   width: number;
   height: number;
-}
-
-type ValidationError = {
-  message: string;
-  errors: Record<string, string[]>;
 }
 
 function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
@@ -66,7 +62,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
         onToggle(data);
       })
       .catch((error: unknown)=>{
-        if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
+        if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
           const errorText: string | undefined = error.response?.data?.message;
           if (errorText) {
             toast.error(errorText);
