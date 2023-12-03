@@ -9,13 +9,13 @@ import {getMapData} from '../../utils/getMapData';
 import {AuthorizationStatus} from '../../const';
 import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
-import Header from "../../components/header/header";
-import {Offer} from "../../types/offer";
-import {OfferItem} from "../../types/offer-item";
-import {Review} from "../../types/review";
+import Header from '../../components/header/header';
+import {Offer} from '../../types/offer';
+import {OfferItem} from '../../types/offer-item';
+import {Review} from '../../types/review';
 import { useParams, useNavigate } from 'react-router-dom';
-import {createAPI} from "../../services/api";
-import FavoriteButton from "../../components/favorite-button/favorite-button";
+import {createAPI} from '../../services/api';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 
 
 function OfferScreen(): JSX.Element {
