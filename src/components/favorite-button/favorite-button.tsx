@@ -22,7 +22,7 @@ type FavButtonProps = {
 
 type ValidationError = {
   message: string;
-  errors: Record<string, string[]>
+  errors: Record<string, string[]>;
 }
 
 function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
@@ -67,16 +67,10 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
       })
       .catch((error: unknown)=>{
         if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
-          const errorText: string | undefined = (error?.response?.data?.message) || undefined;
+          const errorText: string | undefined = error.response?.data?.message;
           if (errorText) {
             toast.error(errorText);
           }
-        }
-
-
-
-        if (error instanceof AxiosError) {
-
         }
       })
       .finally(()=>{
