@@ -9,17 +9,17 @@ import {SelectedPoint} from '../../types/selected-point';
 import {CityName} from '../../types/city-name';
 import {getMapData} from '../../utils/getMapData';
 import {Helmet} from 'react-helmet-async';
-import SortingForm from "../../components/sorting-form/sorting-form";
-import {SortingOption} from "../../const";
-import {useFilteredOffers} from "../../hooks/use-filtered-offers";
+import SortingForm from '../../components/sorting-form/sorting-form';
+import {useFilteredOffers} from '../../hooks/use-filtered-offers';
+import {SORTING_DEFAULT_OPTION} from '../../const';
 
 function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
   const mapData = getMapData(offers, activeCityName);
-  const [activeOption, setActiveOption] = useState<string>(SortingOption.Popular);
-  const filteredOffersData = useFilteredOffers(offers, activeCityName, activeOption);
+  const [activeOptionValue, setActiveOptionValue] = useState<string>(SORTING_DEFAULT_OPTION);
+  const filteredOffersData = useFilteredOffers(offers, activeCityName, activeOptionValue);
   const placesFound: number = filteredOffersData.length;
 
   const onChangeHoverPlaceList = function(offer: Offer){
@@ -35,8 +35,8 @@ function WelcomeScreen(): JSX.Element {
     setSelectedPoint(null);
   };
 
-  const updateSorting = (option: string) => {
-    setActiveOption(option);
+  const onChangeSort = (optionValue: string) => {
+    setActiveOptionValue(optionValue);
   };
 
   return (
@@ -57,7 +57,7 @@ function WelcomeScreen(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{placesFound} places to stay in {activeCityName}</b>
-                <SortingForm onChangeSort={updateSorting} />
+                <SortingForm onChangeSort={onChangeSort} />
                 <PlaceList
                   offers={filteredOffersData}
                   onChangeHoverPlace={onChangeHoverPlaceList}

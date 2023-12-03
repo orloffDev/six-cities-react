@@ -2,11 +2,11 @@ import {Offer} from "../types/offer";
 import {CityName} from "../types/city-name";
 import {SortingOption} from "../const";
 
-export const useFilteredOffers = function (offers: Offer[], cityName: CityName, optionName?: string) {
+export const useFilteredOffers = function (offers: Offer[], cityName: CityName, optionValue?: string) {
   const byCity = offers.filter((offer) => offer.city.name === cityName);
   const byField = (byCity: Offer[]) => {
-    if(!optionName) return;
-    switch (SortingOption[optionName]) {
+    if(!optionValue) return;
+    switch (optionValue) {
       case SortingOption.Popular:
         return byCity;
       case SortingOption.PriceLowToHigh:
@@ -20,6 +20,6 @@ export const useFilteredOffers = function (offers: Offer[], cityName: CityName, 
     }
   };
 
-  return !optionName ? byCity : byField(byCity);
+  return !optionValue ? byCity : byField(byCity);
 }
 

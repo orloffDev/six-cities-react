@@ -38,7 +38,7 @@ export enum SortingOption {
   TopRatedFirst = 'Top rated first',
 }
 
-export const SORTING_DEFAULT_OPTION = 'Popular';
+export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
 
