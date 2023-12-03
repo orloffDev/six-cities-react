@@ -6,7 +6,7 @@ import {Offer} from "../../types/offer";
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const favoriteOffers:Offer[]  = offers.filter((offer) => offer.isFavorite);
 
   return (
     <>
