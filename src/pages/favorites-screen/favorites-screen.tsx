@@ -23,8 +23,7 @@ function FavoritesScreen(): JSX.Element {
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <FavoriteList offers={favoriteOffers} />
-              </section>
-            }
+              </section>}
 
             {favoriteOffers.length === 0 &&
               <section className="favorites favorites--empty">
@@ -33,8 +32,7 @@ function FavoritesScreen(): JSX.Element {
                   <b className="favorites__status">Nothing yet saved.</b>
                   <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
                 </div>
-              </section>
-            }
+              </section>}
           </div>
         </main>
         <footer className="footer container">
