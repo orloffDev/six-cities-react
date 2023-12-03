@@ -21,8 +21,6 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers = useAppSelector((state) => state.offers);
-
-
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams().id as string;
@@ -58,16 +56,16 @@ function OfferScreen(): JSX.Element {
     setReviewsData(data);
   };
 
-  const fetchAll = function(){
+  const fetchAll = function(id){
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
   };
 
   useEffect(() => {
-    fetchAll();
+    fetchAll(id);
     window.scrollTo(0, 0);
-  });
+  }, [id]);
 
   return (
     <>
