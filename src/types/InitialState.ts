@@ -6,8 +6,10 @@ import {UserData} from './user-data';
 export type InitialState = {
   activeCityName: CityName;
   offers: Offer[] | [];
-  authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
+  favoriteOffers: Offer[] | [];
+  isFavoriteOffersDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
   error: string | null;
   userData: UserData | null;
 }

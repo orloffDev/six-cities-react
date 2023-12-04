@@ -7,8 +7,10 @@ import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
   setOffers,
-  requireAuthorization,
   setOffersDataLoadingStatus,
+  setFavoriteOffers,
+  setFavoriteOffersDataLoadingStatus,
+  requireAuthorization,
   setError,
   redirectToRoute,
   setUserData
@@ -30,6 +32,20 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setFavoriteOffersDataLoadingStatus(true));
+    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    dispatch(setFavoriteOffersDataLoadingStatus(false));
+    dispatch(setFavoriteOffers(data));
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -41,8 +57,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get(APIRoute.Login);
       dispatch(setUserData(data));
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(fetchFavoriteOffersAction());
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      dispatch(setFavoriteOffers([]));
     }
   },
 );

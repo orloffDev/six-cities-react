@@ -3,6 +3,8 @@ import {
   setActiveCityName,
   setOffers,
   setOffersDataLoadingStatus,
+  setFavoriteOffers,
+  setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
   setError,
   setUserData
@@ -15,8 +17,10 @@ import {CITY_DEFAULT_NAME, AuthorizationStatus} from '../const';
 const initialState: InitialState = {
   activeCityName: CITY_DEFAULT_NAME,
   offers: [],
-  authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
+  favoriteOffers: [],
+  isFavoriteOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   userData: null
 };
@@ -30,6 +34,12 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
+    })
+    .addCase(setFavoriteOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {

@@ -14,6 +14,12 @@ export const setOffers = createAction('offers/change', (offers: Offer[]) => ({
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
+export const setFavoriteOffers = createAction('favoriteOffers/change', (favoriteOffers: Offer[]) => ({
+  payload: favoriteOffers
+}));
+
+export const setFavoriteOffersDataLoadingStatus = createAction<boolean>('data/setFavoriteOffersDataLoadingStatus');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('offers/setError');
