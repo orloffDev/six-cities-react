@@ -56,7 +56,12 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <FavoriteButton offer={offer} parent="place-card" width={18} height={19} />
+          <FavoriteButton
+            offer={offer}
+            parent="place-card"
+            width={18}
+            height={19}
+          />
 
         </div>
         <div className="place-card__rating rating">

@@ -1,4 +1,5 @@
 import {Offer} from '../../types/offer';
+import {OfferItem} from '../../types/offer-item';
 import {useEffect, useRef} from 'react';
 import axios, {AxiosRequestConfig} from 'axios';
 import {APIRoute} from '../../const';
@@ -19,9 +20,10 @@ type FavButtonProps = {
   parent: string;
   width: number;
   height: number;
+  onToggle?: (offerItem: OfferItem) => void
 }
 
-function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Element {
+function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isFavorite = offer.isFavorite;
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -30,12 +32,15 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
-  const onToggle = function(toggleOffer:Offer){
-    const newOffers = offers.reduce((acc:Offer[], item) => {
-      acc.push(item.id === toggleOffer.id ? toggleOffer : item);
-      return acc;
-    }, []);
-
+  const onFetch = function(toggleOffer:OfferItem){
+    const newOffers: Offer[] = JSON.parse(JSON.stringify(offers));
+    const curItemIndex: number = newOffers.findIndex((item)=>{
+      return item.id === toggleOffer.id;
+    });
+    newOffers[curItemIndex].isFavorite = toggleOffer.isFavorite;
+    if(onToggle) {
+      onToggle(toggleOffer);
+    }
     dispatch(setOffers(newOffers));
   };
 
@@ -59,7 +64,7 @@ function FavoriteButton({offer, parent, width, height}: FavButtonProps): JSX.Ele
 
     api.post<Offer>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
-        onToggle(data);
+        onFetch(data);
       })
       .catch((error: unknown)=>{
         if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {

@@ -20,11 +20,9 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offers = useAppSelector((state) => state.offers);
   const navigate = useNavigate();
   const api = createAPI();
-  const pageId = useParams().id as string;
-  const [offerid, setOfferId] = useState<string | null>(null);
+  const id = useParams().id as string;
   const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
@@ -36,7 +34,7 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
-  const fetchOffer = async(id) => {
+  const fetchOffer = async() => {
     try {
       const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
       setOfferItem(res.data);
@@ -47,29 +45,33 @@ function OfferScreen(): JSX.Element {
     }
   };
 
-  const fetchOffersNear = async(id) => {
+  const fetchOffersNear = async() => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
     setOffersNear(data.slice(0, 3));
   };
 
-  const fetchReviews = async(id) => {
+  const fetchReviews = async() => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
     setReviewsData(data);
   };
 
-  const fetchAll = function(id){
-    fetchOffer(id);
-    fetchOffersNear(id);
-    fetchReviews(id);
+  const fetchAll = function(){
+    fetchOffer();
+    fetchOffersNear();
+    fetchReviews();
   };
 
+  const handleOfferItemToggleFavorite = function(offerItem){
+    setOfferItem(offerItem);
+  }
+
+  /**
+   * Поменялось предложение
+   */
   useEffect(() => {
-    if(pageId !== offerid){
-      fetchAll(pageId);
-      setOfferId(pageId);
-      window.scrollTo(0, 0);
-    }
-  }, [pageId]);
+    fetchAll();
+    window.scrollTo(0, 0);
+  }, [id]);
 
   return (
     <>
@@ -98,7 +100,13 @@ function OfferScreen(): JSX.Element {
                 </div>}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offerItem.title}</h1>
-                  <FavoriteButton offer={offerItem} parent="offer" width={31} height={33} />
+                  <FavoriteButton
+                    offer={offerItem}
+                    parent="offer"
+                    width={31}
+                    height={33}
+                    onToggle={handleOfferItemToggleFavorite}
+                  />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
@@ -169,7 +177,7 @@ function OfferScreen(): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceList
-                offers={offers}
+                offers={offersNear}
                 parentClass="near-places__list"
                 parent="near-places"
                 maxLength={MAX_NEAR_PLACES_COUNT}
