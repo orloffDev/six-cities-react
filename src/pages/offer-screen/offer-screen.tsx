@@ -25,7 +25,7 @@ function OfferScreen(): JSX.Element {
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams().id as string;
-  const [offerItem, setOfferItem] = useState<OfferItem | null>(null);
+  const [currentOfferItem, setCurrentOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const reviewsCount = reviewsData.length;
@@ -39,7 +39,7 @@ function OfferScreen(): JSX.Element {
   const fetchOffer = async() => {
     try {
       const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
-      setOfferItem(res.data);
+      setCurrentOfferItem(res.data);
     } catch (error: unknown) {
       if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
         navigate(ERROR_ROUTE);
@@ -63,16 +63,16 @@ function OfferScreen(): JSX.Element {
     fetchReviews();
   };
 
-  const handleOfferItemToggleFavorite = function(offerItem){
-    setOfferItem(offerItem);
-  };
+  const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
+    setCurrentOfferItem(offerItem);
+  }
 
   const handleNearListToggle = function(offerItem: OfferItem){
     if(offersNear){
       const newOffersNear = updateOffers(offersNear, offerItem);
       setOffersNear(newOffersNear);
     }
-  };
+  }
 
   useEffect(() => {
     fetchAll();
@@ -86,12 +86,12 @@ function OfferScreen(): JSX.Element {
       </Helmet>
       <div className="page">
         <Header nav />
-        {offerItem &&
+        {currentOfferItem &&
         <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offerItem.images.slice(0,6).map((picUrl) => (
+                {currentOfferItem.images.slice(0,6).map((picUrl) => (
                   <div key={picUrl} className="offer__image-wrapper">
                     <img className="offer__image" src={picUrl} alt="Photo studio" />
                   </div>
@@ -100,14 +100,14 @@ function OfferScreen(): JSX.Element {
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
-                {offerItem.isPremium &&
+                {currentOfferItem.isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>}
                 <div className="offer__name-wrapper">
-                  <h1 className="offer__name">{offerItem.title}</h1>
+                  <h1 className="offer__name">{currentOfferItem.title}</h1>
                   <FavoriteButton
-                    offer={offerItem}
+                    offer={currentOfferItem}
                     parent="offer"
                     width={31}
                     height={33}
@@ -116,30 +116,30 @@ function OfferScreen(): JSX.Element {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${offerItem.rating * 100 / 5}%`}}></span>
+                    <span style={{width: `${currentOfferItem.rating * 100 / 5}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{offerItem.rating}</span>
+                  <span className="offer__rating-value rating__value">{currentOfferItem.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offerItem.type}
+                    {currentOfferItem.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offerItem.bedrooms} {offerItem.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                    {currentOfferItem.bedrooms} {currentOfferItem.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offerItem.maxAdults} {offerItem.maxAdults > 1 ? 'adults' : 'adult'}
+                    Max {currentOfferItem.maxAdults} {currentOfferItem.maxAdults > 1 ? 'adults' : 'adult'}
                   </li>
                 </ul>
                 <div className="offer__price">
-                  <b className="offer__price-value">&euro;{offerItem.price}</b>
+                  <b className="offer__price-value">&euro;{currentOfferItem.price}</b>
                   <span className="offer__price-text">&nbsp;night</span>
                 </div>
                 <div className="offer__inside">
                   <h2 className="offer__inside-title">What&apos;s inside</h2>
                   <ul className="offer__inside-list">
-                    {offerItem.goods.map((feature) => (
+                    {currentOfferItem.goods.map((feature) => (
                       <li key={feature} className="offer__inside-item">
                         {feature}
                       </li>
@@ -149,19 +149,19 @@ function OfferScreen(): JSX.Element {
                 <div className="offer__host">
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
-                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${offerItem.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
-                      <img className="offer__avatar user__avatar" src={offerItem.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${currentOfferItem.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
+                      <img className="offer__avatar user__avatar" src={currentOfferItem.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="offer__user-name">
-                      {offerItem.host.name}
+                      {currentOfferItem.host.name}
                     </span>
-                    {offerItem.host.isPro &&
+                    {currentOfferItem.host.isPro &&
                       <span className="offer__user-status">
                         Pro
                       </span>}
                   </div>
                   <div className="offer__description">
-                    <p className="offer__text">{offerItem.description}</p>
+                    <p className="offer__text">{currentOfferItem.description}</p>
                   </div>
                 </div>
                 <section className="offer__reviews reviews">
