@@ -1,5 +1,6 @@
 //types
 import {Review} from '../../types/review';
+import {getRating} from '../../utils/index';
 
 type ReviewsItemProps = {
   reviewData: Review;
@@ -18,7 +19,7 @@ function ReviewsItem({reviewData}: ReviewsItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width:`${reviewData.rating * 20}%`}}></span>
+            <span style={{width: `${getRating(reviewData.rating)}`}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

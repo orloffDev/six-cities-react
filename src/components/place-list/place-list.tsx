@@ -1,7 +1,6 @@
-//components
 import PlaceCard from '../../components/place-card/place-card';
-//types
 import {Offer} from '../../types/offer';
+import {OfferItem} from '../../types/offer-item';
 
 type PlaceListProps = {
   offers: Offer[];
@@ -10,9 +9,10 @@ type PlaceListProps = {
   parentClass: string;
   parent: string;
   maxLength?: number;
+  onFavoriteToggle?: (offerItem: OfferItem) => void;
 }
 
-function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, parent, maxLength}: PlaceListProps): JSX.Element {
+function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, parent, maxLength, onFavoriteToggle}: PlaceListProps): JSX.Element {
   const sliceOffers:Offer[] = maxLength ? offers.slice(0, maxLength) : offers;
 
   const handleEnter = (offer: Offer) =>{
@@ -27,6 +27,12 @@ function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, p
     }
   };
 
+  const handlePlaceCardFavorite = (offerItem: OfferItem) =>{
+    if (onFavoriteToggle) {
+      onFavoriteToggle(offerItem);
+    }
+  };
+
   //
   return (
     <div className={`${parentClass} places__list`}>
@@ -37,6 +43,7 @@ function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, p
           parent={parent}
           onEnter={handleEnter}
           onOut={handleOut}
+          onFavoriteToggle={handlePlaceCardFavorite}
         />
       ))}
     </div>

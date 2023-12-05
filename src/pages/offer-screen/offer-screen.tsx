@@ -6,55 +6,41 @@ import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getMapData} from '../../utils/getMapData';
-import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../../const';
-import {MAX_NEAR_PLACES_COUNT, APIRoute, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
+import {AuthorizationStatus} from '../../const';
+import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
-import Header from "../../components/header/header";
-import {Offer} from "../../types/offer";
-import {Review} from "../../types/review";
+import Header from '../../components/header/header';
+import {Offer} from '../../types/offer';
+import {OfferItem} from '../../types/offer-item';
+import {Review} from '../../types/review';
 import { useParams, useNavigate } from 'react-router-dom';
-import {createAPI} from "../../services/api";
+import {createAPI} from '../../services/api';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
+import {useUpdateOffers} from '../../hooks/use-update-offers';
+import {getRating} from '../../utils/index';
 
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offers = useAppSelector((state) => state.offers);
-
-
+  const updateOffers = useUpdateOffers;
   const navigate = useNavigate();
   const api = createAPI();
-  const id = useParams()?.id;
-  const [offer, setOffer] = useState<Offer | null>(null);
+  const id = useParams().id as string;
+  const [currentOfferItem, setCurrentOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
-  const reviewsCount = reviewsData ? reviewsData.length : null;
+  const reviewsCount = reviewsData.length;
   const mapData = getMapData(offersNear);
 
-  const onFormSuccess = function(data){
-    const reviewData = data.data;
-    const newData = [...reviewsData, reviewData];
+  const onFormSuccess = function(data: Review){
+    const newData = [...reviewsData, data];
     setReviewsData(newData);
-  };
-
-  const toggleFavorite = async (favoriteOffer: Offer) => {
-    if (authorizationStatus !== authorizationStatus.Auth) {
-      navigate(AppRoute.Login);
-      return;
-    }
-
-    const { isFavorite } = favoriteOffer;
-    if (isFavorite) {
-      console.log('remove') //TODO
-    } else {
-      console.log('add'); //TODO
-    }
-    fetchOffer();
   };
 
   const fetchOffer = async() => {
     try {
-      const res = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-      setOffer(res.data);
+      const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+      setCurrentOfferItem(res.data);
     } catch (error: unknown) {
       if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
         navigate(ERROR_ROUTE);
@@ -68,7 +54,7 @@ function OfferScreen(): JSX.Element {
   };
 
   const fetchReviews = async() => {
-    const { data } = await api.get<Comment[]>(`${APIRoute.Reviews}/${id}`);
+    const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
     setReviewsData(data);
   };
 
@@ -76,7 +62,18 @@ function OfferScreen(): JSX.Element {
     fetchOffer();
     fetchOffersNear();
     fetchReviews();
-  }
+  };
+
+  const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
+    setCurrentOfferItem(offerItem);
+  };
+
+  const handleNearListToggle = function(offerItem: OfferItem){
+    if(offersNear){
+      const newOffersNear = updateOffers(offersNear, offerItem);
+      setOffersNear(newOffersNear);
+    }
+  };
 
   useEffect(() => {
     fetchAll();
@@ -89,12 +86,13 @@ function OfferScreen(): JSX.Element {
         <title>Offer</title>
       </Helmet>
       <div className="page">
-        <Header nav={true} />
-        {offer && <main className="page__main page__main--offer">
+        <Header nav />
+        {currentOfferItem &&
+        <main className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {offer.images.slice(0,6).map((picUrl) => (
+                {currentOfferItem.images.slice(0,6).map((picUrl) => (
                   <div key={picUrl} className="offer__image-wrapper">
                     <img className="offer__image" src={picUrl} alt="Photo studio" />
                   </div>
@@ -103,51 +101,46 @@ function OfferScreen(): JSX.Element {
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
-                {offer.isPremium &&
+                {currentOfferItem.isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>}
                 <div className="offer__name-wrapper">
-                  <h1 className="offer__name">{offer.title}</h1>
-                  <button
-                    className={`offer__bookmark-button button ${offer.isFavorite && authorizationStatus === authorizationStatus.Auth ? 'offer__bookmark-button--active' : ''}`}
-                    type="button"
-                    onClick={ () => {
-                      toggleFavorite(offer);
-                    }}
-                  >
-                    <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <h1 className="offer__name">{currentOfferItem.title}</h1>
+                  <FavoriteButton
+                    offer={currentOfferItem}
+                    parent="offer"
+                    width={31}
+                    height={33}
+                    onToggle={handleOfferItemToggleFavorite}
+                  />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${offer.rating * 100 / 5}%`}}></span>
+                    <span style={{width: `${getRating(currentOfferItem.rating)}`}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{offer.rating}</span>
+                  <span className="offer__rating-value rating__value">{currentOfferItem.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {offer.type}
+                    {currentOfferItem.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} {offer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                    {currentOfferItem.bedrooms} {currentOfferItem.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} {offer.maxAdults > 1 ? 'adults' : 'adult'}
+                    Max {currentOfferItem.maxAdults} {currentOfferItem.maxAdults > 1 ? 'adults' : 'adult'}
                   </li>
                 </ul>
                 <div className="offer__price">
-                  <b className="offer__price-value">&euro;{offer.price}</b>
+                  <b className="offer__price-value">&euro;{currentOfferItem.price}</b>
                   <span className="offer__price-text">&nbsp;night</span>
                 </div>
                 <div className="offer__inside">
                   <h2 className="offer__inside-title">What&apos;s inside</h2>
                   <ul className="offer__inside-list">
-                    {offer.goods.map((feature) => (
+                    {currentOfferItem.goods.map((feature) => (
                       <li key={feature} className="offer__inside-item">
                         {feature}
                       </li>
@@ -157,37 +150,44 @@ function OfferScreen(): JSX.Element {
                 <div className="offer__host">
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
-                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${offer.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
-                      <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <div className={`offer__avatar-wrapper user__avatar-wrapper ${currentOfferItem.host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
+                      <img className="offer__avatar user__avatar" src={currentOfferItem.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="offer__user-name">
-                      {offer.host.name}
+                      {currentOfferItem.host.name}
                     </span>
-                    {offer.host.isPro && <span className="offer__user-status">
-                      Pro
-                    </span>}
+                    {currentOfferItem.host.isPro &&
+                      <span className="offer__user-status">
+                        Pro
+                      </span>}
                   </div>
                   <div className="offer__description">
-                    <p className="offer__text">{offer.description}</p>
+                    <p className="offer__text">{currentOfferItem.description}</p>
                   </div>
                 </div>
                 <section className="offer__reviews reviews">
-                  {reviewsCount !== 0 && <><h2 className="reviews__title">Reviews &middot;
-                  <span className="reviews__amount">{reviewsCount}</span></h2>
-                  <ReviewsList reviewsData={reviewsData} /></>}
+                  {reviewsCount !== 0 &&
+                  <>
+                    <h2 className="reviews__title">Reviews &middot;
+                      <span className="reviews__amount">{reviewsCount}</span>
+                    </h2>
+                    <ReviewsList reviewsData={reviewsData} />
+                  </>}
                   {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm onSuccess={onFormSuccess} id={id} />}
                 </section>
               </div>
             </div>
             {mapData && <PlaceMap mapData={mapData} parent="offer" />}
           </section>
-          {offersNear && <div className="container">
+          {offersNear &&
+          <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlaceList
-                offers={offers}
+                offers={offersNear}
                 parentClass="near-places__list"
                 parent="near-places"
+                onFavoriteToggle={handleNearListToggle}
                 maxLength={MAX_NEAR_PLACES_COUNT}
               />
             </section>

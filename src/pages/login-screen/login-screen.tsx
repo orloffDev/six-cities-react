@@ -2,7 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {useRef, FormEvent} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {loginAction} from '../../store/api-actions';
-import Header from "../../components/header/header";
+import Header from '../../components/header/header';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

@@ -3,18 +3,22 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
 import {Offer} from '../types/offer';
+import {OfferItem} from '../types/offer-item';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
   setOffers,
-  requireAuthorization,
   setOffersDataLoadingStatus,
+  setFavoriteOffers,
+  setFavoriteOffersDataLoadingStatus,
+  requireAuthorization,
   setError,
   redirectToRoute,
   setUserData
 } from './action';
 import {APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {saveToken, dropToken} from '../services/token';
+import {useUpdateOffers} from '../hooks/use-update-offers';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -30,6 +34,34 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const updateOffersAction = createAsyncThunk<void, OfferItem, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/updateOffers',
+  (offerItem, {dispatch, getState}) => {
+    const offers = getState()['offers'];
+    const newOfferList = useUpdateOffers(offers, offerItem);
+    dispatch(setOffers(newOfferList));
+  }
+);
+
+
+export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setFavoriteOffersDataLoadingStatus(true));
+    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    dispatch(setFavoriteOffersDataLoadingStatus(false));
+    dispatch(setFavoriteOffers(data));
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -38,11 +70,13 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get(APIRoute.Login);
+      const {data} = await api.get<UserData>(APIRoute.Login);
       dispatch(setUserData(data));
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(fetchFavoriteOffersAction());
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      dispatch(setFavoriteOffers([]));
     }
   },
 );
@@ -61,6 +95,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(fetchOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -74,7 +109,10 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dispatch(setUserData(null));
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(fetchOffersAction());
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 

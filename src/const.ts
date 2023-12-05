@@ -28,7 +28,17 @@ export enum APIRoute {
   Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite',
 }
+
+export enum SortingOption {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
 

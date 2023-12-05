@@ -1,26 +1,28 @@
 import { toast } from 'react-toastify';
-import {AxiosError} from "axios";
+import axios, {AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
-import {FormData} from "../../types/form-data";
-import {Review} from "../../types/review";
-import {createAPI} from "../../services/api";
-import {APIRoute} from "../../const";
+import {FormData} from '../../types/form-data';
+import {Review} from '../../types/review';
+import {createAPI} from '../../services/api';
+import {APIRoute} from '../../const';
+import {MutableRefObject, ValidationError} from '../../types/index';
 import './reviews-form.css';
 
+
 type ReviewsFormProps = {
-  onSuccess: (formData: FormData) => Promise<void>;
+  onSuccess: (data: Review) => void;
   id: Review['id'];
 }
 
 function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
-  const controllerRef = useRef(null);
+  const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
 
   const [formData, setFormData] = useState({
     rating: 0,
     comment: ''
-  });
+  } as FormData);
 
   const handleReviewChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -38,19 +40,20 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
   const cancelFetch = ()=>{
     const controller = controllerRef.current;
-    controller && controller.abort();
-  }
-
-  const resetForm = (formTag)=>{
-    formTag.reset();
-    formTag.classList.remove('form--disabled');
-  }
-
-  useEffect(() => {
-    return()=>{
-      cancelFetch();
+    if(controller) {
+      controller.abort();
     }
-  }, []);
+  };
+
+  const resetForm = (formTag: HTMLFormElement)=>{
+    formTag.reset();
+    setFormData({
+      rating: 0,
+      comment: ''
+    });
+  };
+
+  useEffect(() => cancelFetch(), []);
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -59,25 +62,27 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
 
     cancelFetch();
     controllerRef.current = new AbortController();
+    const signal:AbortSignal = controllerRef.current.signal;
+    const config = {
+      signal: signal
+    } as AxiosRequestConfig;
 
-    api.post<FormData>(`${APIRoute.Reviews}/${id}`, formData, {
-      signal: controllerRef.current.signal
-    })
-      .then((data)=>{
+    api.post<Review>(`${APIRoute.Reviews}/${id}`, formData, config)
+      .then(({data})=>{
+        resetForm(formTag);
         onSuccess(data);
       })
       .catch((error: unknown)=>{
-        if (error instanceof AxiosError && error.code !== "ERR_CANCELED") {
-          const errorText: string | undefined = error?.message;
+        if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
+          const errorText: string | undefined = error.response?.data?.message;
           if (errorText) {
-            console.log(errorText);
             toast.error(errorText);
           }
         }
       })
       .finally(()=>{
-        resetForm(formTag);
-      })
+        formTag.classList.remove('form--disabled');
+      });
   };
 
   //
@@ -86,7 +91,8 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <ReviewsRating handleRatingChange={handleRatingChange} />
       <textarea
@@ -94,7 +100,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData['review']}
+        value={formData['comment']}
         onChange={handleReviewChange}
       />
       <div className="reviews__button-wrapper">

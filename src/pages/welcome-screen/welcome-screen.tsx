@@ -1,27 +1,29 @@
-//react
 import {useState} from 'react';
-//components
 import Header from '../../components/header/header';
 import PlaceList from '../../components/place-list/place-list';
 import PlaceMap from '../../components/place-map/place-map';
 import Tabs from '../../components/tabs/tabs';
-//hooks
 import {useAppSelector} from '../../hooks/use-app-selector';
-//types
 import {Offer} from '../../types/offer';
 import {SelectedPoint} from '../../types/selected-point';
 import {CityName} from '../../types/city-name';
-//utils
 import {getMapData} from '../../utils/getMapData';
 import {Helmet} from 'react-helmet-async';
+import SortingForm from '../../components/sorting-form/sorting-form';
+import {useFilteredOffers} from '../../hooks/use-filtered-offers';
+import {SORTING_DEFAULT_OPTION} from '../../const';
+import classNames from 'classnames';
+
 
 function WelcomeScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
-  const offersFromCity = offers.filter((offer) => offer.city.name === activeCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
   const mapData = getMapData(offers, activeCityName);
-  const placesFound: number = offersFromCity.length;
+  const [activeOptionValue, setActiveOptionValue] = useState<string>(SORTING_DEFAULT_OPTION);
+  const filteredOffersData: Offer[] = useFilteredOffers(offers, activeCityName, activeOptionValue);
+  const placesFound: number = filteredOffersData.length;
+  const mainClasses = classNames(['page__main page__main--index', !placesFound && 'page__main--index-empty']);
 
   const onChangeHoverPlaceList = function(offer: Offer){
     const newSelectedPoint: SelectedPoint = {
@@ -36,6 +38,10 @@ function WelcomeScreen(): JSX.Element {
     setSelectedPoint(null);
   };
 
+  const onChangeSort = (optionValue: string) => {
+    setActiveOptionValue(optionValue);
+  };
+
   return (
     <>
       <Helmet>
@@ -43,35 +49,21 @@ function WelcomeScreen(): JSX.Element {
       </Helmet>
 
       <div className="page page--gray page--main">
-        <Header nav={true} />
-        <main className="page__main page__main--index">
+        <Header nav />
+        <main className={mainClasses}>
           <h1 className="visually-hidden">Cities</h1>
 
           <Tabs />
 
+          {placesFound !== 0 &&
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{placesFound} places to stay in {activeCityName}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex={0}>
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                    <li className="places__option" tabIndex={0}>Price: low to high</li>
-                    <li className="places__option" tabIndex={0}>Price: high to low</li>
-                    <li className="places__option" tabIndex={0}>Top rated first</li>
-                  </ul>
-                </form>
-
+                <SortingForm onChangeSort={onChangeSort} />
                 <PlaceList
-                  offers={offersFromCity}
+                  offers={filteredOffersData}
                   onChangeHoverPlace={onChangeHoverPlaceList}
                   onChangeOutPlace={onChangeOutPlaceList}
                   parentClass="cities__places-list tabs__content"
@@ -84,6 +76,23 @@ function WelcomeScreen(): JSX.Element {
               </div>
             </div>
           </div>
+          }
+
+          {placesFound === 0 &&
+          <div className="cities">
+            <div className="cities__places-container cities__places-container--empty container">
+              <section className="cities__no-places">
+                <div className="cities__status-wrapper tabs__content">
+                  <b className="cities__status">No places to stay available</b>
+                  <p className="cities__status-description">We could not find any property available at the moment in
+                    Dusseldorf</p>
+                </div>
+              </section>
+              <div className="cities__right-section"></div>
+            </div>
+          </div>
+          }
+
         </main>
       </div>
     </>

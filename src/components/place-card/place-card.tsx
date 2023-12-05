@@ -5,19 +5,21 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {OfferHandleEnter} from '../../types/offer';
 import {OfferHandleOut} from '../../types/offer';
+import FavoriteButton from '../favorite-button/favorite-button';
+import {OfferItem} from '../../types/offer-item';
 
 type PlaceCardProps = {
   offer: Offer;
   onEnter?: OfferHandleEnter;
   onOut?: OfferHandleOut;
   parent: string;
+  onFavoriteToggle?: (offerItem: OfferItem) => void;
 }
 
-function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, onEnter, onOut, parent, onFavoriteToggle}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
-    isFavorite,
     isPremium,
     rating,
     type,
@@ -33,6 +35,11 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
   const handleOut = ()=>{
     if (onOut) {
       onOut(offer);
+    }
+  };
+  const handleFavoriteButtonToggle = (offerItem: OfferItem)=>{
+    if(onFavoriteToggle) {
+      onFavoriteToggle(offerItem);
     }
   };
 
@@ -56,12 +63,14 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <button className={`place-card__bookmark-button button ${isFavorite && 'place-card__bookmark-button--active'}`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+            offer={offer}
+            parent="place-card"
+            width={18}
+            height={19}
+            onToggle={handleFavoriteButtonToggle}
+          />
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -4,21 +4,28 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {useFavoriteCount} from '../../hooks/use-favorite-count';
 
 
 function SignOut(): JSX.Element {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.userData);
+  const favoriteCount = useFavoriteCount();
 
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
-        <a className="header__nav-link header__nav-link--profile" href="#">
+        <Link
+          className="header__nav-link header__nav-link--profile"
+          to={AppRoute.Favorites}
+        >
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__user-name user__name">{userData?.name}</span>
-          <span className="header__favorite-count">3</span>
-        </a>
+          <span className="header__favorite-count">
+            {favoriteCount}
+          </span>
+        </Link>
       </li>
       <li className="header__nav-item">
         <Link
@@ -27,7 +34,7 @@ function SignOut(): JSX.Element {
             e.preventDefault();
             dispatch(logoutAction());
           }}
-          to='/'
+          to={AppRoute.Main}
         >
           <span className="header__signout">Sign out</span>
         </Link>
@@ -62,7 +69,7 @@ function Nav(): JSX.Element {
 }
 
 type HeaderProps = {
-  nav?: boolean
+  nav?: boolean;
 }
 
 function Header({nav}: HeaderProps): JSX.Element {
