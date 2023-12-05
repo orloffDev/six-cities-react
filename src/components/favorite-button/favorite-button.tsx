@@ -34,7 +34,7 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onFetch = function(toggleOffer:OfferItem){
-    const newFavoriteOffers: Offer[] = JSON.parse(JSON.stringify(favoriteOffers));
+    const newFavoriteOffers: Offer[] = JSON.parse(JSON.stringify(favoriteOffers)) as Offer[];
     if(toggleOffer.isFavorite){
       newFavoriteOffers.push(toggleOffer);
     } else {
