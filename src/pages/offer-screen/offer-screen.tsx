@@ -55,7 +55,7 @@ function OfferScreen(): JSX.Element {
 
   const fetchOffersNear = async() => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
-    setOffersNear(data);
+    setOffersNear(data.slice(0, MAX_NEAR_PLACES_COUNT));
   };
 
   const fetchReviews = async() => {
