@@ -18,8 +18,8 @@ import {
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {saveToken, dropToken} from '../services/token';
 import {useUpdateOffers} from '../hooks/use-update-offers';
-import {ValidationError} from "../types/index";
-import {toast} from "react-toastify";
+import {ValidationError} from '../types/index';
+import {toast} from 'react-toastify';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
