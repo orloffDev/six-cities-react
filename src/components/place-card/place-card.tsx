@@ -6,7 +6,7 @@ import {Offer} from '../../types/offer';
 import {OfferHandleEnter} from '../../types/offer';
 import {OfferHandleOut} from '../../types/offer';
 import FavoriteButton from '../favorite-button/favorite-button';
-import {OfferItem} from "../../types/offer-item";
+import {OfferItem} from '../../types/offer-item';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -38,7 +38,9 @@ function PlaceCard({offer, onEnter, onOut, parent, onFavoriteToggle}: PlaceCardP
     }
   };
   const handleFavoriteButtonToggle = (offerItem: OfferItem)=>{
-    if(onFavoriteToggle) onFavoriteToggle(offerItem);
+    if(onFavoriteToggle) {
+      onFavoriteToggle(offerItem);
+    }
   }
 
   //
