@@ -38,9 +38,7 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
     if(toggleOffer.isFavorite){
       newFavoriteOffers.push(toggleOffer);
     } else {
-      const curItemIndex: number = newFavoriteOffers.findIndex((item)=>{
-        return item.id === toggleOffer.id;
-      });
+      const curItemIndex: number = newFavoriteOffers.findIndex((item) => item.id === toggleOffer.id);
       newFavoriteOffers.splice(curItemIndex, 1);
     }
     dispatch(setFavoriteOffers(newFavoriteOffers));
