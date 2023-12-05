@@ -69,7 +69,7 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
       signal: signal
     } as AxiosRequestConfig;
 
-    api.post<Offer>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
+    api.post<OfferItem>(`${APIRoute.Favorite}/${offer.id}/${newStatus}`, null, config)
       .then(({data})=>{
         onFetch(data);
       })
