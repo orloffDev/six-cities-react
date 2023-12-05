@@ -3,7 +3,7 @@ import FavoriteList from '../../components/favorite-list/favorite-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offer';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
