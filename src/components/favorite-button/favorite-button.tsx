@@ -14,14 +14,14 @@ import classNames from 'classnames';
 import {setFavoriteOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {ValidationError} from '../../types/index';
-import {updateOffersAction} from "../../store/api-actions";
+import {updateOffersAction} from '../../store/api-actions';
 
 type FavButtonProps = {
   offer: Offer;
   parent: string;
   width: number;
   height: number;
-  onToggle?: (offerItem: OfferItem) => void
+  onToggle?: (offerItem: OfferItem) => void;
 }
 
 function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps): JSX.Element {
