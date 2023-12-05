@@ -63,7 +63,7 @@ function OfferScreen(): JSX.Element {
     fetchReviews();
   };
 
-  const handleOfferItemToggleFavorite = function(offerItem){
+  const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
     setOfferItem(offerItem);
   }
 
