@@ -1,7 +1,6 @@
-//components
 import PlaceCard from '../../components/place-card/place-card';
-//types
 import {Offer} from '../../types/offer';
+import {OfferItem} from "../../types/offer-item";
 
 type PlaceListProps = {
   offers: Offer[];
@@ -10,7 +9,7 @@ type PlaceListProps = {
   parentClass: string;
   parent: string;
   maxLength?: number;
-  onFavoriteToggle?: (offer: Offer) => void;
+  onFavoriteToggle?: (offerItem: OfferItem) => void;
 }
 
 function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, parent, maxLength, onFavoriteToggle}: PlaceListProps): JSX.Element {
