@@ -3,6 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
 import {Offer} from '../types/offer';
+import {OfferItem} from "../types/offer-item";
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
@@ -32,6 +33,24 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const updateOffersAction = createAsyncThunk<void, OfferItem, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/updateOffers',
+  (offer, {dispatch, getState, extra: api}) => {
+    const offers = getState()['offers'];
+    const newOfferList: Offer[] = JSON.parse(JSON.stringify(offers));
+    const curItemIndex: number = newOfferList.findIndex((item)=>{
+      return item.id === offer.id;
+    });
+    newOfferList[curItemIndex].isFavorite = offer.isFavorite;
+    dispatch(setOffers(newOfferList));
+  }
+);
+
+
 export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -45,6 +64,8 @@ export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setFavoriteOffers(data));
   },
 );
+
+
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

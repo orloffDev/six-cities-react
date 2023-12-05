@@ -14,6 +14,7 @@ import classNames from 'classnames';
 import {setFavoriteOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {ValidationError} from '../../types/index';
+import {updateOffersAction} from "../../store/api-actions";
 
 type FavButtonProps = {
   offer: Offer;
@@ -42,8 +43,9 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
       });
       newFavoriteOffers.splice(curItemIndex, 1);
     }
-
     dispatch(setFavoriteOffers(newFavoriteOffers));
+    dispatch(updateOffersAction(toggleOffer));
+
     if(onToggle) {
       onToggle(toggleOffer);
     }
