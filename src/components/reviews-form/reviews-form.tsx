@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-//import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios, {AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import ReviewsRating from '../reviews-rating/reviews-rating';
@@ -76,6 +76,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     api.post<Review>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
         resetForm(formTag);
+        toast.success('Ваш коментарий успешно добавлен');
         onSuccess(data);
       })
       .catch((error: unknown)=>{
