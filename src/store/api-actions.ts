@@ -3,7 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
 import {Offer} from '../types/offer';
-import {OfferItem} from "../types/offer-item";
+import {OfferItem} from '../types/offer-item';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
@@ -18,7 +18,7 @@ import {
 } from './action';
 import {APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {saveToken, dropToken} from '../services/token';
-import {useUpdateOffers} from "../hooks/use-update-offers";
+import {useUpdateOffers} from '../hooks/use-update-offers';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -61,8 +61,6 @@ export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setFavoriteOffers(data));
   },
 );
-
-
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

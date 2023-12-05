@@ -65,14 +65,14 @@ function OfferScreen(): JSX.Element {
 
   const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
     setCurrentOfferItem(offerItem);
-  }
+  };
 
   const handleNearListToggle = function(offerItem: OfferItem){
     if(offersNear){
       const newOffersNear = updateOffers(offersNear, offerItem);
       setOffersNear(newOffersNear);
     }
-  }
+  };
 
   useEffect(() => {
     fetchAll();
