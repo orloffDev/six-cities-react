@@ -100,7 +100,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
       onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <ReviewsRating handleRatingChange={handleRatingChange}  />
+      <ReviewsRating handleRatingChange={handleRatingChange} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
@@ -114,7 +114,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe
           your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit"  disabled={!isFormValid}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid}>Submit</button>
       </div>
     </form>
   );
