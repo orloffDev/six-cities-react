@@ -27,7 +27,7 @@ function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, p
     }
   };
 
-  const handlePlaceCardFavorite = (offerItem: Offer) =>{
+  const handlePlaceCardFavorite = (offerItem: OfferItem) =>{
     if (onFavoriteToggle) {
       onFavoriteToggle(offerItem);
     }
