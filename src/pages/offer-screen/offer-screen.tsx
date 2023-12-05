@@ -17,7 +17,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
-import {getRating} from "../../utils/index";
+import {getRating} from '../../utils/index';
 
 
 function OfferScreen(): JSX.Element {

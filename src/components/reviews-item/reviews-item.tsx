@@ -1,6 +1,6 @@
 //types
 import {Review} from '../../types/review';
-import {getRating} from "../../utils/index";
+import {getRating} from '../../utils/index';
 
 type ReviewsItemProps = {
   reviewData: Review;
