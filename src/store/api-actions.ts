@@ -1,4 +1,4 @@
-import {AxiosInstance} from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
@@ -18,6 +18,8 @@ import {
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {saveToken, dropToken} from '../services/token';
 import {useUpdateOffers} from '../hooks/use-update-offers';
+import {ValidationError} from '../types/index';
+import {toast} from 'react-toastify';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -87,15 +89,24 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
-    const token = data.token;
-    const userData = data;
-    saveToken(token);
-    dispatch(setUserData(userData));
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(fetchOffersAction());
-    dispatch(fetchFavoriteOffersAction());
-    dispatch(redirectToRoute(AppRoute.Main));
+    try {
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const token = data.token;
+      const userData = data;
+      saveToken(token);
+      dispatch(setUserData(userData));
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoriteOffersAction());
+      dispatch(redirectToRoute(AppRoute.Main));
+    } catch (error: unknown) {
+      if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
+        const errorText: string | undefined = error.response?.data?.message;
+        if (errorText) {
+          toast.error(errorText);
+        }
+      }
+    }
   },
 );
 
