@@ -70,7 +70,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get(APIRoute.Login);
+      const {data} = await api.get<UserData>(APIRoute.Login);
       dispatch(setUserData(data));
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(fetchFavoriteOffersAction());
