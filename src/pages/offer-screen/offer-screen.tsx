@@ -18,6 +18,8 @@ import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
 import {getRating} from '../../utils/index';
+import {SelectedPoint} from "../../types/selected-point";
+import {MapData} from "../../types/map-data";
 
 
 function OfferScreen(): JSX.Element {
@@ -27,10 +29,15 @@ function OfferScreen(): JSX.Element {
   const api = createAPI();
   const id = useParams().id as string;
   const [currentOfferItem, setCurrentOfferItem] = useState<OfferItem | null>(null);
-  const [offersNear, setOffersNear] = useState<Offer[] | null>(null);
+  const [offersNear, setOffersNear] = useState<Offer[]>([]);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const reviewsCount = reviewsData.length;
-  const mapData = getMapData(offersNear);
+  const mapData = currentOfferItem ? getMapData([...offersNear, currentOfferItem] as Offer[]) : null;
+  const selectedPoint = currentOfferItem ? {
+    id: currentOfferItem.id,
+    latitude: currentOfferItem.location.latitude,
+    longitude: currentOfferItem.location.longitude
+  } as SelectedPoint : null;
 
   const onFormSuccess = function(data: Review){
     const newData = [...reviewsData, data];
@@ -69,7 +76,7 @@ function OfferScreen(): JSX.Element {
   };
 
   const handleNearListToggle = function(offerItem: OfferItem){
-    if(offersNear){
+    if(offersNear.length){
       const newOffersNear = updateOffers(offersNear, offerItem);
       setOffersNear(newOffersNear);
     }
@@ -177,9 +184,9 @@ function OfferScreen(): JSX.Element {
                 </section>
               </div>
             </div>
-            {mapData && <PlaceMap mapData={mapData} parent="offer" />}
+            {mapData && selectedPoint && <PlaceMap mapData={mapData} selectedPoint={selectedPoint} parent="offer" />}
           </section>
-          {offersNear &&
+          {offersNear.length !==0 &&
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>

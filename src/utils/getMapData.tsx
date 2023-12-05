@@ -4,16 +4,16 @@ import {MapData} from '../types/map-data';
 import {MapPoint} from '../types/map-point';
 import {CityName} from '../types/city-name';
 
-const getMapData = function(offers: Offer[] | null, city?: CityName): MapData | undefined{
+const getMapData = function(offers: Offer[] | null, city?: CityName): MapData | null{
 
   if(!offers || !offers.length) {
-    return undefined;
+    return null;
   }
 
   const centerOffer = city ? offers.find((offer) => offer['city']['name'] === city) : offers[0];
 
   if(!centerOffer) {
-    return undefined;
+    return null;
   }
 
   const points = offers.reduce((acc: MapPoint[], offer) => {
