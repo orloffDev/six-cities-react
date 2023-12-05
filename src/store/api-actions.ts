@@ -12,11 +12,10 @@ import {
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
-  setError,
   redirectToRoute,
   setUserData
 } from './action';
-import {APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {saveToken, dropToken} from '../services/token';
 import {useUpdateOffers} from '../hooks/use-update-offers';
 
@@ -91,11 +90,11 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     const token = data.token;
     const userData = data;
-
     saveToken(token);
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -112,21 +111,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(setUserData(null));
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(fetchOffersAction());
+    dispatch(setFavoriteOffers([]));
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
-
-export const clearErrorAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'offers/clearError',
-  (_arg, {dispatch}) => {
-    setTimeout(
-      () => dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
-

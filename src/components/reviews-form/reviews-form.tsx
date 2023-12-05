@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { toast } from 'react-toastify';
 import axios, {AxiosRequestConfig} from 'axios';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
@@ -5,7 +6,7 @@ import ReviewsRating from '../reviews-rating/reviews-rating';
 import {FormData} from '../../types/form-data';
 import {Review} from '../../types/review';
 import {createAPI} from '../../services/api';
-import {APIRoute} from '../../const';
+import {APIRoute, FormSettings} from '../../const';
 import {MutableRefObject, ValidationError} from '../../types/index';
 import './reviews-form.css';
 
@@ -23,6 +24,11 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     rating: 0,
     comment: ''
   } as FormData);
+
+  const isFormValid = useMemo(
+    () => formData.rating > 0 && formData.comment.length >= (FormSettings.Minlength as number) && formData.comment.length <= (FormSettings.MaxLength as number),
+    [formData]
+  );
 
   const handleReviewChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
@@ -70,6 +76,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
     api.post<Review>(`${APIRoute.Reviews}/${id}`, formData, config)
       .then(({data})=>{
         resetForm(formTag);
+        toast.success('Ваш коментарий успешно добавлен');
         onSuccess(data);
       })
       .catch((error: unknown)=>{
@@ -108,7 +115,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe
           your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" >Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid}>Submit</button>
       </div>
     </form>
   );

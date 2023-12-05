@@ -38,6 +38,11 @@ export enum SortingOption {
   TopRatedFirst = 'Top rated first',
 }
 
+export enum FormSettings {
+  Minlength = 50,
+  MaxLength = 300
+}
+
 export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
@@ -48,11 +53,11 @@ export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensi
 
 export const MAX_NEAR_PLACES_COUNT = 3;
 
+export const MAX_REVIEWS_COUNT = 10;
+
 export const BACKEND_URL = 'https://14.design.pages.academy/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
-
-export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const ERROR_STATUS_CODE = 404;
 export const ERROR_ROUTE = '404';

@@ -22,8 +22,6 @@ export const setFavoriteOffersDataLoadingStatus = createAction<boolean>('data/se
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setError = createAction<string | null>('offers/setError');
-
 export const redirectToRoute = createAction('app/redirectToRoute', (appRoute: AppRoute) => ({
   payload: appRoute
 }));
