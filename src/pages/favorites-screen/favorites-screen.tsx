@@ -3,6 +3,7 @@ import FavoriteList from '../../components/favorite-list/favorite-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offer';
+import {Link} from "react-router-dom";
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -36,9 +37,10 @@ function FavoritesScreen(): JSX.Element {
           </div>
         </main>
         <footer className="footer container">
-          <a className="footer__logo-link" href="main.html">
+
+          <Link className="footer__logo-link" to="/">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-          </a>
+          </Link>
         </footer>
       </div>
     </>
