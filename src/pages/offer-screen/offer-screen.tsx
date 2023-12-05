@@ -6,7 +6,7 @@ import PlaceMap from '../../components/place-map/place-map';
 import PlaceList from '../../components/place-list/place-list';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getMapData} from '../../utils/getMapData';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, MAX_REVIEWS_COUNT} from '../../const';
 import {MAX_NEAR_PLACES_COUNT, APIRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../../const';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
@@ -55,12 +55,12 @@ function OfferScreen(): JSX.Element {
 
   const fetchOffersNear = async() => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
-    setOffersNear(data.slice(0, 3));
+    setOffersNear(data);
   };
 
   const fetchReviews = async() => {
     const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${id}`);
-    setReviewsData(data);
+    setReviewsData(data.slice(0, MAX_REVIEWS_COUNT));
   };
 
   const fetchAll = function(){

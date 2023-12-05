@@ -48,6 +48,8 @@ export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensi
 
 export const MAX_NEAR_PLACES_COUNT = 3;
 
+export const MAX_REVIEWS_COUNT = 10;
+
 export const BACKEND_URL = 'https://14.design.pages.academy/six-cities';
 
 export const REQUEST_TIMEOUT = 5000;
