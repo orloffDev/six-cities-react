@@ -38,6 +38,11 @@ export enum SortingOption {
   TopRatedFirst = 'Top rated first',
 }
 
+export enum FormSettings {
+  Minlength = 50,
+  MaxLength = 300
+}
+
 export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
