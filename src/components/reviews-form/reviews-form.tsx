@@ -26,7 +26,7 @@ function ReviewsForm({onSuccess, id}: ReviewsFormProps): JSX.Element {
   } as FormData);
 
   const isFormValid = useMemo(
-    () => formData.rating > 0 && formData.comment.length >= FormSettings.Minlength as number && formData.comment.length <= FormSettings.MaxLength as number,
+    () => formData.rating > 0 && formData.comment.length >= (FormSettings.Minlength as number) && formData.comment.length <= (FormSettings.MaxLength as number),
     [formData]
   );
 
