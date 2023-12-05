@@ -17,6 +17,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
+import {getRating} from "../../utils/index";
 
 
 function OfferScreen(): JSX.Element {
@@ -116,7 +117,7 @@ function OfferScreen(): JSX.Element {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${currentOfferItem.rating * 100 / 5}%`}}></span>
+                    <span style={{width: `${getRating(currentOfferItem.rating)}`}}/>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="offer__rating-value rating__value">{currentOfferItem.rating}</span>
