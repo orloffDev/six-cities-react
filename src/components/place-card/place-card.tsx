@@ -41,7 +41,7 @@ function PlaceCard({offer, onEnter, onOut, parent, onFavoriteToggle}: PlaceCardP
     if(onFavoriteToggle) {
       onFavoriteToggle(offerItem);
     }
-  }
+  };
 
   //
   return (
