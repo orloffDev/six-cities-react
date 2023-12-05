@@ -28,7 +28,7 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
   const dispatch = useAppDispatch();
   const isFavorite = offer.isFavorite;
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
+  const favoriteOffers: Offer[] = useAppSelector((state) => state.favoriteOffers);
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
