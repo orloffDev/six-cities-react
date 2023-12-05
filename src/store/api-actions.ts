@@ -40,7 +40,7 @@ export const updateOffersAction = createAsyncThunk<void, OfferItem, {
   extra: AxiosInstance;
 }>(
   'data/updateOffers',
-  (offerItem, {dispatch, getState, extra: api}) => {
+  (offerItem, {dispatch, getState}) => {
     const offers = getState()['offers'];
     const newOfferList = useUpdateOffers(offers, offerItem);
     dispatch(setOffers(newOfferList));
