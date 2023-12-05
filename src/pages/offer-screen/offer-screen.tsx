@@ -18,9 +18,7 @@ import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
 import {getRating} from '../../utils/index';
-import {SelectedPoint} from "../../types/selected-point";
-import {MapData} from "../../types/map-data";
-
+import {SelectedPoint} from '../../types/selected-point';
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
