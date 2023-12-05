@@ -96,6 +96,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch(setUserData(userData));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -112,6 +113,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(setUserData(null));
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(fetchOffersAction());
+    dispatch(setFavoriteOffers([]));
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
