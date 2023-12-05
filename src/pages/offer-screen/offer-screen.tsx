@@ -16,7 +16,7 @@ import {Review} from '../../types/review';
 import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
-import {useUpdateOffers} from "../../hooks/use-update-offers";
+import {useUpdateOffers} from '../../hooks/use-update-offers';
 
 
 function OfferScreen(): JSX.Element {
@@ -63,16 +63,16 @@ function OfferScreen(): JSX.Element {
     fetchReviews();
   };
 
-  const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
+  const handleOfferItemToggleFavorite = function(offerItem){
     setOfferItem(offerItem);
-  }
+  };
 
   const handleNearListToggle = function(offerItem: OfferItem){
     if(offersNear){
       const newOffersNear = updateOffers(offersNear, offerItem);
       setOffersNear(newOffersNear);
     }
-  }
+  };
 
   useEffect(() => {
     fetchAll();
