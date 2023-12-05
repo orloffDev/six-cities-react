@@ -72,12 +72,12 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
         onFetch(data);
       })
       .catch((error: unknown)=>{
-        /*if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
+        if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
           const errorText: string | undefined = error.response?.data?.message;
           if (errorText) {
             toast.error(errorText);
           }
-        }*/
+        }
       })
       .finally(()=>{
         controllerRef.current = null;
