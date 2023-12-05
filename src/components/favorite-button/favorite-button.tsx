@@ -11,7 +11,7 @@ import {createAPI} from '../../services/api';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
-import {setOffers} from '../../store/action';
+import {setFavoriteOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {ValidationError} from '../../types/index';
 
@@ -27,21 +27,26 @@ function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps
   const dispatch = useAppDispatch();
   const isFavorite = offer.isFavorite;
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offers = useAppSelector((state) => state.offers);
+  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();
   const buttonClasses = classNames([`button ${parent}__bookmark-button`, isFavorite && `${parent}__bookmark-button--active`]);
   const onFetch = function(toggleOffer:OfferItem){
-    const newOffers: Offer[] = JSON.parse(JSON.stringify(offers));
-    const curItemIndex: number = newOffers.findIndex((item)=>{
-      return item.id === toggleOffer.id;
-    });
-    newOffers[curItemIndex].isFavorite = toggleOffer.isFavorite;
+    const newFavoriteOffers: Offer[] = JSON.parse(JSON.stringify(favoriteOffers));
+    if(toggleOffer.isFavorite){
+      newFavoriteOffers.push(toggleOffer);
+    } else {
+      const curItemIndex: number = newFavoriteOffers.findIndex((item)=>{
+        return item.id === toggleOffer.id;
+      });
+      newFavoriteOffers.splice(curItemIndex, 1);
+    }
+
+    dispatch(setFavoriteOffers(newFavoriteOffers));
     if(onToggle) {
       onToggle(toggleOffer);
     }
-    dispatch(setOffers(newOffers));
   };
 
   const handleButtonDown = function(){
