@@ -4,7 +4,7 @@ import {Review} from '../../types/review';
 type ReviewsListProps = {
   reviewsData: Review[];
 }
-import {MAX_REVIEWS_COUNT} from "../../const";
+import {MAX_REVIEWS_COUNT} from '../../const';
 
 
 function ReviewsList({reviewsData}: ReviewsListProps): JSX.Element {
