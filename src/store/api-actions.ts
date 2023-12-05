@@ -12,7 +12,6 @@ import {
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
-  setError,
   redirectToRoute,
   setUserData
 } from './action';
@@ -116,18 +115,3 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
-
-export const clearErrorAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'offers/clearError',
-  (_arg, {dispatch}) => {
-    setTimeout(
-      () => dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
-

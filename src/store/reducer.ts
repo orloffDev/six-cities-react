@@ -6,7 +6,6 @@ import {
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
-  setError,
   setUserData
 } from './action';
 //types
@@ -44,9 +43,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
