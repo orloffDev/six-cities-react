@@ -18,6 +18,7 @@ import {
 } from './action';
 import {APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import {saveToken, dropToken} from '../services/token';
+import {useUpdateOffers} from "../hooks/use-update-offers";
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -39,13 +40,9 @@ export const updateOffersAction = createAsyncThunk<void, OfferItem, {
   extra: AxiosInstance;
 }>(
   'data/updateOffers',
-  (offer, {dispatch, getState, extra: api}) => {
+  (offerItem, {dispatch, getState, extra: api}) => {
     const offers = getState()['offers'];
-    const newOfferList: Offer[] = JSON.parse(JSON.stringify(offers));
-    const curItemIndex: number = newOfferList.findIndex((item)=>{
-      return item.id === offer.id;
-    });
-    newOfferList[curItemIndex].isFavorite = offer.isFavorite;
+    const newOfferList = useUpdateOffers(offers, offerItem);
     dispatch(setOffers(newOfferList));
   }
 );

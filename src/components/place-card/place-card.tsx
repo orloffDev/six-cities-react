@@ -6,15 +6,17 @@ import {Offer} from '../../types/offer';
 import {OfferHandleEnter} from '../../types/offer';
 import {OfferHandleOut} from '../../types/offer';
 import FavoriteButton from '../favorite-button/favorite-button';
+import {OfferItem} from "../../types/offer-item";
 
 type PlaceCardProps = {
   offer: Offer;
   onEnter?: OfferHandleEnter;
   onOut?: OfferHandleOut;
   parent: string;
+  onFavoriteToggle?: (offerItem: OfferItem) => void;
 }
 
-function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, onEnter, onOut, parent, onFavoriteToggle}: PlaceCardProps): JSX.Element {
   const {
     id,
     title,
@@ -35,6 +37,9 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
       onOut(offer);
     }
   };
+  const handleFavoriteButtonToggle = (offerItem: OfferItem)=>{
+    if(onFavoriteToggle) onFavoriteToggle(offerItem);
+  }
 
   //
   return (
@@ -61,6 +66,7 @@ function PlaceCard({offer, onEnter, onOut, parent}: PlaceCardProps): JSX.Element
             parent="place-card"
             width={18}
             height={19}
+            onToggle={handleFavoriteButtonToggle}
           />
 
         </div>

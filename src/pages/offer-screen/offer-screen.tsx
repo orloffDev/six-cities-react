@@ -16,10 +16,12 @@ import {Review} from '../../types/review';
 import { useParams, useNavigate } from 'react-router-dom';
 import {createAPI} from '../../services/api';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
+import {useUpdateOffers} from "../../hooks/use-update-offers";
 
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const updateOffers = useUpdateOffers;
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams().id as string;
@@ -65,9 +67,13 @@ function OfferScreen(): JSX.Element {
     setOfferItem(offerItem);
   }
 
-  /**
-   * Поменялось предложение
-   */
+  const handleNearListToggle = function(offerItem: OfferItem){
+    if(offersNear){
+      const newOffersNear = updateOffers(offersNear, offerItem);
+      setOffersNear(newOffersNear);
+    }
+  }
+
   useEffect(() => {
     fetchAll();
     window.scrollTo(0, 0);
@@ -180,6 +186,7 @@ function OfferScreen(): JSX.Element {
                 offers={offersNear}
                 parentClass="near-places__list"
                 parent="near-places"
+                onFavoriteToggle={handleNearListToggle}
                 maxLength={MAX_NEAR_PLACES_COUNT}
               />
             </section>
