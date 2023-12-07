@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosInstance} from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
@@ -15,12 +15,11 @@ import {
   redirectToRoute,
   setUserData
 } from './action';
-import {APIRoute, AuthorizationStatus, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {saveToken, dropToken} from '../services/token';
 import {useUpdateOffers} from '../hooks/use-update-offers';
 import {ValidationError} from '../types/index';
 import {toast} from 'react-toastify';
-import {useNavigate} from "react-router-dom";
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
