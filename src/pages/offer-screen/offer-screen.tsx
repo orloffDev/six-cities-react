@@ -19,19 +19,14 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
 import {getRating} from '../../utils/index';
 import {SelectedPoint} from '../../types/selected-point';
-import {fetchFavoriteOffersAction} from "../../store/api-actions";
-import {fetchOfferItemAction} from "../../store/api-actions";
-import {useDispatch} from "react-redux";
-import {setFavoriteOffers, setOfferItem} from "../../store/action";
 
 function OfferScreen(): JSX.Element {
-  const dispatch = useDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const currentOfferItem = useAppSelector((state) => state.offerItem);
   const updateOffers = useUpdateOffers;
   const navigate = useNavigate();
   const api = createAPI();
   const id = useParams().id as string;
+  const [currentOfferItem, setCurrentOfferItem] = useState<OfferItem | null>(null);
   const [offersNear, setOffersNear] = useState<Offer[]>([]);
   const [reviewsData, setReviewsData] = useState<Review[]>([]);
   const reviewsCount = reviewsData.length;
@@ -47,6 +42,17 @@ function OfferScreen(): JSX.Element {
     setReviewsData(newData);
   };
 
+  const fetchOffer = async() => {
+    try {
+      const res = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+      setCurrentOfferItem(res.data);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
+        navigate(ERROR_ROUTE);
+      }
+    }
+  };
+
   const fetchOffersNear = async() => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
     setOffersNear(data.slice(0, MAX_NEAR_PLACES_COUNT));
@@ -58,14 +64,13 @@ function OfferScreen(): JSX.Element {
   };
 
   const fetchAll = function(){
-    dispatch(fetchOfferItemAction(id));
-
+    fetchOffer();
     fetchOffersNear();
     fetchReviews();
   };
 
   const handleOfferItemToggleFavorite = function(offerItem: OfferItem){
-    dispatch(setOfferItem(offerItem));
+    setCurrentOfferItem(offerItem);
   };
 
   const handleNearListToggle = function(offerItem: OfferItem){
@@ -78,11 +83,6 @@ function OfferScreen(): JSX.Element {
   useEffect(() => {
     fetchAll();
     window.scrollTo(0, 0);
-
-    return () => {
-      dispatch(setOfferItem(null));
-    };
-
   }, [id]);
 
   return (

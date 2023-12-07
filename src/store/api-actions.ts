@@ -9,8 +9,6 @@ import {UserData} from '../types/user-data';
 import {
   setOffers,
   setOffersDataLoadingStatus,
-  setOfferItem,
-  setOfferItemDataLoadingStatus,
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
@@ -58,35 +56,6 @@ export const updateOffersAction = createAsyncThunk<void, OfferItem, {
     dispatch(setOffers(newOfferList));
   }
 );
-
-export const fetchOfferItemAction = createAsyncThunk<void, OfferItem['id'], {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'offerItem/fetch',
-  async (id, {dispatch, getState, extra: api}) => {
-    const isOfferItemDataLoading = getState()['isOfferItemDataLoading'];
-    if(isOfferItemDataLoading) return;
-    dispatch(setOfferItemDataLoadingStatus(true));
-    try {
-      const {data} = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
-      dispatch(setOfferItem(data));
-    } catch (error: unknown) {
-      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
-        dispatch(redirectToRoute(AppRoute.NotFound));
-      } else {
-        const errorText: string | undefined = error.message;
-        toast.error(errorText);
-        const offerItem = getState()['offerItem'];
-        if(!offerItem) dispatch(setOfferItem(null));
-      }
-    } finally {
-      dispatch(setOfferItemDataLoadingStatus(false));
-    }
-  },
-);
-
 
 export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

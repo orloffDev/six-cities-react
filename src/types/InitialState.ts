@@ -10,10 +10,7 @@ export type InitialState = {
   isOffersDataLoading: boolean;
   favoriteOffers: Offer[] | [];
   isFavoriteOffersDataLoading: boolean;
-  offerItem: OfferItem | null;
-  isOfferItemDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
-  error: string | null;
   userData: UserData | null;
 }
 

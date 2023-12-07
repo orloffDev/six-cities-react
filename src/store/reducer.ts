@@ -3,8 +3,6 @@ import {
   setActiveCityName,
   setOffers,
   setOffersDataLoadingStatus,
-  setOfferItem,
-  setOfferItemDataLoadingStatus,
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
@@ -21,10 +19,7 @@ const initialState: InitialState = {
   isOffersDataLoading: false,
   favoriteOffers: [],
   isFavoriteOffersDataLoading: false,
-  offerItem:null,
-  isOfferItemDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
   userData: null
 };
 
@@ -38,12 +33,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
-    })
-    .addCase(setOfferItem, (state, action) => {
-      state.offerItem = action.payload;
-    })
-    .addCase(setOfferItemDataLoadingStatus, (state, action) => {
-      state.isOfferItemDataLoading = action.payload;
     })
     .addCase(setFavoriteOffers, (state, action) => {
       state.favoriteOffers = action.payload;
