@@ -9,7 +9,7 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
