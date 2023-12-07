@@ -13,7 +13,7 @@ import SortingForm from '../../components/sorting-form/sorting-form';
 import {useFilteredOffers} from '../../hooks/use-filtered-offers';
 import {SORTING_DEFAULT_OPTION} from '../../const';
 import classNames from 'classnames';
-import Spinner from "../../components/spinner/spinner";
+import Spinner from '../../components/spinner/spinner';
 
 
 function WelcomeScreen(): JSX.Element {
