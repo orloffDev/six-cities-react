@@ -13,9 +13,11 @@ import SortingForm from '../../components/sorting-form/sorting-form';
 import {useFilteredOffers} from '../../hooks/use-filtered-offers';
 import {SORTING_DEFAULT_OPTION} from '../../const';
 import classNames from 'classnames';
+import Spinner from "../../components/spinner/spinner";
 
 
 function WelcomeScreen(): JSX.Element {
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const offers = useAppSelector((state) => state.offers);
   const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
@@ -55,7 +57,10 @@ function WelcomeScreen(): JSX.Element {
 
           <Tabs />
 
-          {placesFound !== 0 &&
+          {isOffersDataLoading &&
+          <Spinner></Spinner>}
+
+          {!isOffersDataLoading && placesFound !== 0 &&
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
@@ -77,7 +82,7 @@ function WelcomeScreen(): JSX.Element {
             </div>
           </div>}
 
-          {placesFound === 0 &&
+          {!isOffersDataLoading && placesFound === 0 &&
           <div className="cities">
             <div className="cities__places-container cities__places-container--empty container">
               <section className="cities__no-places">
