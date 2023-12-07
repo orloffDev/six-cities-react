@@ -10,8 +10,7 @@ import useMap from '../../hooks/use-map';
 import {MapData} from '../../types/map-data';
 import {SelectedPoint} from '../../types/selected-point';
 //const
-import {URL_MARKER_CURRENT} from '../../const';
-import {URL_MARKER_DEFAULT} from '../../const';
+import {MarkerUrl} from "../../const";
 
 type PlaceMapProps = {
   mapData: MapData;
@@ -20,15 +19,15 @@ type PlaceMapProps = {
 }
 
 const defaultCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconUrl: MarkerUrl.Default,
+  iconSize: [27, 39],
+  iconAnchor: [13, 39],
 });
 
 const currentCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconUrl: MarkerUrl.Current,
+  iconSize: [27, 39],
+  iconAnchor: [13, 39],
 });
 
 function PlaceMap({mapData, parent, selectedPoint}: PlaceMapProps) {

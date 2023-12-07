@@ -43,13 +43,14 @@ export enum FormSettings {
   MaxLength = 300
 }
 
+export const enum MarkerUrl {
+  Default = '/assets/pin.svg',
+  Current= '/assets/pin-active.svg',
+}
+
 export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
-
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 export const MAX_NEAR_PLACES_COUNT = 3;
 
