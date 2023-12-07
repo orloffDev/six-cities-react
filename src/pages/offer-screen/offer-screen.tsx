@@ -128,7 +128,7 @@ function OfferScreen(): JSX.Element {
                   <span className="offer__rating-value rating__value">{currentOfferItem.rating}</span>
                 </div>
                 <ul className="offer__features">
-                  <li className="offer__feature offer__feature--entire">
+                  <li className="offer__feature offer__feature--entire" style={{textTransform: 'capitalize'}}>
                     {currentOfferItem.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
