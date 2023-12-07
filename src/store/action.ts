@@ -3,6 +3,7 @@ import {CityName} from '../types/city-name';
 import {Offer} from '../types/offer';
 import {AppRoute, AuthorizationStatus} from '../const';
 import {UserData} from '../types/user-data';
+import {OfferItem} from "../types/offer-item";
 
 export const setActiveCityName = createAction('city/change', (activeCityName: CityName) => ({
   payload: activeCityName
@@ -13,6 +14,12 @@ export const setOffers = createAction('offers/change', (offers: Offer[]) => ({
 }));
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
+export const setOfferItem = createAction('offer/change', (offerItem: OfferItem | null) => ({
+  payload: offerItem
+}));
+export const setOfferItemDataLoadingStatus = createAction<boolean>('data/setOfferItemDataLoadingStatus');
+
 
 export const setFavoriteOffers = createAction('favoriteOffers/change', (favoriteOffers: Offer[]) => ({
   payload: favoriteOffers

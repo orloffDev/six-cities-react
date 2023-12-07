@@ -1,4 +1,4 @@
-import axios, {AxiosInstance} from 'axios';
+import axios, {AxiosError, AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch} from '../types/app-dispatch';
 import {State} from '../types/state';
@@ -9,24 +9,27 @@ import {UserData} from '../types/user-data';
 import {
   setOffers,
   setOffersDataLoadingStatus,
+  setOfferItem,
+  setOfferItemDataLoadingStatus,
   setFavoriteOffers,
   setFavoriteOffersDataLoadingStatus,
   requireAuthorization,
   redirectToRoute,
   setUserData
 } from './action';
-import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute, ERROR_STATUS_CODE, ERROR_ROUTE} from '../const';
 import {saveToken, dropToken} from '../services/token';
 import {useUpdateOffers} from '../hooks/use-update-offers';
 import {ValidationError} from '../types/index';
 import {toast} from 'react-toastify';
+import {useNavigate} from "react-router-dom";
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
+  'offers/fetch',
   async (_arg, {dispatch, getState, extra: api}) => {
     const isOffersDataLoading = getState()['isOffersDataLoading'];
     if(isOffersDataLoading) return;
@@ -48,12 +51,40 @@ export const updateOffersAction = createAsyncThunk<void, OfferItem, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/updateOffers',
+  'offers/update',
   (offerItem, {dispatch, getState}) => {
     const offers = getState()['offers'];
     const newOfferList = useUpdateOffers(offers, offerItem);
     dispatch(setOffers(newOfferList));
   }
+);
+
+export const fetchOfferItemAction = createAsyncThunk<void, OfferItem['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offerItem/fetch',
+  async (id, {dispatch, getState, extra: api}) => {
+    const isOfferItemDataLoading = getState()['isOfferItemDataLoading'];
+    if(isOfferItemDataLoading) return;
+    dispatch(setOfferItemDataLoadingStatus(true));
+    try {
+      const {data} = await api.get<OfferItem>(`${APIRoute.Offers}/${id}`);
+      dispatch(setOfferItem(data));
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error?.response?.status === ERROR_STATUS_CODE) {
+        dispatch(redirectToRoute(AppRoute.NotFound));
+      } else {
+        const errorText: string | undefined = error.message;
+        toast.error(errorText);
+        const offerItem = getState()['offerItem'];
+        if(!offerItem) dispatch(setOfferItem(null));
+      }
+    } finally {
+      dispatch(setOfferItemDataLoadingStatus(false));
+    }
+  },
 );
 
 
@@ -62,7 +93,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
+  'favorite/fetch',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setFavoriteOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Favorite);
