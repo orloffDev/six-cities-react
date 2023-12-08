@@ -14,7 +14,7 @@ export const favoritesData = createSlice({
   name: NameSpace.Favorites,
   initialState,
   reducers: {
-    setFavoriteOffers: state => {
+    setFavoriteOffers: (state, action: PayloadAction<Offer[]>) => {
       state.favoriteOffers = action.payload;
     },
     setFavoriteOffersDataLoadingStatus: (state, action: PayloadAction<boolean>) => {
