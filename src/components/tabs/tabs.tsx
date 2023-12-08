@@ -1,22 +1,17 @@
-//react
 import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
-//hooks
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-//action
-import {setActiveCityName} from '../../store/action';
-//types
 import {CityName} from '../../types/city-name';
-//const
 import {CitiesList} from '../../const';
-//props
+import {setActiveCityName} from "../../store/city-data/city-data";
+import {getActiveCityName} from "../../store/city-data/selectors";
 type ItemProps = {
   name: CityName;
 }
 
 function Item({name}: ItemProps): JSX.Element {
-  const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
+  const activeCityName: CityName = useAppSelector(getActiveCityName);
   const dispatch = useAppDispatch();
   const handleItemClick = function(e: MouseEvent){
     e.preventDefault();

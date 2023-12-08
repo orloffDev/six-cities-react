@@ -14,15 +14,18 @@ import {useFilteredOffers} from '../../hooks/use-filtered-offers';
 import {SORTING_DEFAULT_OPTION} from '../../const';
 import classNames from 'classnames';
 import Spinner from '../../components/spinner/spinner';
+import {getIsOffersDataLoading, getOffers} from "../../store/offers-data/selectors";
+import {getActiveCityName} from "../../store/city-data/selectors";
 
 
 function WelcomeScreen(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offers = useAppSelector((state) => state.offers);
-  const activeCityName: CityName = useAppSelector((state) => state.activeCityName);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
+  const offers = useAppSelector(getOffers);
+  const activeCityName: CityName = useAppSelector(getActiveCityName);
   const [selectedPoint, setSelectedPoint] = useState<SelectedPoint>(null);
   const mapData = getMapData(offers, activeCityName);
   const [activeOptionValue, setActiveOptionValue] = useState<string>(SORTING_DEFAULT_OPTION);
+
   const filteredOffersData: Offer[] = useFilteredOffers(offers, activeCityName, activeOptionValue);
   const placesFound: number = filteredOffersData.length;
   const mainClasses = classNames(['page__main page__main--index', !placesFound && 'page__main--index-empty']);

@@ -5,11 +5,13 @@ import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useFavoriteCount} from '../../hooks/use-favorite-count';
+import {getUserData} from "../../store/user-data/selectors";
+import {getAuthorizationStatus} from "../../store/user-data/selectors";
 
 
 function SignOut(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.userData);
+  const userData = useAppSelector(getUserData);
   const favoriteCount = useFavoriteCount();
 
   return (
@@ -60,7 +62,7 @@ function SignIn(): JSX.Element {
 }
 
 function Nav(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   return (
     <nav className="header__nav">
       {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}

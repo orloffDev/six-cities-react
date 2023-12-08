@@ -11,10 +11,12 @@ import {createAPI} from '../../services/api';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
-import {setFavoriteOffers} from '../../store/action';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {ValidationError} from '../../types/index';
 import {updateOffersAction} from '../../store/api-actions';
+import {getAuthorizationStatus} from "../../store/user-data/selectors";
+import {getFavoriteOffers} from "../../store/favorites-data/selectors";
+import {setFavoriteOffers} from "../../store/favorites-data/favorites-data";
 
 type FavButtonProps = {
   offer: Offer;
@@ -27,8 +29,8 @@ type FavButtonProps = {
 function FavoriteButton({offer, parent, width, height, onToggle}: FavButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isFavorite = offer.isFavorite;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const favoriteOffers: Offer[] = useAppSelector((state) => state.favoriteOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteOffers: Offer[] = useAppSelector(getFavoriteOffers);
   const navigate = useNavigate();
   const controllerRef:MutableRefObject<AbortController> = useRef(null);
   const api = createAPI();

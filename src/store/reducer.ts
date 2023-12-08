@@ -25,6 +25,12 @@ const initialState: InitialState = {
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
+    })
     .addCase(setActiveCityName, (state, action) => {
       state.activeCityName = action.payload;
     })
@@ -34,16 +40,24 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
     })
+
+
+
+
+
+
+
+
+
+
+
+
     .addCase(setFavoriteOffers, (state, action) => {
       state.favoriteOffers = action.payload;
     })
     .addCase(setFavoriteOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
     })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
-    })
-    .addCase(setUserData, (state, action) => {
-      state.userData = action.payload;
-    });
+
+
 });

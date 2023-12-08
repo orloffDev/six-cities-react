@@ -48,6 +48,13 @@ export const enum MarkerUrl {
   Current= '/assets/pin-active.svg',
 }
 
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Favorites = 'FAVORITES',
+  City = 'CITY',
+}
+
 export const SORTING_DEFAULT_OPTION = SortingOption.Popular;
 
 export const CITY_DEFAULT_NAME: CityName = CitiesList.Paris;
