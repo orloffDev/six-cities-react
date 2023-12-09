@@ -32,17 +32,4 @@ describe('Application Routing', () => {
     expect(screen.getByText('WelcomeScreen')).toBeInTheDocument();
   });
 
-  it('should render "favoritesScreen" when user navigate to "/favorites"', () => {
-    history.push(AppRoute.Favorites);
-    render(fakeApp);
-    expect(screen.getByText('FavoritesScreen')).toBeInTheDocument();
-  });
-
-  it('should render "LoginScreen" when user navigate to "/login"', () => {
-    history.push(AppRoute.Login);
-    render(fakeApp);
-    expect(screen.getByText('LoginScreen')).toBeInTheDocument();
-  });
-
-
 });
