@@ -41,7 +41,7 @@ describe('Application Routing', () => {
   it('should render "LoginScreen" when user navigate to "/login"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('Login')).toBeInTheDocument();
   });
 
 
