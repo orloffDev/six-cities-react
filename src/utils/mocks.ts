@@ -1,7 +1,10 @@
 import { name, internet, lorem, datatype, random, image} from 'faker';
-import { Offer, City, Location, User} from '../types';
+import {Offer} from '../types/offer';
+import {City} from '../types/city';
+import {Location} from '../types/location';
+import {User} from '../types/user';
 import {State } from '../types/state';
-import {UserData} from "../types/user-data";
+import {UserData} from '../types/user-data';
 import {AuthorizationStatus, CitiesList} from '../const';
 
 export const makeFakeUserData = (): UserData => ({
