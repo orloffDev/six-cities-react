@@ -26,11 +26,23 @@ const fakeApp = (
 
 describe('Application Routing', () => {
 
-  it('should render "HomePage" when user navigate to "/"', () => {
+  it('should render "WelcomeScreen" when user navigate to "/"', () => {
     history.push(AppRoute.Main);
-
     render(fakeApp);
-
     expect(screen.getByText(CITY_DEFAULT_NAME)).toBeInTheDocument();
   });
+
+  it('should render "favoritesScreen" when user navigate to "/login"', () => {
+    history.push(AppRoute.Login);
+    render(fakeApp);
+    expect(screen.getByText('Favorites')).toBeInTheDocument();
+  });
+
+  it('should render "LoginScreen" when user navigate to "/login"', () => {
+    history.push(AppRoute.Login);
+    render(fakeApp);
+    expect(screen.getByText('Email')).toBeInTheDocument();
+  });
+
+
 });
