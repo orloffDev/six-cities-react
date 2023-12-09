@@ -1,10 +1,8 @@
 import { render, screen} from '@testing-library/react';
-import Logo from "./logo";
-import {createMemoryHistory} from "history";
-import {AppRoute} from "../../const";
-import HistoryRouter from "../history-router/history-router";
-
-
+import Logo from './logo';
+import {createMemoryHistory} from 'history';
+import {AppRoute} from '../../const';
+import HistoryRouter from '../history-router/history-router';
 
 const history = createMemoryHistory();
 
