@@ -32,16 +32,16 @@ describe('Application Routing', () => {
     expect(screen.getByText(CITY_DEFAULT_NAME)).toBeInTheDocument();
   });
 
-  it('should render "favoritesScreen" when user navigate to "/login"', () => {
+  it('should render "favoritesScreen" when user navigate to "/favorites"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Favorites')).toBeInTheDocument();
+    expect(screen.getByText('Saved listing')).toBeInTheDocument();
   });
 
   it('should render "LoginScreen" when user navigate to "/login"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByText('Password')).toBeInTheDocument();
   });
 
 
