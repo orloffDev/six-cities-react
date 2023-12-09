@@ -1,16 +1,11 @@
-//vendors
 import leaflet from 'leaflet';
 import { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-//react
 import {useRef, useEffect} from 'react';
-//hooks
 import useMap from '../../hooks/use-map';
-//types
 import {MapData} from '../../types/map-data';
 import {SelectedPoint} from '../../types/selected-point';
-//const
-import {MarkerUrl} from "../../const";
+import {MarkerUrl} from '../../const';
 
 type PlaceMapProps = {
   mapData: MapData;

@@ -19,7 +19,7 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import {useUpdateOffers} from '../../hooks/use-update-offers';
 import {getRating} from '../../utils/index';
 import {SelectedPoint} from '../../types/selected-point';
-import {getAuthorizationStatus} from "../../store/user-data/selectors";
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
 function OfferScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);

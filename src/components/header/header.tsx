@@ -5,8 +5,8 @@ import {logoutAction} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useFavoriteCount} from '../../hooks/use-favorite-count';
-import {getUserData} from "../../store/user-data/selectors";
-import {getAuthorizationStatus} from "../../store/user-data/selectors";
+import {getUserData} from '../../store/user-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
 
 function SignOut(): JSX.Element {

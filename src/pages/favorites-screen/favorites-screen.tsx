@@ -4,7 +4,7 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offer';
 import {Link} from 'react-router-dom';
-import {getOffers} from "../../store/offers-data/selectors";
+import {getOffers} from '../../store/offers-data/selectors';
 
 function FavoritesScreen(): JSX.Element {
   const offers = useAppSelector(getOffers);

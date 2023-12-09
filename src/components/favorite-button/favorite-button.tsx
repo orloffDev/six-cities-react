@@ -14,9 +14,9 @@ import classNames from 'classnames';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {ValidationError} from '../../types/index';
 import {updateOffersAction} from '../../store/api-actions';
-import {getAuthorizationStatus} from "../../store/user-data/selectors";
-import {getFavoriteOffers} from "../../store/favorites-data/selectors";
-import {setFavoriteOffers} from "../../store/favorites-data/favorites-data";
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
+import {getFavoriteOffers} from '../../store/favorites-data/selectors';
+import {setFavoriteOffers} from '../../store/favorites-data/favorites-data';
 
 type FavButtonProps = {
   offer: Offer;

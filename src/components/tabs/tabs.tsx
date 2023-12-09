@@ -4,8 +4,8 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {CityName} from '../../types/city-name';
 import {CitiesList} from '../../const';
-import {setActiveCityName} from "../../store/city-data/city-data";
-import {getActiveCityName} from "../../store/city-data/selectors";
+import {setActiveCityName} from '../../store/city-data/city-data';
+import {getActiveCityName} from '../../store/city-data/selectors';
 type ItemProps = {
   name: CityName;
 }

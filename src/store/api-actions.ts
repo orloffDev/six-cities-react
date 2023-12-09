@@ -18,6 +18,31 @@ import {useUpdateOffers} from '../hooks/use-update-offers';
 import {ValidationError} from '../types/index';
 import {toast} from 'react-toastify';
 
+export const updateOffersAction = createAsyncThunk<void, OfferItem, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offers/update',
+  (offerItem, {dispatch, getState}) => {
+    const offers = getState()['OFFERS']['offers'];
+    const newOfferList = useUpdateOffers(offers, offerItem);
+    dispatch(setOffers(newOfferList));
+  }
+);
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favorite/fetch',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    return data;
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -95,27 +120,3 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const updateOffersAction = createAsyncThunk<void, OfferItem, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'offers/update',
-  (offerItem, {dispatch, getState}) => {
-    const offers = getState()['OFFERS']['offers'];
-    const newOfferList = useUpdateOffers(offers, offerItem);
-    dispatch(setOffers(newOfferList));
-  }
-);
-
-export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'favorite/fetch',
-  async (_arg, {extra: api}) => {
-    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
-    return data;
-  },
-);
