@@ -24,7 +24,7 @@ export const makeFakeLocation = (): Location => ({
 
 export const makeFakeCity = (): City => ({
   location: makeFakeLocation(),
-  name: random.arrayElement(CitiesList)
+  name: random.word(),
 } as City);
 
 export const makeFakeHost = (): User => ({
