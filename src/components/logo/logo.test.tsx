@@ -7,7 +7,6 @@ import {AppRoute} from "../../const";
 import HistoryRouter from "../history-router/history-router";
 
 const mockStore = configureMockStore();
-const store = mockStore(makeFakeStore());
 
 const history = createMemoryHistory();
 
