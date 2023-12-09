@@ -1,5 +1,5 @@
-import { name, internet, lorem, datatype, random, image, date } from 'faker';
-import { Offer, City, Location, User, AuthData, Comment } from '../types';
+import { name, internet, lorem, datatype, random, image} from 'faker';
+import { Offer, City, Location, User} from '../types';
 import {State } from '../types/state';
 import {UserData} from "../types/user-data";
 import {AuthorizationStatus, CitiesList} from '../const';
