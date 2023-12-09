@@ -1,6 +1,6 @@
 import { render, screen} from '@testing-library/react';
 import {createMemoryHistory } from 'history';
-import {AppRoute, CITY_DEFAULT_NAME} from '../../const';
+import {AppRoute} from '../../const';
 import { makeFakeStore } from '../../utils/mocks';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import App from './app';
