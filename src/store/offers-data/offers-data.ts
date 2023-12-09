@@ -1,5 +1,5 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {NameSpace, AuthorizationStatus} from '../../const';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {NameSpace} from '../../const';
 import {OffersProcess, State} from '../../types/state';
 import {Offer} from "../../types/offer";
 import {fetchOffersAction} from '../api-actions';
