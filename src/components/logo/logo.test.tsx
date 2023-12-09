@@ -1,11 +1,10 @@
 import { render, screen} from '@testing-library/react';
-import {Provider} from "react-redux";
 import Logo from "./logo";
 import {configureMockStore} from "@jedmao/redux-mock-store";
 import {makeFakeStore} from "../../utils/mocks";
 import {createMemoryHistory} from "history";
-import App from "../app/app";
 import {AppRoute} from "../../const";
+import HistoryRouter from "../history-router/history-router";
 
 const mockStore = configureMockStore();
 const store = mockStore(makeFakeStore());
@@ -13,12 +12,9 @@ const store = mockStore(makeFakeStore());
 const history = createMemoryHistory();
 
 const fakeApp = (
-  <Provider store={store}>
-    <App>
-      <Logo />
-    </App>
-  </Provider>
-);
+  <HistoryRouter history={history}>
+    <Logo />
+  </HistoryRouter>);
 
 describe('Component: Logo', () => {
   it('should render correctly', () => {
