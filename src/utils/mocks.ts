@@ -5,7 +5,7 @@ import {Location} from '../types/location';
 import {User} from '../types/user';
 import {State } from '../types/state';
 import {UserData} from '../types/user-data';
-import {AuthorizationStatus, CitiesList, CITY_DEFAULT_NAME} from '../const';
+import {AuthorizationStatus, CitiesList} from '../const';
 
 export const makeFakeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
@@ -60,7 +60,7 @@ export const makeFakeOffer = (): Offer => ({
 
 export const makeFakeStore = (newStateData?: Partial<State>): State => ({
   USER: { userData: makeFakeUserData(), authorizationStatus: AuthorizationStatus.Auth},
-  CITY: { city: CITY_DEFAULT_NAME},
+  CITY: { activeCityName: CitiesList[0] },
   OFFERS: {
     offers: [makeFakeOffer(), makeFakeOffer()],
     isOffersDataLoading: false
