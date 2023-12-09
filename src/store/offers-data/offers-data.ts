@@ -23,7 +23,7 @@ export const offersData = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchOffersAction.pending, (state, action: PayloadAction<Offer[]>) => { //сначала срабатывает здесь, потом в action
+      .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action: PayloadAction<Offer[]>) => {
