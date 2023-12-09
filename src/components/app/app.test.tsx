@@ -33,7 +33,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "favoritesScreen" when user navigate to "/favorites"', () => {
-    history.push(AppRoute.Login);
+    history.push(AppRoute.Favorites);
     render(fakeApp);
     expect(screen.getByText('FavoritesScreen')).toBeInTheDocument();
   });
