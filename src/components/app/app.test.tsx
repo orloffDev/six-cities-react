@@ -29,19 +29,19 @@ describe('Application Routing', () => {
   it('should render "WelcomeScreen" when user navigate to "/"', () => {
     history.push(AppRoute.Main);
     render(fakeApp);
-    expect(screen.getByText(CITY_DEFAULT_NAME)).toBeInTheDocument();
+    expect(screen.getByText('WelcomeScreen')).toBeInTheDocument();
   });
 
   it('should render "favoritesScreen" when user navigate to "/favorites"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Saved listing')).toBeInTheDocument();
+    expect(screen.getByText('FavoritesScreen')).toBeInTheDocument();
   });
 
   it('should render "LoginScreen" when user navigate to "/login"', () => {
     history.push(AppRoute.Login);
     render(fakeApp);
-    expect(screen.getByText('Password')).toBeInTheDocument();
+    expect(screen.getByText('LoginScreen')).toBeInTheDocument();
   });
 
 

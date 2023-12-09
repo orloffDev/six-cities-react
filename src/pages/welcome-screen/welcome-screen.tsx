@@ -56,7 +56,7 @@ function WelcomeScreen(): JSX.Element {
       <div className="page page--gray page--main">
         <Header nav />
         <main className={mainClasses}>
-          <h1 className="visually-hidden">Cities</h1>
+          <h1 className="visually-hidden">WelcomeScreen</h1>
 
           <Tabs />
 

@@ -29,6 +29,7 @@ function LoginScreen(): JSX.Element {
       <div className="page page--gray page--login">
         <Header />
         <main className="page__main page__main--login">
+          <div className="visually-hidden">LoginScreen</div>
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>

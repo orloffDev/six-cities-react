@@ -19,6 +19,7 @@ function FavoritesScreen(): JSX.Element {
       <div className="page">
         <Header nav />
         <main className="page__main page__main--favorites">
+          <div className="visually-hidden">FavoritesScreen</div>
           <div className="page__favorites-container container">
 
             {favoriteOffers.length !== 0 &&
