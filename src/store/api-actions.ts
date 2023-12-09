@@ -89,7 +89,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'offers/fetch',
-  async (_arg, {dispatch, getState, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     return data;
   },
@@ -114,7 +114,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'favorite/fetch',
-  async (_arg, {dispatch, getState, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Favorite);
     return data;
   },
