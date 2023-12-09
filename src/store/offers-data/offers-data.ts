@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
 import {OffersProcess} from '../../types/state';
-import {Offer} from "../../types/offer";
+import {Offer} from '../../types/offer';
 import {fetchOffersAction} from '../api-actions';
 
 const initialState: OffersProcess = {
@@ -35,7 +35,7 @@ export const offersData = createSlice({
           state.offers = [];
         }
         state.isOffersDataLoading = false;
-      })
+      });
   }
 });
 

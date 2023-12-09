@@ -36,7 +36,7 @@ export const favoritesData = createSlice({
           state.favoriteOffers = [];
         }
         state.isFavoriteOffersDataLoading = false;
-      })
+      });
   }
 });
 
