@@ -4,9 +4,9 @@ import {AppRoute, CITY_DEFAULT_NAME} from '../../const';
 import { makeFakeStore } from '../../utils/mocks';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import App from './app';
-import {Provider} from "react-redux";
-import {ToastContainer} from "react-toastify";
-import React from "react";
+import {Provider} from 'react-redux';
+import {ToastContainer} from 'react-toastify';
+import React from 'react';
 
 
 const mockStore = configureMockStore();
