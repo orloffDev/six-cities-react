@@ -8,7 +8,7 @@ import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {redirectToRoute} from './action';
 
-import {setUserData} from './user-data/user-data';
+import {setUserData, setAuthorizationStatus} from './user-data/user-data';
 import {setFavoriteOffers, setFavoriteOffersDataLoadingStatus} from './favorites-data/favorites-data';
 import {setOffers, setOffersDataLoadingStatus} from './offers-data/offers-data';
 
@@ -28,8 +28,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     try {
       const {data} = await api.get<UserData>(APIRoute.Login);
       dispatch(setUserData(data));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
       dispatch(fetchFavoriteOffersAction());
     } catch {
+      dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
       dispatch(setFavoriteOffers([]));
     }
   },
@@ -48,10 +50,12 @@ export const loginAction = createAsyncThunk<void, AuthData, {
       const userData = data;
       saveToken(token);
       dispatch(setUserData(userData));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
       dispatch(fetchOffersAction());
       dispatch(fetchFavoriteOffersAction());
       dispatch(redirectToRoute(AppRoute.Main));
     } catch (error: unknown) {
+      dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
       if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error) && error.code !== 'ERR_CANCELED') {
         const errorText: string | undefined = error.response?.data?.message;
         if (errorText) {
@@ -72,6 +76,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(setUserData(null));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
     dispatch(fetchOffersAction());
     dispatch(setFavoriteOffers([]));
     dispatch(redirectToRoute(AppRoute.Main));

@@ -16,7 +16,7 @@ export const offersData = createSlice({
     setOffers: (state, action: PayloadAction<Offer[]>) => {
       state.offers = action.payload;
     },
-    setOffersDataLoadingStatus: state => {
+    setOffersDataLoadingStatus: (state, action: PayloadAction<boolean>) => {
       state.isOffersDataLoading = action.payload;
     },
 
