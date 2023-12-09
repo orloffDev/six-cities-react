@@ -5,7 +5,7 @@ import {Location} from '../types/location';
 import {User} from '../types/user';
 import {State } from '../types/state';
 import {UserData} from '../types/user-data';
-import {AuthorizationStatus, CitiesList, CITY_DEFAULT_NAME} from '../const';
+import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../const';
 
 export const makeFakeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
