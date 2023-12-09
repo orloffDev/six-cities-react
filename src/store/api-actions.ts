@@ -9,8 +9,8 @@ import {UserData} from '../types/user-data';
 import {redirectToRoute} from './action';
 
 import {setUserData, setAuthorizationStatus} from './user-data/user-data';
-import {setFavoriteOffers, setFavoriteOffersDataLoadingStatus} from './favorites-data/favorites-data';
-import {setOffers, setOffersDataLoadingStatus} from './offers-data/offers-data';
+import {setFavoriteOffers} from './favorites-data/favorites-data';
+import {setOffers} from './offers-data/offers-data';
 
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {saveToken, dropToken} from '../services/token';
