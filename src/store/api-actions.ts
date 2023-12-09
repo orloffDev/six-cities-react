@@ -108,7 +108,7 @@ export const updateOffersAction = createAsyncThunk<void, OfferItem, {
   }
 );
 
-export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
