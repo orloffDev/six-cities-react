@@ -1,8 +1,8 @@
 import { store } from '../store/index';
 import {AuthorizationStatus} from '../const';
-import {Offer} from "./offer";
-import {CityName} from "./city-name";
-import {UserData} from "./user-data";
+import {Offer} from './offer';
+import {CityName} from './city-name';
+import {UserData} from './user-data';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
@@ -10,17 +10,17 @@ export type UserProcess = {
 };
 
 export type OffersProcess = {
-  offers: Offer[],
-  isOffersDataLoading: boolean
+  offers: Offer[];
+  isOffersDataLoading: boolean;
 };
 
 export type FavoriteOffersProcess = {
-  favoriteOffers: Offer[],
-  isFavoriteOffersDataLoading: boolean
+  favoriteOffers: Offer[];
+  isFavoriteOffersDataLoading: boolean;
 };
 
 export type CityData = {
-  activeCityName: CityName
+  activeCityName: CityName;
 };
 
 export type State = ReturnType<typeof store.getState>;
