@@ -18,6 +18,18 @@ import {useUpdateOffers} from '../hooks/use-update-offers';
 import {ValidationError} from '../types/index';
 import {toast} from 'react-toastify';
 
+export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offers/fetch',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(APIRoute.Offers);
+    return data;
+  },
+);
+
 export const updateOffersAction = createAsyncThunk<void, OfferItem, {
   dispatch: AppDispatch;
   state: State;
@@ -108,15 +120,4 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'offers/fetch',
-  async (_arg, {extra: api}) => {
-    const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    return data;
-  },
-);
 

@@ -14,8 +14,8 @@ import {useFilteredOffers} from '../../hooks/use-filtered-offers';
 import {SORTING_DEFAULT_OPTION} from '../../const';
 import classNames from 'classnames';
 import Spinner from '../../components/spinner/spinner';
-import {getIsOffersDataLoading, getOffers} from "../../store/offers-data/selectors";
-import {getActiveCityName} from "../../store/city-data/selectors";
+import {getIsOffersDataLoading, getOffers} from '../../store/offers-data/selectors';
+import {getActiveCityName} from '../../store/city-data/selectors';
 
 
 function WelcomeScreen(): JSX.Element {
