@@ -6,6 +6,11 @@ import {User} from '../types/user';
 import {State } from '../types/state';
 import {UserData} from '../types/user-data';
 import {AuthorizationStatus, CITY_DEFAULT_NAME} from '../const';
+import { Action } from 'redux';
+import {createAPI} from "../services/api";
+import { ThunkDispatch } from 'redux-thunk';
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
 export const makeFakeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
