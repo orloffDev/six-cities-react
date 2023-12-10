@@ -8,9 +8,7 @@ describe('Component: PlaceCard', () => {
     const fakeCityOffer = makeFakeOffer();
     const fakeStore = makeFakeStore({});
     const testId = 'place-card';
-    const { withStoreComponent } = withStore(withHistory(<PlaceCard
-      offer={fakeCityOffer}
-      parent="favorites" />), fakeStore);
+    const { withStoreComponent } = withStore(withHistory(<PlaceCard offer={fakeCityOffer} parent="favorites" />), fakeStore);
 
     render(withStoreComponent);
 
