@@ -38,7 +38,7 @@ function Tabs(): JSX.Element {
   const list = Object.values(CitiesList) as Array<keyof typeof CitiesList>;
 
   return (
-    <div className="tabs">
+    <div data-testid="tabs" className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {list.map((val) => (
