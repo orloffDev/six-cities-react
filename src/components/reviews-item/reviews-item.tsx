@@ -10,7 +10,7 @@ function ReviewsItem({reviewData}: ReviewsItemProps): JSX.Element {
 
   //
   return (
-    <li className="reviews__item">
+    <li data-testid="reviews-item" className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={reviewData.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
