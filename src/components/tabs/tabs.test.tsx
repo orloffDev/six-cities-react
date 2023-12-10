@@ -7,7 +7,6 @@ describe('Component: Tabs', () => {
   it('should render correctly', () => {
     const fakeStore = makeFakeStore({});
     const testId = 'tabs';
-    const fakeReview = makeFakeReview();
     const { withStoreComponent } = withStore(withHistory(<Tabs />), fakeStore);
 
     render(withStoreComponent);
