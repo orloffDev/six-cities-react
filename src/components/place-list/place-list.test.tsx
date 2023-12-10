@@ -9,13 +9,14 @@ describe('Component: PlaceList', () => {
     const fakeOffersNear = [makeFakeOffer(), makeFakeOffer()];
     const fakeStore = makeFakeStore({});
     const testId = 'place-list';
-    const { withStoreComponent } = withStore(withHistory(<PlaceList
-      offers={fakeOffersNear}
-      parentClass="near-places__list"
-      parent="near-places"
-      onFavoriteToggle={() => {}}
-      maxLength={MAX_NEAR_PLACES_COUNT}
-    />), fakeStore);
+    const { withStoreComponent } = withStore(withHistory(
+      <PlaceList
+        offers={fakeOffersNear}
+        parentClass="near-places__list"
+        parent="near-places"
+        onFavoriteToggle={() => {}}
+        maxLength={MAX_NEAR_PLACES_COUNT}
+      />), fakeStore);
 
     render(withStoreComponent);
 
