@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { withStore, withHistory } from '../../utils/mock-component';
 import { makeFakeStore, makeFakeOffer } from '../../utils/mocks';
-import FavoriteButton from "./favorite-button";
+import FavoriteButton from './favorite-button';
 
 describe('Component: FavoriteButton', () => {
   it('should render correctly', () => {
