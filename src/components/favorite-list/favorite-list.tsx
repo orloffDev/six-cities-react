@@ -17,7 +17,7 @@ function FavoriteList({offers}: FavoriteListProps): JSX.Element {
 
   //
   return (
-    <ul className="favorites__list">
+    <ul data-testid="favorite-list" className="favorites__list">
       {Object.entries(list).map(([cityName, cityOffers]) => (
         <li key={cityName} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
