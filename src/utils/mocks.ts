@@ -95,8 +95,8 @@ export const makeFakeMapData = (): MapData => ({
 
 export const makeFakeReview = (): Review => ({
   id: datatype.string(20),
-  date: datatype.datetime(),
-  user: makeFakeUserData(),
+  date: datatype.datetime() as string,
+  user: makeFakeUserData() as User,
   comment: datatype.string(100),
-  rating: datatype.number({ min: 1, max: 5, precision: 0.1 })
+  rating: datatype.number({ min: 1, max: 5, precision: 0.1 }) as number,
 } as Review);
