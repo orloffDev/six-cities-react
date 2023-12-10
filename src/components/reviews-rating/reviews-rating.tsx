@@ -28,7 +28,7 @@ function ReviewsRating({handleRatingChange}: ReviewsRatingProps): JSX.Element {
 
   //
   return (
-    <div className="reviews__rating-form form__rating">
+    <div data-testid="reviews-rating" className="reviews__rating-form form__rating">
       {data.map(({title, value}) => (
         <React.Fragment key={value}>
           <input
