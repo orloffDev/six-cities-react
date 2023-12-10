@@ -35,7 +35,7 @@ function PlaceList({offers, onChangeHoverPlace, onChangeOutPlace, parentClass, p
 
   //
   return (
-    <div className={`${parentClass} places__list`}>
+    <div data-testid="place-list" className={`${parentClass} places__list`}>
       {sliceOffers.map((offer) => (
         <PlaceCard
           key={offer.id}
