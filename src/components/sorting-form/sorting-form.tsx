@@ -22,7 +22,7 @@ function SortingForm({ onChangeSort }: SortingProps): JSX.Element {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form data-testid="sorting-form" className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleListClick}>
         {activeOptionValue}
