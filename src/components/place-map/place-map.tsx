@@ -53,7 +53,7 @@ function PlaceMap({mapData, parent, selectedPoint}: PlaceMapProps) {
 
 
   return (
-    <section className={`${parent}__map map`} ref={mapRef}></section>
+    <section data-testid="place-map" className={`${parent}__map map`} ref={mapRef}></section>
   );
 }
 
