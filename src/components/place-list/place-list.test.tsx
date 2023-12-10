@@ -14,8 +14,7 @@ describe('Component: PlaceList', () => {
       parentClass="near-places__list"
       parent="near-places"
       onFavoriteToggle={() => {}}
-      maxLength={MAX_NEAR_PLACES_COUNT}
-    />), fakeStore);
+      maxLength={MAX_NEAR_PLACES_COUNT} />), fakeStore);
 
     render(withStoreComponent);
 

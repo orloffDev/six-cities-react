@@ -10,8 +10,7 @@ describe('Component: PlaceMap', () => {
     const testId = 'place-map';
     const { withStoreComponent } = withStore(withHistory(<PlaceMap
       mapData={fakeMapData}
-      parent="cities"
-    />), fakeStore);
+      parent="cities" />), fakeStore);
 
     render(withStoreComponent);
 

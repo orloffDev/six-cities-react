@@ -14,17 +14,6 @@ import {MapData} from '../types/map-data';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
-export const makeFakeMapPoint = (): MapPoint => ({
-  id: datatype.string(20),
-  latitude: datatype.number({ min: -90, max: 90, precision: 0.000001 }),
-  longitude: datatype.number({ min: -180, max: 180, precision: 0.000001 }),
-} as MapPoint);
-
-export const makeFakeMapData = (): MapData => ({
-  center: makeFakeLocation(),
-  points: [makeFakeMapPoint(), makeFakeMapPoint()],
-} as MapData);
-
 export const makeFakeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
   email: internet.email(),
@@ -89,3 +78,14 @@ export const makeFakeStore = (newStateData?: Partial<State>): State => ({
   },
   ...newStateData ?? {},
 });
+
+export const makeFakeMapPoint = (): MapPoint => ({
+  id: datatype.string(20),
+  latitude: datatype.number({ min: -90, max: 90, precision: 0.000001 }),
+  longitude: datatype.number({ min: -180, max: 180, precision: 0.000001 }),
+} as MapPoint);
+
+export const makeFakeMapData = (): MapData => ({
+  center: makeFakeLocation(),
+  points: [makeFakeMapPoint(), makeFakeMapPoint()],
+} as MapData);
