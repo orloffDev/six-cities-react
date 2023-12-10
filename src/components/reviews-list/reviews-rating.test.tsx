@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withStore, withHistory } from '../../utils/mock-component';
-import {makeFakeStore, makeFakeReview} from '../../utils/mocks';
+import {makeFakeStore} from '../../utils/mocks';
 import ReviewsRating from '../reviews-rating/reviews-rating';
 
 describe('Component: ReviewsRating', () => {

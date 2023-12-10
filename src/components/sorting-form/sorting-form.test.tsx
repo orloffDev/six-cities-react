@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withStore, withHistory } from '../../utils/mock-component';
-import {makeFakeStore, makeFakeReview} from '../../utils/mocks';
+import {makeFakeStore} from '../../utils/mocks';
 import SortingForm from './sorting-form';
 
 describe('Component: SortingForm', () => {
