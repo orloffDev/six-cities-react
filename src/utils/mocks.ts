@@ -14,6 +14,8 @@ import {MapData} from '../types/map-data';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
+export const makeFakeOfferId = (): string => datatype.string(20);
+
 export const makeFakeUserData = (): UserData => ({
   avatarUrl: internet.avatar(),
   email: internet.email(),
