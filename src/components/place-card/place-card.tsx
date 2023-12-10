@@ -49,6 +49,7 @@ function PlaceCard({offer, onEnter, onOut, parent, onFavoriteToggle}: PlaceCardP
       className={`${parent}__card place-card`}
       onPointerEnter={handleEnter}
       onPointerLeave={handleOut}
+      data-testid="place-card"
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${parent}__image-wrapper place-card__image-wrapper`}>
