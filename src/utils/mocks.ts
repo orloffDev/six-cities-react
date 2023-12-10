@@ -11,7 +11,7 @@ import {createAPI} from '../services/api';
 import { ThunkDispatch } from 'redux-thunk';
 import {MapPoint} from '../types/map-point';
 import {MapData} from '../types/map-data';
-import {Review} from "../types/review";
+import {Review} from '../types/review';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -98,5 +98,5 @@ export const makeFakeReview = (): Review => ({
   date: datatype.string(10),
   user: makeFakeUserData() as User,
   comment: datatype.string(100),
-  rating: datatype.number({ min: 1, max: 5, precision: 0.1 }) as number,
+  rating: datatype.number({ min: 1, max: 5, precision: 0.1 }),
 } as Review);
